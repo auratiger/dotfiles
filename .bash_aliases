@@ -2,6 +2,12 @@ alias ll='ls -alF'
 alias la='ls -a'
 alias l='ls -CF'
 
+alias cl="clear"
+
+alias grepK="du -h | grep -E '([0-9]+\.[0-9]+K)|([0-9]+K)'"
+alias grepM="du -h | grep -E '[0-9]+\.[0-9]+M|[0-9]+M'"
+alias grepG="du -h | grep -E '[0-9]+\.[0-9]+G|[0-9]+G'"
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -41,7 +47,10 @@ alias g="git"
 alias ga="git add"
 alias gaa="git add ."
 alias gc="git commit -m"
+alias ga="git add . && git commit -avm"
 alias gs="git status"
-alias gb="git branch"
+alias gb="git branch --all"
 alias gout="git checkout"
 alias gp="git push"
+
+alias gd=!"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
