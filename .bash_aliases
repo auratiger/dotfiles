@@ -8,6 +8,11 @@ alias grepK="du -h | grep -E '([0-9]+\.[0-9]+K)|([0-9]+K)'"
 alias grepM="du -h | grep -E '[0-9]+\.[0-9]+M|[0-9]+M'"
 alias grepG="du -h | grep -E '[0-9]+\.[0-9]+G|[0-9]+G'"
 
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -v"
+alias mkdir="mkdir -pv"
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
