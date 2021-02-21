@@ -54,10 +54,13 @@ function export_files(){
     cp -iv .bash_aliases ~/
     cp -iv .gitconfig ~/
     cp -iv .inputrc ~/
+    cp -iv .tmux.conf ~/
+
     mkdir -p ~/.config/nvim
     cp -ivr nvim/* ~/.config/nvim/
-    mkdir -p ~/Workspace/nvim
-    cp -ivr nvim/* ~/Workspace/nvim
+
+    mkdir -p ~/.config/nvim
+    cp -ivr nvim/* ~/.config/nvim
 }
 
 function install_code_env(){
