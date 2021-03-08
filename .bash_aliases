@@ -13,6 +13,7 @@ alias mv="mv -iv"
 alias rm="rm -v"
 alias mkdir="mkdir -pv"
 alias ex="exit"
+alias mx="tmux"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

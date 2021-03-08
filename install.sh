@@ -12,7 +12,7 @@ osInfo[/etc/centos-release]="yum install -y"
 osInfo[/etc/fedora-release]="dnf install -y"
 osInfo[/etc/lsb-release]="pacman -S"
 
-code_setup_packages=(
+setup_packages=(
     "git"
     "nodejs"
     "npm"
@@ -26,9 +26,6 @@ code_setup_packages=(
     "lua5.3" 
     "neofetch"
     "cmatrix"
-)
-
-os_setup_packages=(
     "gnome-tweaks"
     "fonts-firacode"
     "tmux"
@@ -44,8 +41,13 @@ function get_package_manager(){
 }
 
 function update() {
-    apt-get update
-    apg-get dist-upgrade
+    (
+        ( apt update -y && apt upgrade -y && apt dist-upgrade -y ) ||
+        ( pacman -Syyu ) || 
+        ( apk -U upgrade ) ||
+        ( dnf upgrade ) ||
+        ( yum update )
+    )
 }
 
 function export_files(){
@@ -64,28 +66,50 @@ function export_files(){
 }
 
 function install_code_env(){
-    for i in "${code_setup_packages[@]}"
+    for i in "${setup_packages[@]}"
     do
         ${package_manager} ${i}
         echo "$i"
     done
 }
 
+# checks which package manager to use for the specific distro
 get_package_manager
 
-while getopts fupe flag
+while getopts fupeh flag
 do
     case "${flag}" in
         f) echo "full install";;
         u)
             echo -n ${ORANGE}
-            read -p "Do you want to update?: " VAR
+            read -p "Are you sure you want to update?: " VAR
             echo -n ${WHITE}
             if [[ "${VAR,,}" == "y" ]]; then
                 update
             fi;;
-        p) echo "install packages";;
-        e) echo "export files";;
-        *) echo "default";;
+        p) 
+            echo -n ${ORANGE}
+            read -p "Are you sure you want to install all necessary packages?: " VAR
+            echo -n ${WHITE}
+            if [[ "${VAR,,}" == "y" ]]; then
+                install_code_env
+            fi;;
+        e) 
+            echo -n ${ORANGE}
+            read -p "Are you sure you want to export the config files?: " VAR
+            echo -n ${WHITE}
+            if [[ "${VAR,,}" == "y" ]]; then
+                export_files
+            fi;;
+        h) echo "help page";;
+        *) 
+            echo -n ${ORANGE}
+            read -p "Are you sure you want to do a full setup?: " VAR
+            echo -n ${WHITE}
+            if [[ "${VAR,,}" == "y" ]]; then
+                update
+                install_code_env
+                export_files
+            fi;;
     esac
 done
