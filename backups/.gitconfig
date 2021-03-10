@@ -1,0 +1,17 @@
+[user]
+	email = auratiger@gmail.com
+	name = auratiger
+[core]
+	editor = vim
+[apply]
+    # Detect whitespace errors when applying a patch.
+    whitespace = fix
+[branch]
+    # Show most recently changed branches first.
+    sort = -committerdate
+[color]
+    ui = auto
+
+[merge]
+    # Include summaries of merged commits in newly created merge commit messages
+    log = true
