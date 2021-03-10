@@ -70,9 +70,9 @@ function install_code_env(){
     done
 }
 
-# update
+update
 backup_existing_files
-#export_files
-#install_code_env
+export_files
+install_code_env
 
 
