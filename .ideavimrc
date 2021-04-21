@@ -1,0 +1,58 @@
+""" Map leader to space 
+let mapleader = " "
+
+""" Common settings
+set incsearch
+set noerrorbells
+set smartcase
+set ignorecase
+" set relativenumber
+set showmode
+set number
+set scrolloff=8
+set sidescrolloff=4
+set history=100000
+
+set ideajoin
+
+
+""" Escaping
+inoremap jj <ESC>
+inoremap jk <ESC>
+
+""" Mappings
+
+" move between split windows
+nnoremap <leader>h <C-W><C-H>
+nnoremap <leader>j <C-W><C-J>
+nnoremap <leader>k <C-W><C-K>
+nnoremap <leader>l <C-W><C-L>
+
+" copy to end of line
+nnoremap Y y$
+
+" TAB in normal mode will move to text buffer
+nnoremap <silent> <TAB> gt
+" SHIFT-TAB will go back
+nnoremap <silent> <S-TAB> gT
+
+" built in search looks better
+nnoremap / :action Find<CR>
+" but preserve ideavim search
+nnoremap <leader>/ /
+
+" nnoremap <leader>cd :action ChooseDebugConfiguration<CR>
+
+" nnoremap ga :action GotoAction<CR>
+" nnoremap gc :action GotoClass<CR>
+" nnoremap gd :action GotoDeclaration<CR>
+" nnoremap gf :action GotoFile<CR>
+" nnoremap gi :action GotoImplementaion<CR>
+" nnoremap gs :action GotoSymbolo<CR>
+
+
+" Rename a file
+nnoremap <leader>rf :action RenameFile<CR>
+
+" Show Usages
+nnoremap <leader>su :action ShowUsages<CR>
