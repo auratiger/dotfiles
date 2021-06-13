@@ -4,11 +4,11 @@
 	process = git-lfs filter-process
 	required = true
 [user]
-	email = auratiger@gmail.com
-	name = auratiger
+	email = gegeorgiev@vmware.com
+	name = Georgi Georgiev
 
 [core]
-	editor = vim
+	editor = nvim
 [apply]
     # Detect whitespace errors when applying a patch.
     whitespace = fix
@@ -18,14 +18,32 @@
 [color]
     ui = auto
 
+[color "branch"]
+
+	current = green
+	local = normal
+	remote = red
+
+[color "diff"]
+
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
 [merge]
     # Include summaries of merged commits in newly created merge commit messages
     log = true
 
 [alias]
 
-	# View abbreviated SHA, description, and history graph of the latest 20 commits
-	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+	# View abbreviated SHA, description, and history graph of all commits
+    l = log --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an%Creset, %ar'
+    la = log --all --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an%Creset, %ar'
+	lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+
+	# Color graph log view
+	gr = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
 
 	# View the current working tree status using the short format
 	s = status
@@ -33,26 +51,35 @@
     a = add
 
 	# Show the diff between the latest commit and the current state
-	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+	d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 
 	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
-	# Pull in remote changes for the current repository and all its submodules
-	; p = !"git pull; git submodule foreach git pull origin master"
     p = push
 
     pf = push --force
 
-	# Checkout a pull request from origin (of a github repository)
-	pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+    fp = fetch --prune
 
-	# Clone a repository including all submodules
-	cl = clone --recursive
+    # clean untracked files
+    cl = clean -fd
+
+    # restore all staged files
+    rsa = restore --staged .
+
+    co = checkout
 
     c = commit
 
 	# Commit all changes
 	ca = !git add -A && git commit -av
 
-    b = branch -a
+    # show local branches
+    b = branch
+
+    # show all branches
+    ba = branch -a
+
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
