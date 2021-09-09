@@ -87,9 +87,6 @@ export PATH="/usr/local/opt/openvpn/sbin:$PATH"
 # For compilers to find openjdk you may need to set:
 #  export CPPFLAGS="-I/usr/local/opt/openjdk/include"
 
-
-
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -113,7 +110,10 @@ export PATH="/usr/local/opt/openvpn/sbin:$PATH"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias zshreset="exec zsh"
 alias zshconfig="nvim ~/.zshrc"
+alias gitconfig="nvim ~/.gitconfig"
+alias ideavimconfig="nvim ~/.ideavimrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # VIM
@@ -127,6 +127,7 @@ alias l='ls -CF'
 
 alias cl="clear"
 
+# prints size of file
 alias grepK="du -h | grep -E '([0-9]+\.[0-9]+K)|([0-9]+K)'"
 alias grepM="du -h | grep -E '[0-9]+\.[0-9]+M|[0-9]+M'"
 alias grepG="du -h | grep -E '[0-9]+\.[0-9]+G|[0-9]+G'"
@@ -136,9 +137,24 @@ alias mv="mv -iv"
 alias rm="rm -v"
 alias mkdir="mkdir -pv"
 alias ex="exit"
+
+# finds process running on specified port
+alias port='find_port(){ lsof -i tcp:"$@"; }; find_port'
+
+alias runDb="psql -U admin -d postgres -f ~/Downloads/postgres_2021-04-19_1001.sql"
+alias sbuilder="cd ~/Project/solution-builder"
+alias project="cd ~/Project/migration-manager"
+
+# tmux aliases
 alias mx="tmux"
+alias mxl="tmux list-sessions"
+alias mxk="tmux kill-session -t"
+alias mxka="tmux kill-session -a"
+alias mxkt="tmux kill-session -a -t"
 
-
-
-
+# work
+alias mci="mvn clean install"
+alias depResolve="mvn dependency:resolve"
+alias nrb="npm run build"
+alias migrationVPN="sshuttle --dns --to-ns=192.168.0.253 -r root@10.105.25.14 192.168.0.0/16"
 

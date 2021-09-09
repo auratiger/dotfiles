@@ -1,45 +1,119 @@
-""" Map leader to space 
+""" "Map leader to space "
 let mapleader = " "
 
-""" Common settings
+""" "Common settings"
 set incsearch
 set noerrorbells
 set smartcase
 set ignorecase
-" set relativenumber
+" "set relativenumber"
 set showmode
 set number
 set scrolloff=8
 set sidescrolloff=4
 set history=100000
 
+set clipboard+=unnamed
+set clipboard+=ideaput
+
 set ideajoin
 
+set NERDTree
 
-""" Escaping
+
+" *** "Escaping" ***
+
 inoremap jj <ESC>
 inoremap jk <ESC>
 
-""" Mappings
+" *** "Mappings" ***
 
-" move between split windows
+" "open ideavimrc file"
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+" ========== "NAVIGATION" =============
+
+" "move between split windows"
 nnoremap <leader>h <C-W><C-H>
 nnoremap <leader>j <C-W><C-J>
 nnoremap <leader>k <C-W><C-K>
 nnoremap <leader>l <C-W><C-L>
 
-" copy to end of line
-nnoremap Y y$
+nnoremap <c-\> :action SplitVertically<CR>
+nnoremap <c--> :action SplitHorizontally<CR>
+nnoremap <c-=> :action Unsplit<CR>
+nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
 
-" TAB in normal mode will move to text buffer
+" "TAB in normal mode will move to text buffer"
 nnoremap <silent> <TAB> gt
-" SHIFT-TAB will go back
+" "SHIFT-TAB will go back"
 nnoremap <silent> <S-TAB> gT
 
-" built in search looks better
-nnoremap / :action Find<CR>
-" but preserve ideavim search
-nnoremap <leader>/ /
+" "navigaties to next and previous method"
+nnoremap [[ :action MethodUp<CR>
+nnoremap ]] :action MethodDown<CR>
+
+" ========== "EDITING" ========== 
+
+nnoremap zk :action CollapseRegion<CR>
+nnoremap zj :action ExpandRegion<CR>
+nnoremap <leader>zk :action CollapseAllRegions<CR>
+nnoremap <leader>zj :action ExpandAllRegions<CR>
+
+
+" "comment line"
+" nnoremap <leader>c :action CommentByLineComment<CR>
+
+" "reformating"
+" nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
+" nnoremap <Leader>=  :action ReformatCode<CR>
+" nnoremap <leader>o :action OptimizeImports<CR>
+
+" ========== "ACTIONS" ========== 
+
+nnoremap gi :action GotoImplementation<CR>
+nnoremap ge :action GotoNextError<CR>
+nnoremap gE :action GotoPreviousError<CR>
+
+nnoremap <leader>x :action HideAllWindows<CR>
+vnoremap<leader>y :action CopyReference<CR>
+nnoremap <leader>en :action EditSourceInNewWindow<CR>
+
+" "built in search looks better"
+nnoremap <leader>/ :action Find<CR>
+" "but preserve ideavim search"
+" nnoremap <leader>/ /
+
+" Zen mode
+nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
+
+" Rename a file
+nnoremap <leader>rf :action RenameFile<CR>
+
+" Show Usages
+nnoremap <leader>su :action ShowUsages<CR>
+
+" ========== "DEBUGGING" ========== 
+
+nnoremap ,r :action ContextRun<CR>
+nnoremap ,c :action RunClass<CR>
+nnoremap ,f :action ChooseRunConfiguration<CR>
+nnoremap ,t :action ActivateRunToolWindow<CR>
+nnoremap ,u :action Rerun<CR>
+nnoremap ,b :action ToggleLineBreakpoint<CR>
+nnoremap ,d :action ContextDebug<CR>
+nnoremap ,n :action ActivateDebugToolWindow<CR>
+
+" ========== "ALIASES" ========== 
+
+" "copy to end of line"
+nnoremap Y y$
+
+" "NERDTree"
+nnoremap <leader>f :NERDTreeFocus<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>x :NERDTreeFind<CR>
 
 " nnoremap <leader>cd :action ChooseDebugConfiguration<CR>
 
@@ -50,9 +124,3 @@ nnoremap <leader>/ /
 " nnoremap gi :action GotoImplementaion<CR>
 " nnoremap gs :action GotoSymbolo<CR>
 
-
-" Rename a file
-nnoremap <leader>rf :action RenameFile<CR>
-
-" Show Usages
-nnoremap <leader>su :action ShowUsages<CR>
