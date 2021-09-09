@@ -50,11 +50,15 @@
 
     a = add
 
+	all = !"d() { git add .; git status;}; clear && d"
+
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 
 	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+	dc = !"d() { git diff --staged --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     p = push
 
