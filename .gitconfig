@@ -48,6 +48,14 @@
 	# View the current working tree status using the short format
 	s = status
 
+    # Stashes local changes with specified name
+    sp = "!f() { \
+        git stash push -m $1 ; \
+      }; f"
+
+    show = !"git show --patch-with-stat $1"
+    sh = !"git show --patch-with-stat $1"
+
     a = add
 
 	all = !"d() { git add .; git status;}; clear && d"
@@ -58,11 +66,19 @@
 	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
-	dc = !"d() { git diff --staged --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+	dc = !"git diff-index --quiet HEAD -- || clear; git diff --staged --patch-with-stat"
+
+    # Compare differences from dev to your branch
+    dd = !"git d origin/dev $(git branch --show-current)"
+
+    do = !"git d origin/$(git branch --show-current) $(git branch --show-current)"
 
     p = push
 
     pf = push --force
+
+    # pushed the branch upstream creating a remote branch
+    pp = !"git push --set-upstream origin $(git branch --show-current)"
 
     fp = fetch --prune
 
@@ -71,6 +87,14 @@
 
     # restore all staged files
     rsa = restore --staged .
+
+    rc = rebase --continue
+
+    # rebases current branch to it's origin
+    roi = !"git rebase origin/$(git branch --show-current)"
+
+    # rebases current branch to origin/dev
+    rdd = !"git rebase origin/dev"
 
     co = checkout
 
