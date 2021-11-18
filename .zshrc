@@ -116,11 +116,12 @@ alias gitconfig="nvim ~/.gitconfig"
 alias ideavimconfig="nvim ~/.ideavimrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# VIM
+# ============== VIM ============== 
 alias v="vim"
 alias vi="vim"
 alias vim="nvim"
 
+# ============== SYSTEM ============== 
 alias ll='ls -alF'
 alias la='ls -a'
 alias l='ls -CF'
@@ -145,16 +146,65 @@ alias runDb="psql -U admin -d postgres -f ~/Downloads/postgres_2021-04-19_1001.s
 alias sbuilder="cd ~/Project/solution-builder"
 alias project="cd ~/Project/migration-manager"
 
-# tmux aliases
+# ============== TMUX ============== 
 alias mx="tmux"
 alias mxl="tmux list-sessions"
 alias mxk="tmux kill-session -t"
 alias mxka="tmux kill-session -a"
 alias mxkt="tmux kill-session -a -t"
 
-# work
+# ============== WORK ============== 
 alias mci="mvn clean install"
 alias depResolve="mvn dependency:resolve"
 alias nrb="npm run build"
 alias migrationVPN="sshuttle --dns --to-ns=192.168.0.253 -r root@10.105.25.14 192.168.0.0/16"
+alias vpn="sshuttle --dns --to-ns=192.168.0.253 -r root@10.26.220.75 192.168.0.0/16"
+alias vpp="sshuttle --dns --to-ns=192.168.0.253 -r root@10.105.25.10 192.168.0.0/16"
+
+alias dDrop="mongo < ~/Project/dropDb.js"
+alias neofetch="neofetch --source /usr/local/Cellar/neofetch/7.1.0/share/images/neofetch_ascii/merlin.txt"
+
+# ============== DOCKER ============== 
+
+function docker-show-logs {
+	docker logs -f $1
+}
+
+function docker-inspect-container {
+	docker inspect $1 | less
+}
+
+alias d="docker"
+alias dps="docker ps"
+alias dpsa="docker ps -a"
+alias dim="docker image ls"
+alias dfp="docker system prune --all"
+alias dl=docker-show-logs
+alias di=docker-inspect-container
+
+# Quickly run the docker exec command like this: 'dex container-name bash'
+alias dex="docker exec -it"
+
+# This command is a neat shell pipeline to stop all running containers no matter
+# where you are and without knowing any container names
+alias dsa="docker ps -q | awk '{print $1}' | xargs -o docker stop"
+
+# Start the docker-compose stack in the current directory
+alias dcu="docker-compose up -d"
+
+# Start the docker-compose stack in the current directory and rebuild the images
+alias dcub="docker-compose up -d --build"
+
+# Stop, delete (down) or restart the docker-compose stack in the current directory
+alias dcs="docker-compose stop"
+alias dcd="docker-compose down"
+alias dcr="docker-compose restart"
+
+# Show the logs for the docker-compose stack in the current directory
+# May be extended with the service name to get service-specific logs, like
+# 'dcl php' to get the logs of the php container
+alias dcl="docker-compose logs"
+
+
+
 
