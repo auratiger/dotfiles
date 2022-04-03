@@ -1,99 +1,397 @@
 {
-  "editor.fontLigatures": true,
-  "terminal.integrated.shell.osx": "/bin/zsh",
-  "files.trimTrailingWhitespace": true,
-  "launch": {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "type": "java",
-        "name": "Debug (Attach)",
-        "request": "attach",
-        "hostName": "localhost",
-        "port": 5005
-      }
-    ]
-  },
-  "files.eol": "\n",
-  "workbench.colorTheme": "One Dark Pro",
-  "workbench.iconTheme": "ayu",
-  "gitlens.advanced.messages": {
-    "suppressCommitHasNoPreviousCommitWarning": false,
-    "suppressCommitNotFoundWarning": false,
-    "suppressFileNotUnderSourceControlWarning": false,
-    "suppressGitVersionWarning": false,
-    "suppressLineUncommittedWarning": false,
-    "suppressNoRepositoryWarning": false,
-    "suppressResultsExplorerNotice": false,
-    "suppressShowKeyBindingsNotice": true,
-    "suppressUpdateNotice": false,
-    "suppressWelcomeNotice": true
-  },
-  "editor.renderWhitespace": "all",
-  "editor.renderControlCharacters": false,
-  "extensions.ignoreRecommendations": true,
-  "gitlens.keymap": "alternate",
-  "workbench.colorCustomizations": {
-    //https://github.com/Tyriar/vscode-snazzy
-    //"terminal.background": "#000"
-    //"terminal.background": "#282a36",
-    //"terminal.foreground": "#eff0eb",
-    "terminal.ansiBlack": "#282a36",
-    "terminal.ansiRed": "#ff5c57",
-    "terminal.ansiGreen": "#5af78e",
-    "terminal.ansiYellow": "#f3f99d",
-    "terminal.ansiBlue": "#57c7ff",
-    "terminal.ansiMagenta": "#ff6ac1",
-    "terminal.ansiCyan": "#9aedfe",
-    "terminal.ansiWhite": "#f1f1f0",
-    "terminal.ansiBrightBlack": "#686868",
-    "terminal.ansiBrightRed": "#ff5c57",
-    "terminal.ansiBrightGreen": "#5af78e",
-    "terminal.ansiBrightYellow": "#f3f99d",
-    "terminal.ansiBrightBlue": "#57c7ff",
-    "terminal.ansiBrightMagenta": "#ff6ac1",
-    "terminal.ansiBrightCyan": "#9aedfe",
-    "terminal.ansiBrightWhite": "#eff0eb"
-  },
-  "editor.minimap.enabled": false,
-  "terminal.integrated.rendererType": "dom",
-  "breadcrumbs.enabled": false,
-  "window.titleBarStyle": "custom",
-  "window.zoomLevel": 1,
-  "workbench.settings.editor": "json",
-  "javascript.updateImportsOnFileMove.enabled": "never",
-  "editor.suggestSelection": "first",
-  //"remote.SSH.showLoginTerminal": true,
-  "editor.multiCursorModifier": "alt",
-  "python.venvPath": "${workspaceFolder}/.tox",
-  "python.formatting.provider": "yapf",
-  "python.testing.pytestArgs": ["tests"],
-  "python.testing.unittestEnabled": false,
-  "python.testing.nosetestsEnabled": false,
-  "python.testing.pytestEnabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.workspaceSymbols.exclusionPatterns": [
-    "**/site-packages/**",
-    "bazel-*/**",
-    "**/.eggs/**"
-  ],
-  "python.jediEnabled": false,
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/.repo": true,
-    "**/.tox": true
-  },
-  "files.associations": {
-    "*.textproto": "plaintext",
-    "*.pi": "python"
-  },
-  "files.exclude": {
-    "**/.settings": true,
-    "**/.factorypath": true
-  },
-  "java.errors.incompleteClasspath.severity": "ignore",
-  "java.configuration.checkProjectSettingsExclusions": false,
-  "workbench.startupEditor": "none",
-  "window.newWindowDimensions": "maximized"
+	// Debug:
+	"debug.allowBreakpointsEverywhere": true,
+
+	// Editor:
+	"editor.suggestSelection": "first",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	// "editor.accessibilitySupport": "off",
+	"editor.codeLens": true,
+	"editor.tabSize": 3,
+	"editor.colorDecorators": true,
+	"editor.fontFamily": "Fira Code",
+	"editor.fontLigatures": true,
+	"editor.fontSize": 13.5,
+	"window.zoomLevel": 0.5,
+	"editor.glyphMargin": true,
+	"editor.minimap.enabled": true,
+	"editor.renderWhitespace": "selection",
+	"editor.occurrencesHighlight": true,
+	"editor.rulers": [120],
+	"editor.scrollBeyondLastLine": true,
+	"editor.cursorSurroundingLines": 6, // scrolloff
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.tabCompletion": "on",
+	"editor.wordWrap": "on",
+	"editor.wordWrapColumn": 100,
+	"editor.hover.enabled": false,
+	"editor.gotoLocation.multipleReferences": "peek",
+	"editor.gotoLocation.multipleDefinitions": "peek",
+	"editor.gotoLocation.multipleDeclarations": "peek",
+	"editor.gotoLocation.multipleImplementations": "peek",
+	"editor.gotoLocation.multipleTypeDefinitions": "peek",
+	"explorer.confirmDelete": false,
+
+	"prettier.requireConfig": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	// Files:
+	"files.associations": {
+		".babelrc": "jsonc",
+		".eslintrc": "jsonc",
+		"*.pyi": "python",
+		"*.bats": "shellscript"
+	},
+	"files.autoSave": "onFocusChange",
+	"files.exclude": {
+		"**/.DS_Store": true,
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.vscode": true,
+		"**/node_modules": true,
+		"**/bower_components": true,
+		"**/__pycache__": true,
+		"**/.cache": true,
+		"**/.idea": true,
+		"**/.pytest_cache": true,
+		"**/.mypy_cache": true,
+		"**/.venv": true,
+		"**/.coverage": true,
+		"**/*.py[co]": true,
+		"**/htmlcoverage": true,
+		"**/docs/build": true
+	},
+	"workbench.editorAssociations": {
+		"*.ipynb": "jupyter.notebook.ipynb"
+	},
+
+	// Terminal:
+	"terminal.integrated.defaultProfile.osx": "zsh",
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"terminal.integrated.env.osx": {
+		"SOBOLE_THEME_MODE": "dark"
+	},
+	"terminal.integrated.enableBell": true,
+
+	// Workbench:
+	"window.newWindowDimensions": "maximized",
+	"workbench.iconTheme": "ayu",
+
+	"editor.semanticHighlighting.enabled": false,
+	// VIM
+	"vim.easymotion": true,
+	"vim.incsearch": true,
+	"vim.smartcase": true,
+	"vim.autoindent": true,
+	"vim.useSystemClipboard": true,
+	"vim.showMarksInGutter": true,
+	"vim.ignorecase": true,
+	"vim.useCtrlKeys": true,
+	"vim.highlightedyank.enable": true,
+	"vim.highlightedyank.duration": 400,
+	"vim.highlightedyank.color": "rgba(250, 240, 170, 0.5)",
+	"vim.showmodename": true,
+	"vim.history": 100000,
+	"vim.hlsearch": true,
+	"vim.foldfix": true, // Moving j/k over folds opens up the folds. Try setting vim.foldfix to true. This is a hack; it works fine, but there are side effects (see issue#22276).
+	"vim.insertModeKeyBindings": [
+		{
+			"before": ["j", "j"],
+			"after": ["<Esc>"]
+		},
+		{
+			"before": ["j", "k"],
+			"after": ["<Esc>"]
+		},
+		{
+			"before": ["k", "j"],
+			"after": ["<Esc>"]
+		}
+	],
+	"vim.normalModeKeyBindings": [
+		// TAB navigation
+		{
+			"before": ["<TAB>"],
+			"commands": ["workbench.action.nextEditor"]
+		},
+		{
+			"before": ["<S-TAB>"],
+			"commands": ["workbench.action.previousEditor"]
+		},
+		{
+			// opens fold
+			"before": ["z", "j"],
+			// "after": ["z", "o"]
+			"commands": ["editor.unfoldRecursively"]
+		},
+		{
+			// closes fold
+			"before": ["z", "k"],
+			// "after": ["z", "c"]
+			"commands": ["editor.foldRecursively"]
+		},
+		{
+			// maps L to the $ command which sends you to the end of the line
+			"before": ["L"],
+			"after": ["$"]
+		},
+		{
+			// maps H to the ^ command which sends you to the start of the line
+			"before": ["H"],
+			"after": ["^"]
+		},
+		{
+			// copies to the end of the Line
+			"before": ["Y"],
+			"after": ["y", "$"]
+		},
+		{
+			// goes to next error
+			"before": ["g", "e"],
+			"commands": ["editor.action.marker.next"]
+		},
+		{
+			// goes to previous error
+			"before": ["g", "E"],
+			"commands": ["editor.action.marker.prev"]
+		},
+		{
+			"before": [":"],
+			"commands": ["workbench.action.showCommands"],
+			"silent": true
+		},
+		{
+			// simulate smood scrolling up
+			"before": ["<C-u>"],
+			"after": ["2", "0", "k"]
+		},
+		{
+			// simulate smood scrolling down
+			"before": ["<C-d>"],
+			"after": ["2", "0", "j"]
+		},
+		{
+			// fixes undo
+			"before": ["u"],
+			"commands": [{ "command": "undo" }]
+		},
+		{
+			// fixes redo
+			"before": ["<C-r>"],
+			"commands": [{ "command": "redo" }]
+		},
+		{
+			"before": [",", "b"],
+			"commands": ["editor.debug.action.toggleBreakpoint"]
+		},
+		{
+			// saves and closes the window
+			"before": ["Q"],
+			"commands": [
+				{
+					"command": "workbench.action.files.save",
+					"args": []
+				},
+				{
+					"command": "workbench.action.closeActiveEditor",
+					"args": []
+				}
+			]
+		},
+		{
+			// closes the window
+			"before": ["Z", "Z"],
+			"commands": [
+				{
+					"command": "workbench.action.revertAndCloseActiveEditor",
+					"args": []
+				}
+			]
+		},
+		// LEADER COMMANDS
+		{
+			// split vertical
+			"before": ["<leader>", "i"],
+			"commands": ["workbench.action.splitEditor"]
+		},
+		{
+			// split vertical
+			"before": ["<leader>", "I"],
+			"commands": ["workbench.action.splitEditorOrthogonal"]
+		},
+		{
+			// react snippets
+			"before": ["<leader>", "r", "s"],
+			"commands": ["reactSnippets.search"]
+		},
+		{
+			// navigate left split window
+			"before": ["<leader>", "h"],
+			"commands": ["workbench.action.focusLeftGroup"]
+		},
+		{
+			// navigate below split window
+			"before": ["<leader>", "j"],
+			"commands": ["workbench.action.focusBelowGroup"]
+		},
+		{
+			// navigate above split window
+			"before": ["<leader>", "k"],
+			"commands": ["workbench.action.focusAboveGroup"]
+		},
+		{
+			// navigate right split window
+			"before": ["<leader>", "l"],
+			"commands": ["workbench.action.focusRightGroup"]
+		},
+		{
+			"before": ["<leader>", "n"],
+			"commands": ["workbench.action.toggleSidebarVisibility"]
+		},
+		{
+			// focuses the opened file in the file explorer
+			"before": ["<leader>", "f"],
+			"commands": [
+				"workbench.view.explorer",
+				"workbench.action.focusSideBar"
+			]
+		},
+		{
+			"before": ["<leader>", "r", "e"],
+			"commands": ["fileutils.renameFile"]
+		},
+		{
+			// rename all ocurances
+			"before": ["<leader>", "r", "f"],
+			"commands": ["editor.action.rename"]
+		},
+		{
+			// opens a list of all the active windows and let's the user open the file
+			"before": ["<leader>", "o", "o"],
+			"commands": ["workbench.action.showEditorsInActiveGroup"]
+		},
+		{
+			// toggles git blame
+			"before": ["<leader>", "g"],
+			"commands": ["gitlens.toggleFileBlame"]
+		},
+		{
+			// create temporary typescript file
+			"before": ["<leader>", "q"],
+			"commands": ["quokka.createTypeScriptFile"]
+		},
+		{
+			// create temporary typescript file
+			"before": ["<leader>", "r", "r"],
+			"commands": ["workbench.action.openRecent"]
+		},
+		{
+			// opens run configuration select
+			"before": ["<leader>", "m"],
+			"commands": ["workbench.action.debug.selectandstart"]
+		}
+	],
+	"vim.operatorPendingModeKeyBindings": [
+		{
+			"before": ["L"],
+			"after": ["$"]
+		},
+		{
+			"before": ["H"],
+			"after": ["^"]
+		}
+	],
+	"vim.visualModeKeyBindings": [
+		{
+			"before": [">"],
+			"commands": ["editor.action.indentLines"]
+		},
+		{
+			"before": ["<"],
+			"commands": ["editor.action.outdentLines"]
+		},
+		{
+			"before": ["<leader>", "f"],
+			"commands": ["extension.macColorPicker"]
+		}
+	],
+	"vim.leader": "<space>",
+	"vim.handleKeys": {
+		"<C-a>": false,
+		"<C-f>": false
+	},
+	"vim.statusBarColorControl": true,
+	"vim.statusBarColors.normal": ["#8FB"],
+	"vim.statusBarColors.insert": ["#f0ffbe"],
+	"vim.statusBarColors.visual": ["#d4b2d2"],
+	"vim.statusBarColors.visualline": ["#B48EAD"],
+	"vim.statusBarColors.visualblock": ["#A3BE8C"],
+	"vim.statusBarColors.replace": "#D08770",
+	"vim.statusBarColors.commandlineinprogress": "#007ACC",
+	"vim.statusBarColors.searchinprogressmode": "#8FB",
+	"vim.statusBarColors.easymotionmode": "#007ACC",
+	"vim.statusBarColors.easymotioninputmode": "#007ACC",
+	"vim.statusBarColors.surroundinputmode": "#007ACC",
+
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"workbench.colorCustomizations": {
+		"activityBar.activeBorder": "#e5b358",
+		"activityBar.foreground": "#fff",
+		"editorSuggestWidget.highlightForeground": "#e5b358",
+		"editorSuggestWidget.selectedBackground": "#1c2a42",
+		"statusBar.background": "#8FB",
+		"statusBar.noFolderBackground": "#8FB",
+		"statusBar.debuggingBackground": "#8FB",
+		"statusBar.foreground": "#000",
+		"statusBar.debuggingForeground": "#000"
+	},
+	"eslint.alwaysShowStatus": true,
+	"eslint.probe": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"html",
+		"vue",
+		"markdown",
+		"css",
+		"scss",
+		"json"
+	],
+	"prettier.jsxBracketSameLine": true,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 3,
+	"react-native-tools.networkInspector.consoleLogsColorTheme": "Dark",
+	"vscodeReactRefactor.functionType": "arrowFunction",
+	"[shellscript]": {
+		"editor.defaultFormatter": "foxundermoon.shell-format"
+	},
+	"typescript.suggest.paths": false,
+	"javascript.suggest.paths": false,
+	"workbench.editor.enablePreview": false,
+	"search.searchOnType": false
 }
+
+/* Important:
+	gh: equivalent to hovering your mouse over wherever the cursor is. Handy for seeing types and error messages without reaching for the mouse!
+
+	af - visual mode command which selects increasingly large blocks of text. For example, if you had "blah (foo [bar 'ba|z'])"
+			then it would select 'baz' first. If you pressed af again, it'd then select [bar 'baz'], and if you did it a third time it would select "(foo [bar 'baz'])".
+
+	cmd + shift + L - select all matches of the selected word 
+
+	cmd + j - toggle terminal
+
+*/

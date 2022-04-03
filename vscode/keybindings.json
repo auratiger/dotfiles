@@ -1,0 +1,49 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+  // ======= Custom Configurations ========
+  {
+    "key": ", t",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "!editorTextFocus"
+  },
+  // Navigation throught suggestions with vim keys //
+  {
+    "key": "ctrl+j",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.quickOpenSelectNext",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+d",
+    "command": "-workbench.action.debug.run",
+    "when": "debuggersAvailable && !inDebugMode && !terminalFocus"
+  },
+  // ======== End of custom configurations ========
+  {
+    "key": "ctrl+r",
+    "command": "-workbench.action.tasks.reRunTask"
+  },
+  {
+    "key": "cmd+k",
+    "command": "-git.commitAll",
+    "when": "!inDebugMode && !terminalFocus"
+  },
+  {
+    "key": "cmd+t",
+    "command": "-git.sync"
+  }
+]

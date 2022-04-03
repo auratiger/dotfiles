@@ -31,6 +31,6 @@ vscode-icons-team.vscode-icons
 vscodevim.vim
 }
 
-for i in ${pkglist[@]}; do
+for i in ${package_list[@]}; do
   code --install-extension $i
 done
