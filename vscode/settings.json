@@ -1,6 +1,42 @@
 {
 	// Debug:
 	"debug.allowBreakpointsEverywhere": true,
+	"launch": {
+		// Global launch settings
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "bashdb",
+				"request": "launch",
+				"name": "Bash-Debug (type in script name)",
+				"cwd": "${workspaceFolder}",
+				"program": "${command:AskForScriptName}",
+				"args": []
+			},
+			{
+				"type": "bashdb",
+				"request": "launch",
+				"name": "Bash-Debug (select script from list of sh files)",
+				"cwd": "${workspaceFolder}",
+				"program": "${command:SelectScriptName}",
+				"args": []
+			},
+			{
+				"type": "bashdb",
+				"request": "launch",
+				"name": "Bash-Debug (hardcoded script name)",
+				"cwd": "${workspaceFolder}",
+				"program": "${workspaceFolder}/path/to/script.sh",
+				"args": []
+			},
+			{
+				"type": "bashdb",
+				"request": "launch",
+				"name": "Bash-Debug (simplest configuration)",
+				"program": "${file}"
+			}
+		]
+	},
 
 	// Editor:
 	"editor.suggestSelection": "first",
@@ -11,8 +47,7 @@
 	"editor.colorDecorators": true,
 	"editor.fontFamily": "Fira Code",
 	"editor.fontLigatures": true,
-	"editor.fontSize": 13.5,
-	"window.zoomLevel": 0.5,
+	"editor.fontSize": 12.5,
 	"editor.glyphMargin": true,
 	"editor.minimap.enabled": true,
 	"editor.renderWhitespace": "selection",
@@ -31,17 +66,18 @@
 	"editor.gotoLocation.multipleDeclarations": "peek",
 	"editor.gotoLocation.multipleImplementations": "peek",
 	"editor.gotoLocation.multipleTypeDefinitions": "peek",
+	"editor.semanticHighlighting.enabled": false,
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
 	"explorer.confirmDelete": false,
 
-	"prettier.requireConfig": true,
-	"typescript.updateImportsOnFileMove.enabled": "always",
-	"[typescriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-
-	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
+	// Window
+	"window.zoomLevel": 1,
+	"window.openFoldersInNewWindow": "on", //  When opening recent\other project
+	"window.openFilesInNewWindow": "on", //     it opens them in a new window
+	"window.newWindowDimensions": "maximized",
 
 	// Files:
 	"files.associations": {
@@ -71,10 +107,6 @@
 		"**/htmlcoverage": true,
 		"**/docs/build": true
 	},
-	"workbench.editorAssociations": {
-		"*.ipynb": "jupyter.notebook.ipynb"
-	},
-
 	// Terminal:
 	"terminal.integrated.defaultProfile.osx": "zsh",
 	"terminal.integrated.defaultProfile.linux": "bash",
@@ -82,12 +114,22 @@
 		"SOBOLE_THEME_MODE": "dark"
 	},
 	"terminal.integrated.enableBell": true,
+	"workbench.editorAssociations": {
+		"*.ipynb": "jupyter.notebook.ipynb"
+	},
+	"workbench.editor.enablePreview": false,
+	"workbench.colorCustomizations": {
+		"activityBar.activeBorder": "#e5b358",
+		"activityBar.foreground": "#fff",
+		"editorSuggestWidget.highlightForeground": "#e5b358",
+		"editorSuggestWidget.selectedBackground": "#1c2a42",
+		"statusBar.background": "#8FB",
+		"statusBar.noFolderBackground": "#8FB",
+		"statusBar.debuggingBackground": "#8FB",
+		"statusBar.foreground": "#000",
+		"statusBar.debuggingForeground": "#000"
+	},
 
-	// Workbench:
-	"window.newWindowDimensions": "maximized",
-	"workbench.iconTheme": "ayu",
-
-	"editor.semanticHighlighting.enabled": false,
 	// VIM
 	"vim.easymotion": true,
 	"vim.incsearch": true,
@@ -230,11 +272,6 @@
 			"commands": ["workbench.action.splitEditorOrthogonal"]
 		},
 		{
-			// react snippets
-			"before": ["<leader>", "r", "s"],
-			"commands": ["reactSnippets.search"]
-		},
-		{
 			// navigate left split window
 			"before": ["<leader>", "h"],
 			"commands": ["workbench.action.focusLeftGroup"]
@@ -267,13 +304,43 @@
 			]
 		},
 		{
-			"before": ["<leader>", "r", "e"],
-			"commands": ["fileutils.renameFile"]
+			// react snippets
+			"before": ["<leader>", "r", "s"],
+			"commands": ["reactSnippets.search"]
 		},
 		{
 			// rename all ocurances
 			"before": ["<leader>", "r", "f"],
 			"commands": ["editor.action.rename"]
+		},
+		{
+			// create temporary typescript file
+			"before": ["<leader>", "r", "r"],
+			"commands": ["workbench.action.openRecent"]
+		},
+		{
+			"before": ["<leader>", "r", "e"],
+			"commands": ["fileutils.renameFile"]
+		},
+		{
+			// create new file at path
+			"before": ["<leader>", "r", "n"],
+			"commands": ["fileutils.newFile"]
+		},
+		{
+			// delete opened file
+			"before": ["<leader>", "r", "d"],
+			"commands": ["fileutils.removeFile"]
+		},
+		{
+			// move the file to path
+			"before": ["<leader>", "r", "m"],
+			"commands": ["fileutils.moveFile"]
+		},
+		{
+			// duplicate file to path
+			"before": ["<leader>", "r", "c"],
+			"commands": ["fileutils.duplicateFile"]
 		},
 		{
 			// opens a list of all the active windows and let's the user open the file
@@ -289,11 +356,6 @@
 			// create temporary typescript file
 			"before": ["<leader>", "q"],
 			"commands": ["quokka.createTypeScriptFile"]
-		},
-		{
-			// create temporary typescript file
-			"before": ["<leader>", "r", "r"],
-			"commands": ["workbench.action.openRecent"]
 		},
 		{
 			// opens run configuration select
@@ -342,21 +404,6 @@
 	"vim.statusBarColors.easymotionmode": "#007ACC",
 	"vim.statusBarColors.easymotioninputmode": "#007ACC",
 	"vim.statusBarColors.surroundinputmode": "#007ACC",
-
-	"[jsonc]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"workbench.colorCustomizations": {
-		"activityBar.activeBorder": "#e5b358",
-		"activityBar.foreground": "#fff",
-		"editorSuggestWidget.highlightForeground": "#e5b358",
-		"editorSuggestWidget.selectedBackground": "#1c2a42",
-		"statusBar.background": "#8FB",
-		"statusBar.noFolderBackground": "#8FB",
-		"statusBar.debuggingBackground": "#8FB",
-		"statusBar.foreground": "#000",
-		"statusBar.debuggingForeground": "#000"
-	},
 	"eslint.alwaysShowStatus": true,
 	"eslint.probe": [
 		"javascript",
@@ -373,15 +420,28 @@
 	"prettier.jsxBracketSameLine": true,
 	"prettier.useTabs": true,
 	"prettier.tabWidth": 3,
+	"prettier.requireConfig": true,
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"typescript.updateImportsOnFileMove.enabled": "always",
 	"react-native-tools.networkInspector.consoleLogsColorTheme": "Dark",
 	"vscodeReactRefactor.functionType": "arrowFunction",
-	"[shellscript]": {
-		"editor.defaultFormatter": "foxundermoon.shell-format"
-	},
 	"typescript.suggest.paths": false,
 	"javascript.suggest.paths": false,
-	"workbench.editor.enablePreview": false,
-	"search.searchOnType": false
+	"search.searchOnType": false,
+	"workbench.iconTheme": "vscode-icons"
 }
 
 /* Important:
