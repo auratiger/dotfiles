@@ -4,12 +4,14 @@ let mapleader = " "
 """ "Common settings"
 set incsearch
 set noerrorbells
+set idearefactormode=keep
 set smartcase
 set ignorecase
+set easymotion
 " "set relativenumber"
 set showmode
 set number
-set scrolloff=8
+set scrolloff=6
 set sidescrolloff=4
 set history=100000
 
@@ -85,18 +87,24 @@ nnoremap <leader>/ :action Find<CR>
 " "but preserve ideavim search"
 " nnoremap <leader>/ /
 
-" Zen mode
+" "Zen mode"
 nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
 
-" Rename a file
-nnoremap <leader>rf :action RenameFile<CR>
+" "Rename a file"
+nnoremap <leader>rf :action RenameElement<CR>
 
-" Show Usages
+" "Show Usages"
 nnoremap <leader>su :action ShowUsages<CR>
+
+" "Toggle git-blame window"
+nnoremap <leader>g :action Annotate<CR>
+
+" "Show file methods in popup"
+nnoremap <leader>m :action FileStructurePopup<CR>
 
 " ========== "DEBUGGING" ========== 
 
-nnoremap ,r :action ContextRun<CR>
+nnoremap ,r :action Run<CR>
 nnoremap ,c :action RunClass<CR>
 nnoremap ,f :action ChooseRunConfiguration<CR>
 nnoremap ,t :action ActivateRunToolWindow<CR>

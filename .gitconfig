@@ -53,23 +53,29 @@
         git stash push -m $1 ; \
       }; f"
 
+    so = "!f() { \
+        git stash pop stash@{$1} ; \
+      }; f"
+
     show = !"git show --patch-with-stat $1"
     sh = !"git show --patch-with-stat $1"
 
     a = add
 
-	all = !"d() { git add .; git status;}; clear && d"
+	al = !"d() { git add .; git status;}; clear && d"
 
 	# Show the diff between the latest commit and the current state
-	d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+	d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat -- . ':!*/package-lock.json'"
 
 	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
-	dc = !"git diff-index --quiet HEAD -- || clear; git diff --staged --patch-with-stat"
+	dc = !"git diff-index --quiet HEAD -- || clear; git diff --staged --patch-with-stat  -- . ':!*/package-lock.json'"
 
     # Compare differences from dev to your branch
     dd = !"git d origin/dev $(git branch --show-current)"
+
+    dm = !"git d origin/main $(git branch --show-current)"
 
     do = !"git d origin/$(git branch --show-current) $(git branch --show-current)"
 
@@ -86,9 +92,27 @@
     cl = clean -fd
 
     # restore all staged files
-    rsa = restore --staged .
+    rsa = !"git restore --staged . && git status"
+
+    rs = !"git restore . && git status"
+
+    cn = clean -n
+
+    cf = clean -f
 
     rc = rebase --continue
+
+    ra = rebase --abort
+
+    mc = merge --continue
+
+    ma = merge --abort
+
+    cp = cherry-pick
+
+    cpc = cherry-pick --continue
+
+    cpa = cherry-pick --abort
 
     # rebases current branch to it's origin
     roi = !"git rebase origin/$(git branch --show-current)"
@@ -96,18 +120,30 @@
     # rebases current branch to origin/dev
     rdd = !"git rebase origin/dev"
 
+    rh = reset --hard
+
+    rss = reset --soft
+
     co = checkout
 
     c = commit
 
+    copy = !"git co -b $(git branch --show-current)-COPY"
+
+    dcopy = !"git branch -D $(git branch --show-current)-COPY"
+
 	# Commit all changes
 	ca = !git add -A && git commit -av
+
+    amend = !"git commit --amend --no-edit && git status"
 
     # show local branches
     b = branch
 
     # show all branches
     ba = branch -a
+
+    rename = branch -m
 
 	# Find commits by commit message
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
