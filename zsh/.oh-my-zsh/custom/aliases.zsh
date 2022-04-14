@@ -64,7 +64,8 @@ alias port='find_port(){ lsof -i tcp:"$@"; }; find_port'
 
 alias runDb="psql -U admin -d postgres -f ~/Downloads/postgres_2021-04-19_1001.sql"
 
-alias neofetch="neofetch --source /usr/local/Cellar/neofetch/7.1.0/share/images/neofetch_ascii/merlin.txt"
+# Config and images for neofetch are located in ~/.config/neofetch/
+alias neofetch="neofetch --source ~/.config/neofetch/neofetch_ascii/merlin.txt"
 
 # >> ------------ TMUX ------------ << #
 alias mx="tmux"
@@ -156,6 +157,7 @@ typeset -A application_version_map=(
     [ZSH]="zsh --version"
     [BASH]="bash --version"
     [RUBY]="ruby --version"
+    [LUA]="lua -v"
 )
 
 function __print_versions {

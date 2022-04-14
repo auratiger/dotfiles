@@ -48,8 +48,13 @@ function __mygit() {
 
 function __retcode() {}
 
-PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[black]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%{$fg_bold[default]%}%~%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%b%{$fg[yellow]%}'%D{"%Y-%m-%d %I:%M:%S"}%b$'%{$fg_bold[blue]%}]
+# >>> Shows date, but isn't really useful and take up a lot of space <<<<
+# PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[black]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%{$fg_bold[default]%}%~%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%b%{$fg[yellow]%}'%D{"%Y-%m-%d %I:%M:%S"}%b$'%{$fg_bold[blue]%}]
+# %{$fg_bold[blue]%}└─[%{$fg_bold[magenta]%}%?$(__retcode)%{$fg_bold[blue]%}] <$(__mygit)$(__hg_prompt_info)>%{$reset_color%} '
+
+PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[black]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%{$fg_bold[default]%}%~%{$fg_bold[blue]%}]%{$reset_color%}
 %{$fg_bold[blue]%}└─[%{$fg_bold[magenta]%}%?$(__retcode)%{$fg_bold[blue]%}] <$(__mygit)$(__hg_prompt_info)>%{$reset_color%} '
+
 RPS1='%(?..%{$fg_bold[red]%} -> exit: %? <- %{$reset_color%})' # showing the exit code of the last ran command
 PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
 
