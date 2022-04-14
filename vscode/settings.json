@@ -375,6 +375,11 @@
 	],
 	"vim.visualModeKeyBindings": [
 		{
+			"before": [":"],
+			"commands": ["workbench.action.showCommands"],
+			"silent": true
+		},
+		{
 			"before": [">"],
 			"commands": ["editor.action.indentLines"]
 		},
@@ -441,7 +446,82 @@
 	"typescript.suggest.paths": false,
 	"javascript.suggest.paths": false,
 	"search.searchOnType": false,
-	"workbench.iconTheme": "vscode-icons"
+	"workbench.iconTheme": "vscode-icons",
+	"commentBox.styles": {
+		"defaultStyle": {
+			"capitalize": false,
+			"ignoreInnerIndentation": false,
+			"ignoreOuterIndentation": false,
+			"removeEmptyLines": false,
+			"textAlignment": "left"
+		},
+		"jsStyle": {
+			"commentStartToken": "/*",
+			"commentEndToken": "*/",
+			"leftEdgeToken": "| ",
+			"rightEdgeToken": " |",
+			"topEdgeToken": "=",
+			"bottomEdgeToken": "=",
+			"topRightToken": "=+",
+			"bottomLeftToken": "+="
+		},
+		"shellCommentCenterStyle": {
+			"capitalize": false,
+			"textAlignment": "center",
+			"commentStartToken": "#",
+			"commentEndToken": "####",
+			"leftEdgeToken": "#   ",
+			"rightEdgeToken": "   #",
+			"topEdgeToken": "#",
+			"bottomEdgeToken": "#",
+			"topRightToken": "####",
+			"bottomLeftToken": "#"
+		},
+		"shellCommentLeftStyle": {
+			"capitalize": false,
+			"textAlignment": "left",
+			"commentStartToken": "#",
+			"commentEndToken": "####",
+			"leftEdgeToken": "#   ",
+			"rightEdgeToken": "   #",
+			"topEdgeToken": "#",
+			"bottomEdgeToken": "#",
+			"topRightToken": "####",
+			"bottomLeftToken": "#"
+		},
+		"shellHeaderStyleStyle": {
+			"capitalize": true,
+			"textAlignment": "center",
+			"commentStartToken": "# >>>> ============ ",
+			"commentEndToken": " ==================================================== <<<< #",
+			"topEdgeToken": "",
+			"bottomEdgeToken": "",
+			"topRightToken": "",
+			"bottomLeftToken": ""
+		},
+		"shellParagraphStyleStyle": {
+			"capitalize": true,
+			"textAlignment": "center",
+			"commentStartToken": "# >> ------------ ",
+			"commentEndToken": " ------------ << #",
+			"topEdgeToken": "",
+			"bottomEdgeToken": "",
+			"topRightToken": "",
+			"bottomLeftToken": ""
+		},
+		"shellWallsStyle": {
+			"capitalize": false,
+			"textAlignment": "center",
+			"commentStartToken": "#   ",
+			"commentEndToken": "   #",
+			"leftEdgeToken": "#   ",
+			"rightEdgeToken": "   #",
+			"topEdgeToken": "",
+			"bottomEdgeToken": "",
+			"topRightToken": "",
+			"bottomLeftToken": ""
+		}
+	}
 }
 
 /* Important:
