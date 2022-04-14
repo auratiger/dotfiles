@@ -133,6 +133,7 @@ extention_list=(
    "planbcoding.vscode-react-refactor"
    "Remisa.shellman"
    "rogalmic.bash-debug"
+   "SlySherZ.comment-box"
    "streetsidesoftware.code-spell-checker"
    "timonwong.shellcheck"
    "VisualStudioExptTeam.vscodeintellicode"
