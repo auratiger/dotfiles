@@ -18,6 +18,17 @@
 #                                                                       #
 #########################################################################
 
+# >> Inspired by: https://www.youtube.com/watch?v=UgDz_9i2nwc
+# >> https://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+
+# >>>> Prompt man page: https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+
+
+# >> Reference for colors: http://stackoverflow.com/questions/689765/how-can-i-change-the-color-of-my-prompt-in-zsh-different-from-normal-text
+autoload -U colors && colors
+
+setopt PROMPT_SUBST
+
 # User, Host, Full Path, and time/date on two lines for easier vgrepping
 function __hg_prompt_info {
   if (( $+commands[hg] )) && grep -q "prompt" ~/.hgrc; then
@@ -46,15 +57,93 @@ function __mygit() {
   fi
 }
 
-function __retcode() {}
+function __set_prompt() {
 
-# >>> Shows date, but isn't really useful and take up a lot of space <<<<
-# PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[black]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%{$fg_bold[default]%}%~%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%b%{$fg[yellow]%}'%D{"%Y-%m-%d %I:%M:%S"}%b$'%{$fg_bold[blue]%}]
-# %{$fg_bold[blue]%}└─[%{$fg_bold[magenta]%}%?$(__retcode)%{$fg_bold[blue]%}] <$(__mygit)$(__hg_prompt_info)>%{$reset_color%} '
+	# Opening Bracket: ┌─[
+	PS1="%{$fg_bold[blue]%}┌─["
 
-PROMPT=$'%{$fg_bold[blue]%}┌─[%{$fg_bold[green]%}%n%b%{$fg[black]%}@%{$fg[cyan]%}%m%{$fg_bold[blue]%}]%{$reset_color%} - %{$fg_bold[blue]%}[%{$fg_bold[default]%}%~%{$fg_bold[blue]%}]%{$reset_color%}
-%{$fg_bold[blue]%}└─[%{$fg_bold[magenta]%}%?$(__retcode)%{$fg_bold[blue]%}] <$(__mygit)$(__hg_prompt_info)>%{$reset_color%} '
+  # Name and Host
+  PS1+="%{$fg_bold[green]%}%n%b%{$fg[black]%}@%{$fg[cyan]%}%m"
 
-RPS1='%(?..%{$fg_bold[red]%} -> exit: %? <- %{$reset_color%})' # showing the exit code of the last ran command
-PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
+  # Closing Bracket: ']'
+  PS1+="%{$fg_bold[blue]%}]%{$reset_color%}"
+
+  PS1+=" - "
+
+  # Opening Bracket: '['
+  PS1+="%{$fg_bold[blue]%}["
+
+  # Current Directory Path '~'
+	# Path: http://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
+	PS1+="%{$fg_bold[white]%}${PWD/#$HOME/~}%{$reset_color%}"
+
+  # Closing Bracket: ']'
+  PS1+="%{$fg_bold[blue]%}]%{$reset_color%}"
+
+  # New line
+  PS1+=$'\n'
+
+	# Opening Bracket: └─[
+	PS1+="%{$fg_bold[blue]%}└─["
+
+	# Status Code
+  # >> This is a ternary operation: '%(x.true-text.false-text)'
+  # https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+	PS1+="%(?.%{$fg_bold[magenta]%}%?%{$reset_color%}.%{$fg[red]%}%?%{$reset_color%})"
+
+ 	# Git
+ 	# if git rev-parse --is-inside-work-tree 2> /dev/null | grep -q 'true' ; then
+ 	# 	PS1+=', '
+ 	# 	PS1+="%{$fg[magenta]%}$(git rev-parse --abbrev-ref HEAD 2> /dev/null)%{$reset_color%}"
+		# STATUS=$(git status --short | wc -l)
+		# if [ $STATUS -gt 0 ]; then
+ 	# 		PS1+="%{$fg[green]%}+$(echo $STATUS | awk '{$1=$1};1')%{$reset_color%}"
+ 	# 	fi
+ 	# fi
+
+	# Timer: http://stackoverflow.com/questions/2704635/is-there-a-way-to-find-the-running-time-of-the-last-executed-command-in-the-shel
+	if [[ $_elapsed[-1] -ne 0 ]]; then
+		PS1+=', '
+		PS1+="%{$fg[yellow]%}$_elapsed[-1]s%{$reset_color%}"
+	fi
+
+	# PID
+	if [[ $! -ne 0 ]]; then
+		PS1+=', '
+		PS1+="%{$fg[yellow]%}PID:$!%{$reset_color%}"
+	fi
+
+	# Sudo: https://superuser.com/questions/195781/sudo-is-there-a-command-to-check-if-i-have-sudo-and-or-how-much-time-is-left
+	CAN_I_RUN_SUDO=$(sudo -n uptime 2>&1|grep "load"|wc -l)
+	if [ ${CAN_I_RUN_SUDO} -gt 0 ]
+	then
+		PS1+=', '
+		PS1+="%{$fg_bold[red]%}SUDO%{$reset_color%}"
+	fi
+
+  # Closing Bracket: ']'
+  PS1+="%{$fg_bold[blue]%}] %{$reset_color%}"
+
+  PS1+="%{$fg_bold[blue]%}<$(__mygit)$(__hg_prompt_info)%{$fg_bold[blue]%}>%{$reset_color%} "
+
+  RPS1="%(?..%{$fg_bold[red]%} -> exit: %? <- %{$reset_color%})" # showing the exit code of the last ran command
+  PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
+}
+
+# Here we are using zsh hooks. More information can be found here: 
+# >> https://github.com/rothgar/mastering-zsh/blob/master/docs/config/hooks.md 
+# >> https://zsh.sourceforge.io/Doc/Release/Functions.html
+
+precmd_functions+=__set_prompt
+
+preexec () {
+   (( ${#_elapsed[@]} > 1000 )) && _elapsed=(${_elapsed[@]: -1000})
+   _start=$SECONDS
+}
+
+precmd () {
+   (( _start >= 0 )) && _elapsed+=($(( SECONDS-_start )))
+   _start=-1 
+}
+
 

@@ -7,20 +7,20 @@
 
 # >>>> ============ ALIASES ==================================================== <<<< #
 
+# >> ------------ EDITORS ------------ << #
+alias v="lvim"
+alias vi="lvim"
+alias vim="lvim"
+alias c="code"
+
 # >> ------------ CONFIGS ------------ << #
 alias zshreset="exec zsh"
-alias zshconfig="nvim ~/.zshrc"
-alias aliconfig="nvim ~/.oh-my-zsh/custom/aliases.zsh"
-alias gitconfig="nvim ~/.gitconfig"
-alias ideavimconfig="nvim ~/.ideavimrc"
-alias mxconfig="nvim ~/.tmux.conf"
+alias zshconfig="lvim ~/.zshrc"
+alias aliconfig="lvim ~/.oh-my-zsh/custom/aliases.zsh"
+alias gitconfig="lvim ~/.gitconfig"
+alias ideavimconfig="lvim ~/.ideavimrc"
+alias mxconfig="lvim ~/.tmux.conf"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# >> ------------ EDITORS ------------ << #
-alias v="vim"
-alias vi="vim"
-alias vim="nvim"
-alias c="code"
 
 # >> ------------ COMMAND LINE ------------ << #
 # alias ll='ls -alFG'
@@ -35,6 +35,7 @@ alias la='exa -lbhHigUmuSa --git --color-scale'  # all list
 alias lx='exa -lbhHigUmuSa@ --git --color-scale' # all + extended list
 alias lt='exa -lbFa --tree --level=2'
 
+alias cd='change_dir(){ cd $1 && exa }; change_dir'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias cd..='cd ..'
