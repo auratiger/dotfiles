@@ -63,6 +63,7 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/openvpn/sbin:$PATH"
+export PATH="/Users/gegeorgiev/.local/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # For compilers to find openjdk you may need to set:
