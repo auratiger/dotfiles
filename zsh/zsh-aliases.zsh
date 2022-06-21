@@ -19,8 +19,13 @@ alias zshconfig="lvim $ZDOTDIR/.zshrc"
 alias aliconfig="lvim $ZDOTDIR/.zsh-aliases.zsh"
 alias gitconfig="lvim ~/.gitconfig"
 alias ideavimconfig="lvim ~/.ideavimrc"
-alias mxconfig="lvim ~/.tmux.conf"
+# alias mxconfig="lvim ~/.tmux.conf"
+alias mxconfig="lvim ~/.config/tmux/tmux.conf"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias golunar="cd ~/.local/share/lunarvim/lvim"
+alias golvim="cd ~/.config/lvim"
+alias gozsh="cd $ZDOTDIR"
 
 # >> ------------ COMMAND LINE ------------ << #
 # alias ll='ls -alFG'
@@ -37,6 +42,12 @@ alias la='exa -lbhHigUmuSa --git --color-scale'  # all list
 alias lx='exa -lbhHigUmuSa@ --git --color-scale' # all + extended list
 alias lt='exa -lbFa --tree --level=2'
 
+# Colorize grep output (good for log files)
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Better directory navigation
 alias cd='change_dir(){ cd $1 && exa }; change_dir'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -54,15 +65,31 @@ alias ex="exit"
 
 alias -g L='| less'
 alias -g gr='| grep'
+alias -g and='&&'
+alias -g or='||'
 
 # >> ------------ MISC ------------ << #
 
-# >>  prints size of file
-alias grepK="du -h | grep -E '([0-9]+\.[0-9]+K)|([0-9]+K)'"
-alias grepM="du -h | grep -E '[0-9]+\.[0-9]+M|[0-9]+M'"
-alias grepG="du -h | grep -E '[0-9]+\.[0-9]+G|[0-9]+G'"
-# >>  easier to read disk
-alias df='df -h'     # human-readable sizes
+alias dirSizeK="du -h | grep -E '([0-9]+\.[0-9]+K)|([0-9]+K)'" # Prints the sizes of all files in Kb
+alias dirSizeM="du -h | grep -E '[0-9]+\.[0-9]+M|[0-9]+M'"     # Prints the sizes of all files in Mb
+alias dirSizeG="du -h | grep -E '[0-9]+\.[0-9]+G|[0-9]+G'"     # Prints the sizes of all files in Gb
+alias dirTotal="du -sh ."                                      # Prints the total size of all files in the directory
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+
+# ps
+alias psa="ps auxf"
+alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias psmem='ps auxf | sort -nr -k 4'
+alias pscpu='ps auxf | sort -nr -k 3'
+
+# Play video files in current dir by type
+alias playavi='vlc *.avi'
+alias playmov='vlc *.mov'
+alias playmp4='vlc *.mp4'
+
+# the terminal rickroll
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 # finds process running on specified port
 alias port='find_port(){ lsof -i tcp:"$@"; }; find_port'
@@ -90,6 +117,11 @@ alias serve="npm run serve"
 alias build="npm run build"
 alias nress="rm -rf ./node_modules ./node && npm i"
 alias nressf="rm -rf ./node_modules ./node && npm i -f"
+
+alias gcl="gatsby clean"
+alias gbuild="gatsby build"
+alias gdev="gatsby develop"
+alias gres="gatsby clean && gatsby develop"
 
 # delete later
 alias migrationVPN="sshuttle --dns --to-ns=192.168.0.253 -r root@10.105.25.14 192.168.0.0/16"
@@ -191,22 +223,68 @@ EOF
 alias versions=__print_versions
 
 
+# >>>> ============ SCRIPTS ==================================================== <<<< #
+
+# Functions which expects two input parameters one for the file extention to change and the second for the new extention.
+# If both are not empty, replaces all files with the old file extention in the directory with the new one
+function __change_file_extensions() {
+   local oldExt=$1
+   local newExt=$2
+
+   if [[ -n "$oldExt" && -n "$newExt" ]]; then
+      for file in *.$oldExt; do 
+          mv -- "$file" "${file%.*}.$newExt"
+      done
+   else
+      echo "No extention was specified"
+   fi
+}
+
+alias extChange=__change_file_extensions
+
+
 # >>>> ============ This is a switch case for handling aliases between different OS's ==================================================== <<<< #
 case "$(uname -s)" in
 
-Darwin)
-	# echo 'Mac OS X'
+Darwin) # Maps only for Mac distros 
 	;;
 
-Linux)
-	# echo 'Linux'
+Linux) # Maps only for Linux distros 
+
+   if [[ -f "/etc/lsb-release" ]];then # Checks if using Arch distro
+      # pacman and yay
+      alias pac=pacman
+      alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
+      alias update='sudo pacman -Syyu'                 # Refresh pkglist & update standard pkgs
+      alias pacsyyu='sudo pacman -Syyu'                # Refresh pkglist & update standard pkgs
+      alias yaysua='yay -Sua --noconfirm'              # update only AUR pkgs (yay)
+      alias yaysyu='yay -Syu --noconfirm'              # update standard pkgs and AUR pkgs (yay)
+      alias parsua='paru -Sua --noconfirm'             # update only AUR pkgs (paru)
+      alias parsyu='paru -Syu --noconfirm'             # update standard pkgs and AUR pkgs (paru)
+      alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
+      alias cleanup='sudo pacman -Rns $(pacman -Qtdq)' # remove orphaned packages
+
+   elif [[ -f "/etc/debian_version" ]]; then # Checks if using Debian distro
+      echo "Hello Debian (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
+
+   elif [[ -f "/etc/alpine-release" ]]; then # Checks if using Alpine distro
+      echo "Hello Alpine (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
+
+   elif [[ -f "/etc/centos-release" ]]; then # Checks if using Centos distro
+      echo "Hello Centos (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
+
+   elif [[ -f "/etc/fedora-release" ]]; then # Checks if using Fedora distro
+      echo "Hello Fedora (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
+
+   fi
+
 	;;
 
-CYGWIN* | MINGW32* | MSYS* | MINGW*)
-	# echo 'MS Windows'
+CYGWIN* | MINGW32* | MSYS* | MINGW*) # Maps only for Windows distros... Don't ask why I added it.
 	;;
-*)
-	# echo 'Other OS'
+
+*) # Other
 	;;
+
 esac
 

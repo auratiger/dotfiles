@@ -31,7 +31,11 @@ SAVEHIST=100000
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+# https://github.com/nvm-sh/nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+#export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/openvpn/sbin:$PATH"
@@ -45,18 +49,28 @@ export PATH="/Users/gegeorgiev/.local/bin:$PATH"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# >>>> ============ Color man pages ==================================================== <<<< #
+export LESS_TERMCAP_mb=$'\E[01;32m'
+export LESS_TERMCAP_md=$'\E[01;32m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;47;31m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;36m'
+export LESS=-R
+
 # >>>> ============ USER CONFIGURATION ==================================================== <<<< #
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 export TERMINAL="alacritty"
-# export BROWSER="brave"
+export BROWSER="vivaldi-stable"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='nvim'
+  export EDITOR='lvim'
 fi
 
