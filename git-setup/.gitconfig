@@ -1,0 +1,149 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	email = gegeorgiev@vmware.com
+	name = Georgi Georgiev
+
+[core]
+	editor = nvim
+[apply]
+    # Detect whitespace errors when applying a patch.
+    whitespace = fix
+[branch]
+    # Show most recently changed branches first.
+    sort = -committerdate
+[color]
+    ui = auto
+
+[color "branch"]
+
+	current = green
+	local = normal
+	remote = red
+
+[color "diff"]
+
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
+[merge]
+    # Include summaries of merged commits in newly created merge commit messages
+    log = true
+
+[alias]
+
+# View abbreviated SHA, description, and history graph of all commits
+   l = log --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an%Creset, %ar'
+   la = log --all --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an%Creset, %ar'
+   lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+
+# Color graph log view
+   gr = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+
+# View the current working tree status using the short format
+   s = status
+
+# Stashes local changes with specified name
+   sp = "!f() { git stash push -m $1; }; f"
+
+   so = "!f() { git stash pop stash@{$1}; }; f"
+
+   show = !"git show --patch-with-stat $1"
+   sh = !"git show --patch-with-stat $1"
+
+   a = add
+
+   al = !"d() { git add .; git status;}; clear && d"
+
+# Show the diff between the latest commit and the current state
+   d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat -- . ':!*/package-lock.json'"
+
+# `git di $number` shows the diff between the state `$number` revisions ago and the current state
+   di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+   dc = !"git diff-index --quiet HEAD -- || clear; git diff --staged --patch-with-stat -- . ':!*/package-lock.json'"
+
+# Compare differences from dev to your branch
+   dd = !"git d origin/dev $(git branch --show-current)"
+
+   dm = !"git d origin/main $(git branch --show-current)"
+
+   do = !"git d origin/$(git branch --show-current) $(git branch --show-current)"
+
+   p = push
+
+   pf = push --force
+
+# pushed the branch upstream creating a remote branch
+   pp = !"git push --set-upstream origin $(git branch --show-current)"
+
+   fp = fetch --prune
+
+# clean untracked files
+   cl = clean -fd
+
+# restore all staged files
+   rsa = !"git restore --staged . && git status"
+
+   rs = !"git restore . && git status"
+
+   cn = clean -n
+
+   cf = clean -f
+
+   rc = rebase --continue
+
+   ra = rebase --abort
+
+   mc = merge --continue
+
+   ma = merge --abort
+
+   cp = cherry-pick
+
+   cpc = cherry-pick --continue
+
+   cpa = cherry-pick --abort
+
+# rebases current branch to it's origin
+   roi = !"git rebase origin/$(git branch --show-current)"
+
+# rebases current branch to origin/dev
+   rdd = !"git rebase origin/dev"
+
+   rh = reset --hard
+
+   rss = reset --soft
+
+   co = checkout
+
+   c = commit
+
+   copy = !"git co -b $(git branch --show-current)-COPY"
+
+   dcopy = !"git branch -D $(git branch --show-current)-COPY"
+
+   copyi = "!zsh ~/.config/gitcommands/copyi.sh"
+
+   dcopyall = "!zsh ~/.config/gitcommands/dcopyall.sh"
+
+# Commit all changes
+   ca = !git add -A && git commit -av
+
+   amend = !"git commit --amend --no-edit && git status"
+
+# show local branches
+   b = branch
+
+# show all branches
+   ba = branch -a
+
+   rename = branch -m
+
+# Find commits by commit message
+   fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
