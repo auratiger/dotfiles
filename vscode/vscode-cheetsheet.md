@@ -5,8 +5,9 @@
 ### Normal
 
 key         | command                                 | Description                      | Plugin
-------------|-----------------------------------------|----------------------------------|---------------
+------------|-----------------------------------------|----------------------------------|---------------------
 :           | actions.showCommand                     | open command menu                | Code
+Shift+Shift |                                         | open file search                 | Intellij keybindings
 L           | nextEditor                              | changes to next tab              |
 H           | previousEditor                          | changes to previous tab          |
 zj          | unfoldRecursively                       | opens fold                       |
@@ -38,6 +39,7 @@ Alt+o       | splitEditorOrthogonal                   | split file horizontal   
 <leader>g   | toggleFileBlame                         | toggles git blame                | gitlens
 <leader>q   | createsTypeScriptFile                   | create ts file                   | quokka
 <leader>m   | selectandstart                          | opens run configuration          |
+<leader>c   | closeActiveEditor                       | close active buffer              | Vim
 ----------- | ----------------------------            | -------------------------------- | --------------
 <leader>bu  | reopenClosedEditor                      | reopen last closed buffer        |
 <leader>bo  | showEditorsInActiveGroup                | shows menu of active tabs        |
@@ -51,6 +53,8 @@ Alt+o       | splitEditorOrthogonal                   | split file horizontal   
 <leader>tt  | toggleTerminal                          | open terminal                    |
 <leader>tq  | killAll                                 | kill all terminal instances      |
 ----------- | ----------------------------            | -------------------------------- | --------------
+<leader>f   | quickOpen                               | opens file search                |
+<leader>ff  | quickOpen                               | opens file search                |
 <leader>fo  | focusSidebar                            | focus opened file in explorer    | Vim
 <leader>fc  | replaceInFiles                          | replace word in all files        |
 <leader>fs  | search                                  | search for word in files         |
