@@ -1,49 +1,166 @@
-// Place your key bindings in this file to override the defaultsauto[]
+/*
+######################################################################################
+#   When a key is pressed:                                                           #
+#   - the rules are evaluated from bottom to top.                                    #
+#   - the first rule that matches, both the key and in terms of when, is accepted.   #
+#   - no more rules are processed.                                                   #
+#   - if a rule is found and has a command set, the command is executed.             #
+######################################################################################
+
+######################################################################################################################
+#   Resources:                                                                                                       #
+#   - keybindings: https://code.visualstudio.com/docs/getstarted/keybindings                                         #
+#   - when clause context: https://code.visualstudio.com/api/references/when-clause-contexts#conditional-operators   #
+######################################################################################################################
+
+*/
+
 [
-  // ======= Custom Configurations ========
-  {
-    "key": ", t",
-    "command": "workbench.action.toggleSidebarVisibility",
-    "when": "!editorTextFocus"
-  },
-  // Navigation throught suggestions with vim keys //
-  {
-    "key": "ctrl+j",
-    "command": "selectNextSuggestion",
-    "when": "suggestWidgetVisible"
-  },
-  {
-    "key": "ctrl+k",
-    "command": "selectPrevSuggestion",
-    "when": "suggestWidgetVisible"
-  },
-  {
-    "key": "ctrl+j",
-    "command": "workbench.action.quickOpenSelectNext",
-    "when": "inQuickOpen"
-  },
-  {
-    "key": "ctrl+k",
-    "command": "workbench.action.quickOpenSelectPrevious",
-    "when": "inQuickOpen"
-  },
-  {
-    "key": "ctrl+d",
-    "command": "-workbench.action.debug.run",
-    "when": "debuggersAvailable && !inDebugMode && !terminalFocus"
-  },
-  // ======== End of custom configurations ========
-  {
-    "key": "ctrl+r",
-    "command": "-workbench.action.tasks.reRunTask"
-  },
-  {
-    "key": "cmd+k",
-    "command": "-git.commitAll",
-    "when": "!inDebugMode && !terminalFocus"
-  },
-  {
-    "key": "cmd+t",
-    "command": "-git.sync"
-  }
+	// ======= Custom Configurations ========
+	{
+		"key": ", t",
+		"command": "workbench.action.toggleSidebarVisibility",
+		"when": "!editorTextFocus"
+	},
+	// Navigation through suggestions with vim keys //
+	{
+		"key": "ctrl+j",
+		"command": "selectNextSuggestion",
+		"when": "suggestWidgetVisible"
+	},
+	{
+		"key": "ctrl+k",
+		"command": "selectPrevSuggestion",
+		"when": "suggestWidgetVisible"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "workbench.action.quickOpenSelectNext",
+		"when": "inQuickOpen"
+	},
+	{
+		"key": "ctrl+k",
+		"command": "workbench.action.quickOpenSelectPrevious",
+		"when": "inQuickOpen"
+	},
+	{// <<<<--DELETED--->>>>
+		"key": "ctrl+d",
+		"command": "-workbench.action.debug.run",
+		"when": "debuggersAvailable && !inDebugMode && !terminalFocus"
+	},
+	{// <<<<--DELETED--->>>>
+		"key": "ctrl+r",
+		"command": "-workbench.action.tasks.reRunTask"
+	},
+	{// <<<<--DELETED--->>>>
+		"key": "cmd+k",
+		"command": "-git.commitAll",
+		"when": "!inDebugMode && !terminalFocus"
+	},
+	{// <<<<--DELETED--->>>>
+		"key": "cmd+t",
+		"command": "-git.sync"
+	},
+	{// <<<<--DELETED--->>>>
+		"key": "ctrl+r",
+		"command": "-editor.action.startFindReplaceAction",
+		"when": "editorFocus || editorIsOpen"
+	},
+//# >>>> ============ SPLITS ==================================================== <<<< #
+	{
+		// navigate left split window
+		"key": "alt+h",
+		"command": "workbench.action.focusLeftGroup",
+	},
+	{
+		// navigate below split window
+		"key": "alt+j",
+		"command": "workbench.action.focusBelowGroup",
+	},
+	{
+		// navigate above split window
+		"key": "alt+k",
+		"command": "workbench.action.focusAboveGroup",
+	},
+	{
+		// navigate right split window
+		"key": "alt+l",
+		"command": "workbench.action.focusRightGroup",
+	},
+	{
+		// Closes all other editor windows 
+		"key": "alt+Q",
+		"command": "workbench.action.closeEditorsInOtherGroups",
+	},
+	{
+		// Closes focused editor window
+		"key": "alt+q",
+		"command": "workbench.action.closeEditorsInGroup",
+	},
+	{ // <<<<--DELETED--->>>>
+		"key": "ctrl+k w", 
+		"command": "-workbench.action.closeEditorsInGroup"
+	},
+	{
+		"key": "alt+i", // opens vertical split editor 
+		"command": "workbench.action.splitEditor"
+	},
+	{ // <<<<--DELETED--->>>>
+		"key": "ctrl+\\",
+		"command": "-workbench.action.splitEditor"
+	},
+	{
+		"key": "alt+o", // opens orthogonal split editor 
+		"command": "workbench.action.splitEditorOrthogonal"
+	},
+	{ // <<<<--DELETED--->>>>
+		"key": "ctrl+k ctrl+\\",
+		"command": "-workbench.action.splitEditorOrthogonal"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "workbench.action.togglePanel",
+		"when": "terminalFocus"
+	},
+	{// <<<<--DELETED--->>>>
+		"key": "ctrl+j",
+		"command": "-workbench.action.togglePanel"
+	},
+//# >>>> ============ Explorer ==================================================== <<<< #
+	{
+		"key": "ctrl+e",
+		"command": "workbench.view.explorer"
+	},
+	{
+		"key": "ctrl+e",
+		"command": "-workbench.view.explorer"
+	},
+	{
+		"key": "ctrl+e",
+		"command": "workbench.action.toggleSidebarVisibility",
+		"when": "explorerViewletVisible"
+	},
+	{
+		"key": "ctrl+e",
+		"command": "-workbench.action.toggleSidebarVisibility",
+		"when": "explorerViewletVisible"
+	},
+	{
+		"key": "cmd+e",
+		"command": "workbench.view.explorer"
+	},
+	{
+		"key": "cmd+e",
+		"command": "-workbench.view.explorer"
+	},
+	{
+		"key": "cmd+e",
+		"command": "workbench.action.toggleSidebarVisibility",
+		"when": "explorerViewletVisible"
+	},
+	{
+		"key": "cmd+e",
+		"command": "-workbench.action.toggleSidebarVisibility",
+		"when": "explorerViewletVisible"
+	},
 ]

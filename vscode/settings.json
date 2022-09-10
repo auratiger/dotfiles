@@ -1,6 +1,9 @@
 {
-	// Debug:
+//# >>>> ============ DEBUG: ==================================================== <<<< #
 	"debug.allowBreakpointsEverywhere": true,
+	"debug.focusEditorOnBreak": true,
+	"debug.focusWindowOnBreak": true,
+	"debug.showBreakpointsInOverviewRuler": true,
 	"launch": {
 		// Global launch settings
 		"version": "0.2.0",
@@ -38,52 +41,85 @@
 		]
 	},
 
-	// Editor:
+//# >>>> ============ EDITOR: ==================================================== <<<< #
 	"editor.suggestSelection": "first",
 	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 	// "editor.accessibilitySupport": "off",
 	"editor.codeLens": true,
 	"editor.tabSize": 3,
+	"editor.fontSize": 12.5,
 	"editor.colorDecorators": true,
 	"editor.fontFamily": "Fira Code",
 	"editor.fontLigatures": true,
-	"editor.fontSize": 12.5,
+	"editor.lineNumbers": "relative",
 	"editor.glyphMargin": true,
 	"editor.minimap.enabled": true,
 	"editor.renderWhitespace": "selection",
 	"editor.occurrencesHighlight": true,
-	"editor.rulers": [120],
 	"editor.scrollBeyondLastLine": true,
+	"editor.links": true, // Controls whether the editor should detect links and make them clickable.
 	"editor.cursorSurroundingLines": 6, // scrolloff
-	"editor.formatOnPaste": true,
-	"editor.formatOnSave": true,
 	"editor.tabCompletion": "on",
-	"editor.wordWrap": "on",
-	"editor.wordWrapColumn": 100,
+	"editor.roundedSelection": true,
+	// VsCode by default only supports soft wraps, however with the use of vim, we can simulate
+	// hard wrapping:
+	// https://stackoverflow.com/questions/43122175/automatically-hard-wrap-lines-at-column-in-vscode
+	"editor.wordWrap": "wordWrapColumn",
+	"editor.wrappingIndent": "same",
+	"editor.rulers": [120],
+	"editor.wordWrapColumn": 120,
 	"editor.hover.enabled": false,
 	"editor.gotoLocation.multipleReferences": "peek",
 	"editor.gotoLocation.multipleDefinitions": "peek",
 	"editor.gotoLocation.multipleDeclarations": "peek",
 	"editor.gotoLocation.multipleImplementations": "peek",
 	"editor.gotoLocation.multipleTypeDefinitions": "peek",
-	"editor.semanticHighlighting.enabled": false,
+	"editor.semanticHighlighting.enabled": "configuredByTheme",
 	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
 	},
+	"editor.selectionClipboard": true,
 	"explorer.confirmDelete": false,
+	
 
-	// Window
+	//# >> ------------ FORMATTING ------------ << #
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnSaveMode": "modificationsIfAvailable", // file
+
+	//# >> ------------ FOLDING ------------ << #
+	"editor.folding": true,
+	"editor.foldingHighlight": false,
+	"editor.foldingImportsByDefault": false,
+	"editor.showFoldingControls": "always",
+
+//# >>>> ============ WINDOW ==================================================== <<<< #
 	"window.zoomLevel": 1,
 	"window.openFoldersInNewWindow": "on", //  When opening recent\other project
 	"window.openFilesInNewWindow": "on", //     it opens them in a new window
 	"window.newWindowDimensions": "maximized",
 
-	// Files:
+//# >>>> ============ WORKBENCH ==================================================== <<<< #
+	"workbench.editor.enablePreview": true, 
+	"workbench.editor.limit.value": 15,
+	"workbench.iconTheme": "vscode-icons",
+	"workbench.colorCustomizations": {
+		"activityBar.activeBorder": "#e5b358",
+		"activityBar.foreground": "#fff",
+		"editorSuggestWidget.highlightForeground": "#e5b358",
+		"editorSuggestWidget.selectedBackground": "#1c2a42",
+		"statusBar.background": "#B48EAD",
+		"statusBar.noFolderBackground": "#B48EAD",
+		"statusBar.debuggingBackground": "#B48EAD",
+		"statusBar.foreground": "#000",
+		"statusBar.debuggingForeground": "#000"
+	},
+
+//# >>>> ============ FILES: ==================================================== <<<< #
 	"files.associations": {
 		".babelrc": "jsonc",
 		".eslintrc": "jsonc",
-		"*.pyi": "python",
 		"*.bats": "shellscript"
 	},
 	"files.autoSave": "onFocusChange",
@@ -107,31 +143,50 @@
 		"**/htmlcoverage": true,
 		"**/docs/build": true
 	},
-	// Terminal:
+
+//# >>>> ============ TERMINAL ==================================================== <<<< #
+	// Customizes which terminal to run on Linux and MacOs.
+   "terminal.external.linuxExec": "alacritty", // "xterm"
+  	"terminal.external.osxExec": "alacritty", // "Terminal.app"
+
+	"terminal.integrated.defaultProfile.linux": "zsh",
 	"terminal.integrated.defaultProfile.osx": "zsh",
-	"terminal.integrated.defaultProfile.linux": "bash",
-	"terminal.integrated.env.osx": {
-		"SOBOLE_THEME_MODE": "dark"
-	},
+
+	"terminal.integrated.copyOnSelection": true,
+	"terminal.integrated.cursorBlinking": true,
+	"terminal.integrated.cursorStyle": "block",
+	"terminal.integrated.defaultLocation": "view", // sets default location to the opened project
 	"terminal.integrated.enableBell": true,
-	"workbench.editorAssociations": {
-		"*.ipynb": "jupyter.notebook.ipynb"
-	},
-	"workbench.editor.enablePreview": false,
-	"workbench.colorCustomizations": {
-		"activityBar.activeBorder": "#e5b358",
-		"activityBar.foreground": "#fff",
-		"editorSuggestWidget.highlightForeground": "#e5b358",
-		"editorSuggestWidget.selectedBackground": "#1c2a42",
-		"statusBar.background": "#8FB",
-		"statusBar.noFolderBackground": "#8FB",
-		"statusBar.debuggingBackground": "#8FB",
-		"statusBar.foreground": "#000",
-		"statusBar.debuggingForeground": "#000"
+
+	"terminal.integrated.fontSize": 12,
+	"terminal.integrated.fontWeight": "normal", // "normal", "bold", numbers between 1 and 1000.
+	"terminal.integrated.letterSpacing": 0,
+	"terminal.integrated.lineHeight": 1,
+	"terminal.integrated.rightClickBehavior": "default",
+	"terminal.integrated.scrollback": 99999,
+	"terminal.integrated.shellIntegration.history": 9999,
+   "terminal.integrated.showExitAlert": true,
+	"terminal.integrated.showLinkHover": true,
+	"terminal.integrated.tabs.title": "${process}${separator}${task}",
+
+	// Whether to enable file links in the terminal. Links can be slow when working on a network drive in particular because each file link is verified against the file system. Changing this will take effect only in new terminals.
+	"terminal.integrated.enableFileLinks": true,
+
+	// Object with environment variables that will be added to the VSCode process to be used by the terminal. Set to `null` to delete the environment variable. 
+	"terminal.integrated.env.linux": {},
+	"terminal.integrated.env.osx": {
+		"SOBOLE_THEME_MODE": "dark" // Example usage: 'echo $SOBOLE_THEME_MODE'
 	},
 
-	// VIM
+//   "terminal.integrated.commandsToSkipShell": [],
+//   "terminal.integrated.allowMnemonics": true,
+
+//# >>>> ============ PLUGINS ==================================================== <<<< #
+
+	//# >> ------------ VIM ------------ << #
 	"vim.easymotion": true,
+	"vim.textwidth": 120, // this value should be the same as 'wordWrapColumn'
+	"vim.debug.silent": true,
 	"vim.incsearch": true,
 	"vim.smartcase": true,
 	"vim.autoindent": true,
@@ -146,7 +201,7 @@
 	"vim.history": 100000,
 	"vim.hlsearch": true,
 	"vim.foldfix": true, // Moving j/k over folds opens up the folds. Try setting vim.foldfix to true. This is a hack; it works fine, but there are side effects (see issue#22276).
-	"vim.insertModeKeyBindings": [
+	"vim.insertModeKeyBindingsNonRecursive": [
 		{
 			"before": ["j", "j"],
 			"after": ["<Esc>"]
@@ -155,21 +210,20 @@
 			"before": ["j", "k"],
 			"after": ["<Esc>"]
 		},
-		{
-			"before": ["k", "j"],
-			"after": ["<Esc>"]
-		}
 	],
 	"vim.normalModeKeyBindings": [
-		// TAB navigation
+		// # >> ------------ TAB NAVIGATION ------------ << #
 		{
-			"before": ["<TAB>"],
+			"before": ["L"],
 			"commands": ["workbench.action.nextEditor"]
 		},
 		{
-			"before": ["<S-TAB>"],
+			"before": ["H"],
 			"commands": ["workbench.action.previousEditor"]
 		},
+
+
+		// # >> ------------ FOLDS ------------ << #
 		{
 			// opens fold
 			"before": ["z", "j"],
@@ -182,14 +236,16 @@
 			// "after": ["z", "c"]
 			"commands": ["editor.foldRecursively"]
 		},
+
+		// # >> ------------ GENERAL ------------ << #
 		{
-			// maps L to the $ command which sends you to the end of the line
-			"before": ["L"],
+			// maps K to the $ command which sends you to the end of the line
+			"before": ["K"],
 			"after": ["$"]
 		},
 		{
-			// maps H to the ^ command which sends you to the start of the line
-			"before": ["H"],
+			// maps J to the ^ command which sends you to the start of the line
+			"before": ["J"],
 			"after": ["^"]
 		},
 		{
@@ -213,12 +269,12 @@
 			"silent": true
 		},
 		{
-			// simulate smood scrolling up
+			// simulate smooth scrolling up
 			"before": ["<C-u>"],
 			"after": ["2", "0", "k"]
 		},
 		{
-			// simulate smood scrolling down
+			// simulate smooth scrolling down
 			"before": ["<C-d>"],
 			"after": ["2", "0", "j"]
 		},
@@ -260,92 +316,18 @@
 				}
 			]
 		},
-		// LEADER COMMANDS
-		{
-			// split vertical
-			"before": ["<leader>", "i"],
-			"commands": ["workbench.action.splitEditor"]
-		},
-		{
-			// split vertical
-			"before": ["<leader>", "I"],
-			"commands": ["workbench.action.splitEditorOrthogonal"]
-		},
-		{
-			// navigate left split window
-			"before": ["<leader>", "h"],
-			"commands": ["workbench.action.focusLeftGroup"]
-		},
-		{
-			// navigate below split window
-			"before": ["<leader>", "j"],
-			"commands": ["workbench.action.focusBelowGroup"]
-		},
-		{
-			// navigate above split window
-			"before": ["<leader>", "k"],
-			"commands": ["workbench.action.focusAboveGroup"]
-		},
-		{
-			// navigate right split window
-			"before": ["<leader>", "l"],
-			"commands": ["workbench.action.focusRightGroup"]
-		},
 		{
 			"before": ["<leader>", "n"],
 			"commands": ["workbench.action.toggleSidebarVisibility"]
 		},
 		{
-			// focuses the opened file in the file explorer
-			"before": ["<leader>", "f"],
-			"commands": [
-				"workbench.view.explorer",
-				"workbench.action.focusSideBar"
-			]
-		},
-		{
-			// react snippets
-			"before": ["<leader>", "r", "s"],
-			"commands": ["reactSnippets.search"]
-		},
-		{
-			// rename all ocurances
-			"before": ["<leader>", "r", "f"],
+			// rename all occurrences
+			"before": ["<leader>", "r"],
 			"commands": ["editor.action.rename"]
 		},
 		{
-			// create temporary typescript file
-			"before": ["<leader>", "r", "r"],
-			"commands": ["workbench.action.openRecent"]
-		},
-		{
-			"before": ["<leader>", "r", "e"],
-			"commands": ["fileutils.renameFile"]
-		},
-		{
-			// create new file at path
-			"before": ["<leader>", "r", "n"],
-			"commands": ["fileutils.newFile"]
-		},
-		{
-			// delete opened file
-			"before": ["<leader>", "r", "d"],
-			"commands": ["fileutils.removeFile"]
-		},
-		{
-			// move the file to path
-			"before": ["<leader>", "r", "m"],
-			"commands": ["fileutils.moveFile"]
-		},
-		{
-			// duplicate file to path
-			"before": ["<leader>", "r", "c"],
-			"commands": ["fileutils.duplicateFile"]
-		},
-		{
-			// opens a list of all the active windows and let's the user open the file
-			"before": ["<leader>", "o", "o"],
-			"commands": ["workbench.action.showEditorsInActiveGroup"]
+			"before": ["<leader>", "R"],
+			"commands": ["editor.action.startFindReplaceAction"]
 		},
 		{
 			// toggles git blame
@@ -361,17 +343,127 @@
 			// opens run configuration select
 			"before": ["<leader>", "m"],
 			"commands": ["workbench.action.debug.selectandstart"]
-		}
+		},
+
+
+		// # >> ------------ BUFFERS ------------ << #
+
+		{
+			"before": ["<leader>", "b", "u"],
+			"commands": ["workbench.action.reopenClosedEditor"]
+		},
+		{
+			"before": ["<leader>", "b", "r"],
+			"commands": ["workbench.action.closeEditorsToTheRight"]
+		},
+		{
+			"before": ["<leader>", "b", "l"],
+			"commands": ["workbench.action.closeEditorsToTheLeft"]
+		},
+		{
+			"before": ["<leader>", "<"],
+			"commands": ["workbench.action.moveEditorLeftInGroup"]
+		},
+		{
+			"before": ["<leader>", ">"],
+			"commands": ["workbench.action.moveEditorRightInGroup"]
+		},
+		{
+			// opens a list of all the active windows and let's the user open the file
+			"before": ["<leader>", "b", "o"],
+			"commands": ["workbench.action.showEditorsInActiveGroup"]
+		},
+		{
+			"before": ["<leader>", "b", "y"],
+			"commands": ["copyRelativeFilePath"]
+		},
+		{
+			"before": ["<leader>", "b", "Y"],
+			"commands": ["copyFilePath"]
+		},
+
+
+		// # >> ------------ FILES ------------ << #
+
+
+		{
+			// focuses the opened file in the file explorer
+			"before": ["<leader>", "f", "o"],
+			"commands": [
+				"workbench.view.explorer",
+				"workbench.action.focusSideBar"
+			]
+		},
+		{
+			"before": ["<leader>", "f", "r"],
+			"commands": ["fileutils.renameFile"]
+		},
+		{
+			"before": ["<leader>", "f", "s"],
+			"commands": ["workbench.view.search"]
+		},
+		{
+			"before": ["<leader>", "f", "c"],
+			"commands": ["workbench.action.replaceInFiles"]
+		},
+		{
+			// create new file at path
+			"before": ["<leader>", "f", "n"],
+			"commands": ["fileutils.newFile"]
+		},
+		{
+			// delete opened file
+			"before": ["<leader>", "f", "d"],
+			"commands": ["fileutils.removeFile"]
+		},
+		{
+			// move the file to path
+			"before": ["<leader>", "f", "m"],
+			"commands": ["fileutils.moveFile"]
+		},
+		{
+			// duplicate file to path
+			"before": ["<leader>", "f", "p"],
+			"commands": ["fileutils.duplicateFile"]
+		},
+		{
+			// open recent project
+			"before": ["<leader>", "f", "l"],
+			"commands": ["workbench.action.openRecent"]
+		},
+
+
+		// # >> ------------ TERMINAL ------------ << #
+
+
+		{
+			"before": ["<leader>", "t", "t"],
+			"commands": ["workbench.action.terminal.toggleTerminal"]
+		},
+		{
+			"before": ["<leader>", "t", "q"],
+			"commands": ["workbench.action.terminal.killAll"]
+		},
+
+		// # >> ------------ SNIPPETS ------------ << #
+
+		{
+			// react snippets
+			"before": ["<leader>", "s", "r"],
+			"commands": ["reactSnippets.search"]
+		},
+
+
 	],
 	"vim.operatorPendingModeKeyBindings": [
 		{
-			"before": ["L"],
+			"before": ["K"],
 			"after": ["$"]
 		},
 		{
-			"before": ["H"],
+			"before": ["J"],
 			"after": ["^"]
-		}
+		},
 	],
 	"vim.visualModeKeyBindings": [
 		{
@@ -390,7 +482,15 @@
 		{
 			"before": ["<leader>", "f"],
 			"commands": ["extension.macColorPicker"]
-		}
+		},
+		{
+			"before": ["<leader>", "f", "c"],
+			"commands": ["workbench.action.replaceInFiles"]
+		},
+		{
+			"before": ["<leader>", "R"],
+			"commands": ["editor.action.startFindReplaceAction"]
+		},
 	],
 	"vim.leader": "<space>",
 	"vim.handleKeys": {
@@ -409,44 +509,8 @@
 	"vim.statusBarColors.easymotionmode": "#007ACC",
 	"vim.statusBarColors.easymotioninputmode": "#007ACC",
 	"vim.statusBarColors.surroundinputmode": "#007ACC",
-	"eslint.alwaysShowStatus": true,
-	"eslint.probe": [
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"html",
-		"vue",
-		"markdown",
-		"css",
-		"scss",
-		"json"
-	],
-	"prettier.jsxBracketSameLine": true,
-	"prettier.useTabs": true,
-	"prettier.tabWidth": 3,
-	"prettier.requireConfig": true,
-	"[jsonc]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": true
-	},
-	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": true
-	},
-	"[typescriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"typescript.updateImportsOnFileMove.enabled": "always",
-	"react-native-tools.networkInspector.consoleLogsColorTheme": "Dark",
-	"vscodeReactRefactor.functionType": "arrowFunction",
-	"typescript.suggest.paths": false,
-	"javascript.suggest.paths": false,
-	"search.searchOnType": false,
-	"workbench.iconTheme": "vscode-icons",
+
+	//# >> ------------ COMMENT BOX ------------ << #
 	"commentBox.styles": {
 		"defaultStyle": {
 			"capitalize": false,
@@ -521,17 +585,52 @@
 			"topRightToken": "",
 			"bottomLeftToken": ""
 		}
-	}
+	},
+
+	//# >> ------------ ESLINT ------------ << #
+	"eslint.alwaysShowStatus": true,
+	"eslint.probe": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"html",
+		"vue",
+		"markdown",
+		"css",
+		"scss",
+		"json"
+	],
+
+	//# >> ------------ PRETTIER ------------ << #
+	"prettier.jsxBracketSameLine": true,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 3,
+	"prettier.requireConfig": true,
+
+
+	//# >>>> ============ LANGUAGE SPECIFIC OVERRIDE ========================================== <<<< #
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[shellscript]": {
+		"editor.defaultFormatter": "foxundermoon.shell-format"
+	},
+
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"react-native-tools.networkInspector.consoleLogsColorTheme": "Dark",
+	"vscodeReactRefactor.functionType": "arrowFunction",
+	"typescript.suggest.paths": false,
+	"javascript.suggest.paths": false,
+	"search.searchOnType": false,
+	"markdown-preview-enhanced.previewTheme": "atom-light.css",
 }
-
-/* Important:
-	gh: equivalent to hovering your mouse over wherever the cursor is. Handy for seeing types and error messages without reaching for the mouse!
-
-	af - visual mode command which selects increasingly large blocks of text. For example, if you had "blah (foo [bar 'ba|z'])"
-			then it would select 'baz' first. If you pressed af again, it'd then select [bar 'baz'], and if you did it a third time it would select "(foo [bar 'baz'])".
-
-	cmd + shift + L - select all matches of the selected word 
-
-	cmd + j - toggle terminal
-
-*/
