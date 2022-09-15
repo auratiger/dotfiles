@@ -10,8 +10,6 @@
 # >> ------------ EDITORS ------------ << #
 alias v="lvim"
 alias vi="lvim"
-alias vim="lvim"
-alias c="code"
 
 # >> ------------ CONFIGS ------------ << #
 alias zshreset="exec zsh"
@@ -35,11 +33,11 @@ alias gozsh="cd $ZDOTDIR"
 alias g='git'
 
 alias ls='exa'                                   # ls
-alias l='exa -lbF --git'                         # list, size, type, git
-alias ll='exa -lbFa --git'                       # long list
-alias llm='exa -lbGb --git --sort=modified'      # long list, modified date sort
-alias la='exa -lbhHigUmuSa --git --color-scale'  # all list
-alias lx='exa -lbhHigUmuSa@ --git --color-scale' # all + extended list
+alias l='exa -lbF'                         # list, size, type, git
+alias ll='exa -lbFa'                       # long list
+alias llm='exa -lbGb --sort=modified'      # long list, modified date sort
+alias la='exa -lbhHigUmuSa --color-scale'  # all list
+alias lx='exa -lbhHigUmuSa@ --color-scale' # all + extended list
 alias lt='exa -lbFa --tree --level=2'
 
 # Colorize grep output (good for log files)
