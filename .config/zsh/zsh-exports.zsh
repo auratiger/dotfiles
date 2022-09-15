@@ -71,5 +71,13 @@ export BROWSER="vivaldi-stable"
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='lvim'
+
+  if [[ -e ~/.local/bin/lvim ]]; then
+    export EDITOR='lvim'
+  elif [[ -e /usr/bin/nvim ]]; then
+    export EDITOR='nvim'
+  else
+    export EDITOR='vim'
+  fi
+
 fi

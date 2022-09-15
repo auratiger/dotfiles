@@ -8,17 +8,17 @@
 # >>>> ============ ALIASES ==================================================== <<<< #
 
 # >> ------------ EDITORS ------------ << #
-alias v="lvim"
-alias vi="lvim"
+alias v="${EDITOR}"
+alias vi="${EDITOR}"
 
 # >> ------------ CONFIGS ------------ << #
 alias zshreset="exec zsh"
-alias zshconfig="lvim $ZDOTDIR/.zshrc"
-alias aliconfig="lvim $ZDOTDIR/.zsh-aliases.zsh"
-alias gitconfig="lvim ~/.gitconfig"
-alias ideavimconfig="lvim ~/.ideavimrc"
-# alias mxconfig="lvim ~/.tmux.conf"
-alias mxconfig="lvim ~/.config/tmux/tmux.conf"
+alias zshconfig="$EDITOR $ZDOTDIR/.zshrc"
+alias aliconfig="$EDITOR $ZDOTDIR/.zsh-aliases.zsh"
+alias gitconfig="$EDITOR ~/.gitconfig"
+alias ideavimconfig="$EDITOR ~/.ideavimrc"
+# alias mxconfig="$EDITOR ~/.tmux.conf"
+alias mxconfig="$EDITOR ~/.config/tmux/tmux.conf"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias golunar="cd ~/.local/share/lunarvim/lvim"
