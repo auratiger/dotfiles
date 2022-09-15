@@ -99,20 +99,16 @@ ENV PATH="${NVM_DIR}/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 # ---- Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-# ---- Setup Zsh configs
-COPY ./zsh ./zsh
-RUN zsh ./zsh/setup.zsh 
-
-COPY ./.gitconfig ./.gitconfig
+# ---- Setup dotfiles
+ARG TEMP_DIR=~/tempDots
+RUN mkdir ${TEMP_DIR}
+COPY . ${TEMP_DIR}
+RUN zsh ${TEMP_DIR}/setup_docker_env.zsh && rm -rf ${TEMP_DIR}
 
 USER root
-RUN rm -rf ./zsh
 RUN chown -R ${USER_ACCOUNT}:${USER_ACCOUNT} ./
 USER ${USER_ACCOUNT}
 
 VOLUME /home ${SSH_DIR} ${WORKSPACE}
-
-# COPY docker-entrypoint.sh /usr/local/bin/
-# ENTRYPOINT ["docker-entrypoint.sh"]
 
 ENTRYPOINT [ "/bin/zsh" ]
