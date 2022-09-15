@@ -115,12 +115,14 @@ alias depResolve="mvn dependency:resolve"
 
 alias serve="npm run serve"
 alias build="npm run build"
+alias rmn="rm -rf ./node_modules"
 alias nress="rm -rf ./node_modules ./node && npm i"
 alias nressf="rm -rf ./node_modules ./node && npm i -f"
 
 alias gcl="gatsby clean"
 alias gbuild="gatsby build"
 alias gdev="gatsby develop"
+alias gser="gatsby serve"
 alias gres="gatsby clean && gatsby develop"
 
 # delete later
