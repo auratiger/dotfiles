@@ -158,6 +158,7 @@ alias dn="docker network"
 
 # Volumes
 alias dv="docker volume"
+alias dvp="docker volume prune"
 
 alias dfp="docker system prune --all"
 alias dl=__docker-show-logs
