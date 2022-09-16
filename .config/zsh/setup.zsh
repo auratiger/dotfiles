@@ -1,3 +1,4 @@
+#!/bin/zsh
 
 # >>>> !!!! THIS SCRIPT MUST BE RAN FROM DIRECTORY ITSELF !!!! <<<< #
 
@@ -12,8 +13,8 @@
 #                                                                                               #
 #################################################################################################
 
-# Copy .zprofile to HOME dir
-cp ./.zprofile ~/
+DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Copies the zsh directory to '~/.config'
-mkdir -p ~/.config && cp $(pwd) ~/.config
+# Copy .zprofile to HOME dir
+cp -v ${DIR}/.zprofile ~/
+cp -v ${DIR}/.zshenv ~/

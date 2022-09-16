@@ -8,19 +8,17 @@
 # >>>> ============ ALIASES ==================================================== <<<< #
 
 # >> ------------ EDITORS ------------ << #
-alias v="lvim"
-alias vi="lvim"
-alias vim="lvim"
-alias c="code"
+alias v="${EDITOR}"
+alias vi="${EDITOR}"
 
 # >> ------------ CONFIGS ------------ << #
 alias zshreset="exec zsh"
-alias zshconfig="lvim $ZDOTDIR/.zshrc"
-alias aliconfig="lvim $ZDOTDIR/.zsh-aliases.zsh"
-alias gitconfig="lvim ~/.gitconfig"
-alias ideavimconfig="lvim ~/.ideavimrc"
-# alias mxconfig="lvim ~/.tmux.conf"
-alias mxconfig="lvim ~/.config/tmux/tmux.conf"
+alias zshconfig="$EDITOR $ZDOTDIR/.zshrc"
+alias aliconfig="$EDITOR $ZDOTDIR/.zsh-aliases.zsh"
+alias gitconfig="$EDITOR ~/.gitconfig"
+alias ideavimconfig="$EDITOR ~/.ideavimrc"
+# alias mxconfig="$EDITOR ~/.tmux.conf"
+alias mxconfig="$EDITOR ~/.config/tmux/tmux.conf"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias golunar="cd ~/.local/share/lunarvim/lvim"
@@ -35,11 +33,11 @@ alias gozsh="cd $ZDOTDIR"
 alias g='git'
 
 alias ls='exa'                                   # ls
-alias l='exa -lbF --git'                         # list, size, type, git
-alias ll='exa -lbFa --git'                       # long list
-alias llm='exa -lbGb --git --sort=modified'      # long list, modified date sort
-alias la='exa -lbhHigUmuSa --git --color-scale'  # all list
-alias lx='exa -lbhHigUmuSa@ --git --color-scale' # all + extended list
+alias l='exa -lbF'                         # list, size, type, git
+alias ll='exa -lbFa'                       # long list
+alias llm='exa -lbGb --sort=modified'      # long list, modified date sort
+alias la='exa -lbhHigUmuSa --color-scale'  # all list
+alias lx='exa -lbhHigUmuSa@ --color-scale' # all + extended list
 alias lt='exa -lbFa --tree --level=2'
 
 # Colorize grep output (good for log files)
@@ -115,12 +113,14 @@ alias depResolve="mvn dependency:resolve"
 
 alias serve="npm run serve"
 alias build="npm run build"
+alias rmn="rm -rf ./node_modules"
 alias nress="rm -rf ./node_modules ./node && npm i"
 alias nressf="rm -rf ./node_modules ./node && npm i -f"
 
 alias gcl="gatsby clean"
 alias gbuild="gatsby build"
 alias gdev="gatsby develop"
+alias gser="gatsby serve"
 alias gres="gatsby clean && gatsby develop"
 
 # delete later
@@ -158,6 +158,7 @@ alias dn="docker network"
 
 # Volumes
 alias dv="docker volume"
+alias dvp="docker volume prune"
 
 alias dfp="docker system prune --all"
 alias dl=__docker-show-logs

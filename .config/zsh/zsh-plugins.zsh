@@ -19,6 +19,8 @@ zsh_add_plugin "hlissner/zsh-autopair"
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
 
+bindkey '^l' autosuggest-accept
+
 VI_MODE_SET_CURSOR=true
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)

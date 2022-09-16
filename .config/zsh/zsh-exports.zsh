@@ -27,7 +27,6 @@ HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
 
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -39,12 +38,13 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/openvpn/sbin:$PATH"
-export PATH="/Users/gegeorgiev/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+. "$HOME/.cargo/env"
 
 # For compilers to find openjdk you may need to set:
 #  export CPPFLAGS="-I/usr/local/opt/openjdk/include"
-
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -71,6 +71,13 @@ export BROWSER="vivaldi-stable"
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='lvim'
-fi
 
+  if [[ -e ~/.local/bin/lvim ]]; then
+    export EDITOR='lvim'
+  elif [[ -e /usr/bin/nvim ]]; then
+    export EDITOR='nvim'
+  else
+    export EDITOR='vim'
+  fi
+
+fi

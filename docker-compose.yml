@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+    devenv-service:
+        container_name: devenv
+        build: .
+        network_mode: "host"        
+        volumes:
+            - devenv-vol:/home
+
+volumes:
+    devenv-vol:
