@@ -82,6 +82,7 @@ ENV \
 
 # ---- Use the unprivileged user for safety
 RUN useradd -s ${SHELL} -d ${USER_HOME} -m -G sudo ${USER_ACCOUNT} && echo "${USER_ACCOUNT}:${PASSWORD}" | chpasswd
+RUN chown -R ${USER_ACCOUNT}:${USER_ACCOUNT} ${USER_HOME}/
 
 USER ${USER_ACCOUNT}
 WORKDIR ${USER_HOME}
@@ -105,13 +106,14 @@ RUN mkdir -p ${TEMP_DIR}
 COPY --chown=${USER_ACCOUNT} . ${TEMP_DIR}
 RUN zsh ${TEMP_DIR}/setup_docker_env.zsh && rm -rf ${TEMP_DIR}
 
+RUN /bin/zsh ${USER_HOME}/.config/zsh/.zshrc
+
 # ---- Install LunarVim
-RUN curl -s -o- https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | bash -s -- -y
+# RUN curl -s -o- https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | bash -s -- -y
 
-USER root
-RUN chown -R ${USER_ACCOUNT}:${USER_ACCOUNT} ./
-USER ${USER_ACCOUNT}
-
-VOLUME ${SSH_DIR} ${WORKSPACE}
+# Connect your SSH keys directory
+VOLUME ${SSH_DIR}
+# Optional workspace directory
+VOLUME ${WORKSPACE}
 
 ENTRYPOINT [ "/bin/zsh" ]
