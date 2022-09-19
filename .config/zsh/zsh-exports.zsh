@@ -34,14 +34,19 @@ SAVEHIST=100000
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-#export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-export PATH="/usr/local/opt/openvpn/sbin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
+PATHS=(
+  "/usr/local/opt/openjdk/bin"
+  "/usr/local/bin"
+  "/usr/local/opt/openjdk/bin"
+  "/usr/local/opt/openssl/bin"
+  "/usr/local/opt/openvpn/sbin"
+  "$HOME/.local/bin"
+  "$HOME/.cargo/bin"
+)
 
-. "$HOME/.cargo/env"
+for new_path in "${PATHS[@]}"; do
+  export PATH="${new_path}:$PATH"
+done
 
 # For compilers to find openjdk you may need to set:
 #  export CPPFLAGS="-I/usr/local/opt/openjdk/include"

@@ -152,6 +152,7 @@ alias dcb=__docker-exec-bash
 
 # Image commands
 alias di="docker image"
+# alias dirm="docker rmi -f $(docker images -f dangling=true -q)"
 
 # Network commands
 alias dn="docker network"

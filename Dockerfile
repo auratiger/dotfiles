@@ -1,4 +1,4 @@
-FROM ubuntu:jammy as base
+FROM ubuntu:jammy as build
 
 # Let scripts know we're running in Docker (useful for containerised development)
 ENV RUNNING_IN_DOCKER true
@@ -12,8 +12,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
    && echo $TZ > /etc/timezone
 
 # Set the locale
-RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
-   locale-gen
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
+   && locale-gen
 
 ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
@@ -35,7 +35,7 @@ RUN set -xe \
 
 
 
-FROM base as devenv
+FROM build as devenv
 
 ARG USER_ACCOUNT=auratiger
 ARG PASSWORD=root
@@ -66,31 +66,33 @@ RUN set -xe && apt-get update && apt-get -y upgrade && apt-get install -y \
    fonts-powerline
 
 # Install Nerd Fonts
-RUN cd usr/local/share/fonts && curl -fLo "Hack Regular Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf
-RUN cd usr/local/share/fonts && curl -fLo "Hack Bold Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack/Bold/complete
+RUN curl --create-dirs -O --output-dir /usr/local/share/fonts -fLo "Hack Regular Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf
+RUN curl --create-dirs -O --output-dir /usr/local/share/fonts -fLo "Hack Bold Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack/Bold/complete
 RUN fc-cache -fv
 
 # ---- Install Neovim
 RUN add-apt-repository ppa:neovim-ppa/unstable
-RUN apt-get update && apt-get install -y neovim
+RUN apt-get update \
+   && apt-get install -y neovim
 
 ENV \
    SHELL="/bin/zsh" \
-   USER_HOME=/home/${USER_ACCOUNT} \
-   WORKSPACE="$USER_HOME/workspace" \
-   SSH_DIR="$USER_HOME/.ssh"
+   HOME=/home/${USER_ACCOUNT} \
+   WORKSPACE="$HOME/workspace" \
+   SSH_DIR="$HOME/.ssh"
 
 # ---- Use the unprivileged user for safety
-RUN useradd -s ${SHELL} -d ${USER_HOME} -m -G sudo ${USER_ACCOUNT} && echo "${USER_ACCOUNT}:${PASSWORD}" | chpasswd
-RUN chown -R ${USER_ACCOUNT}:${USER_ACCOUNT} ${USER_HOME}/
+RUN useradd -s ${SHELL} -d ${HOME} -m -G sudo ${USER_ACCOUNT} && echo "${USER_ACCOUNT}:${PASSWORD}" | chpasswd
+RUN chown -R ${USER_ACCOUNT}:${USER_ACCOUNT} ${HOME}/
 
 USER ${USER_ACCOUNT}
-WORKDIR ${USER_HOME}
+WORKDIR ${HOME}
 
 # ---- Install NVM and setup node versions
 RUN mkdir .nvm
-ENV NODE_VERSION=18.3.0
-ENV NVM_DIR=${USER_HOME}/.nvm
+ENV \
+   NODE_VERSION=18.3.0 \
+   NVM_DIR=${HOME}/.nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
@@ -99,17 +101,15 @@ ENV PATH="${NVM_DIR}/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 # ---- Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
-# ---- Setup dotfiles
-ARG TEMP_DIR=~/tempDots
-RUN mkdir -p ${TEMP_DIR}
-COPY --chown=${USER_ACCOUNT} . ${TEMP_DIR}
-RUN zsh ${TEMP_DIR}/setup_docker_env.zsh && rm -rf ${TEMP_DIR}
-
-RUN /bin/zsh ${USER_HOME}/.config/zsh/.zshrc
+ENV PATH="${HOME}/.cargo/bin:${PATH}"
 
 # ---- Install LunarVim
-# RUN curl -s -o- https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | bash -s -- -y
+RUN curl -s -o- https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | bash -s -- -y
+
+# ---- Setup dotfiles
+ARG TEMP_DIR=${HOME}/tempDots
+COPY --chown=${USER_ACCOUNT} . ${TEMP_DIR}
+RUN zsh ${TEMP_DIR}/setup_docker_env.zsh && rm -rf ${TEMP_DIR}
 
 # Connect your SSH keys directory
 VOLUME ${SSH_DIR}
