@@ -31,6 +31,8 @@ alias gozsh="cd $ZDOTDIR"
 # alias l='ls -CF'
 
 alias g='git'
+# inspired from this blog post: https://www.atlassian.com/git/tutorials/dotfiles
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias ls='exa'                                   # ls
 alias l='exa -lbF'                         # list, size, type, git
@@ -54,7 +56,7 @@ alias cd..='cd ..'
 alias cl="clear"
 
 alias cp="cp -iv"
-alias cpr='cp -r'
+alias cpr='cp -rv'
 alias mv="mv -iv"
 alias rm="rm -v"
 alias rmf="rm -vrf"
@@ -63,6 +65,7 @@ alias ex="exit"
 
 alias -g L='| less'
 alias -g gr='| grep'
+alias -g yes='y |'
 alias -g and='&&'
 alias -g or='||'
 

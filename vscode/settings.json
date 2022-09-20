@@ -467,6 +467,19 @@
       "after": ["^"]
     }
   ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+        "before": [
+            "p",
+        ],
+        "after": [
+            "p",
+            "g",
+            "v",
+            "y"
+        ]
+    }
+  ],
   "vim.visualModeKeyBindings": [
     {
       "before": [":"],
@@ -638,5 +651,9 @@
     "showmodename",
     "smartcase",
     "textwidth"
-  ]
+  ],
+  "workbench.startupEditor": "none",
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  }
 }
