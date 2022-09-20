@@ -1,6 +1,5 @@
-#!/bin/zsh
-
-# >>>> !!!! THIS SCRIPT MUST BE RAN FROM DIRECTORY ITSELF !!!! <<<< #
+# zsh config dir
+export ZDOTDIR=$HOME/.config/zsh
 
 ##### SETUP #####################################################################################
 #                                                                                               #
@@ -12,9 +11,3 @@
 #   Order of Operations: [ .zshenv -> .zprofile -> .zshrc -> .zlogin -> .zlogout ]              #
 #                                                                                               #
 #################################################################################################
-
-DIR="$(cd "$(dirname "$0")" && pwd)"
-
-# Copy .zprofile to HOME dir
-cp -v ${DIR}/.zprofile ~/
-cp -v ${DIR}/.zshenv ~/
