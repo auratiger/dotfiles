@@ -2,7 +2,7 @@
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
-mkdir -p ~/.config 
+mkdir -p ~/.config
 
 cp -r "${DIR}/.config" ~/
 

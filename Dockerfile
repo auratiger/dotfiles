@@ -89,11 +89,11 @@ USER ${USER_ACCOUNT}
 WORKDIR ${HOME}
 
 # ---- Install NVM and setup node versions
-RUN mkdir .nvm
 ENV \
    NODE_VERSION=18.3.0 \
    NVM_DIR=${HOME}/.nvm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+RUN mkdir -p .nvm \ 
+   && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
