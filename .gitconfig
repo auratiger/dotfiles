@@ -59,6 +59,7 @@
    a = add
 
    al = !"d() { git add .; git status;}; clear && d"
+   alu = !"d() { git add -u .; git status;}; clear && d"
 
 # Show the diff between the latest commit and the current state
    d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat -- . ':!*/package-lock.json'"
