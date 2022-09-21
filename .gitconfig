@@ -83,10 +83,14 @@
 # pushed the branch upstream creating a remote branch
    pp = !"git push --set-upstream origin $(git branch --show-current)"
 
+   up = !"git remote add upstream"
+
    fp = fetch --prune
 
 # clean untracked files
    cl = clean -fd
+
+   cln = "!f() { git clone $1; git remote add upstream $1; }; f"
 
 # restore all staged files
    rsa = !"git restore --staged . && git status"
