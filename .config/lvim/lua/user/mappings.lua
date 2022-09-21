@@ -4,23 +4,25 @@ M.setup = function()
    local opts = { noremap = true, silent = true }
    local keymap = vim.api.nvim_set_keymap
 
+   -- Character delete uses specific register
+   keymap("n", "x", '"xx', opts)
+
    keymap("v", "p", '"_dP', opts) -- this setting makes it so pasting over selected text doesn't override the top register
    keymap("n", "Q", "@q", opts) -- Run macro bound to q with Q
 
-   -- F12 toggles relativenumber
-   keymap("n", "<F12>", ":set relativenumber!<CR>", opts)
+   keymap("n", "<F4>", ":%s/", { noremap = true, silent = false }) -- F4
+   keymap("n", "<F8>", ":ToggleTerm<CR>", opts) -- F8 toggles terminal window
+   keymap("n", "<F9>", ":MarkdownPreviewToggle<CR>", opts) -- F9 toggles markdown preview
+   keymap("n", "<F12>", ":set relativenumber!<CR>", opts) -- F12 toggles relativenumber
 
    -- Hitting escape also clears spelling and search highlights
    keymap("n", "<ESC>", ":nohls |:set norelativenumber | :setlocal nospell<ESC>", opts)
 
-   -- When you search, center the result and open any folds
-   keymap("n", "n", "nzzzv", opts)
-
-   -- When you search backwards, center the result and open any folds
-   keymap("n", "N", "Nzzzv", opts)
-
-   -- Yank from the current position to the end of the line
-   keymap("n", "Y", "y$", opts)
+   keymap("n", "<C-d>", "<C-d>zz", opts) -- When you search, center the result and open any folds
+   keymap("n", "<C-u>", "<C-u>zz", opts) -- When you search, center the result and open any folds
+   keymap("n", "n", "nzzzv", opts) -- When you search, center the result and open any folds
+   keymap("n", "N", "Nzzzv", opts) -- When you search backwards, center the result and open any folds
+   keymap("n", "Y", "y$", opts) -- Yank from the current position to the end of the line
 
    -- Yank and paste to clipboard
    keymap("n", "y", '"+y', opts)

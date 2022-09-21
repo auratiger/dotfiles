@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-   vim.cmd("set clipboard+=unnamedplus")
+   vim.o.termguicolors = true
 
    local options = {
       showmode = true, -- we don't need to see things like -- INSERT -- anymore
@@ -21,6 +21,7 @@ M.setup = function()
    }
 
    vim.cmd("set foldlevel=99")
+   vim.cmd("set clipboard+=unnamedplus")
 
    for k, v in pairs(options) do
       vim.opt[k] = v
