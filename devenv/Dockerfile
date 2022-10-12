@@ -104,12 +104,14 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="${HOME}/.cargo/bin:${PATH}"
 
 # ---- Install LunarVim
-RUN curl -s -o- https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | bash -s -- -y
+# RUN curl -s -o- https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | bash -s -- -y
 
 # ---- Setup dotfiles
-ARG TEMP_DIR=${HOME}/tempDots
-COPY --chown=${USER_ACCOUNT} . ${TEMP_DIR}
-RUN zsh ${TEMP_DIR}/setup_docker_env.zsh && rm -rf ${TEMP_DIR}
+# ARG TEMP_DIR=${HOME}/tempDots
+# COPY --chown=${USER_ACCOUNT} . ${TEMP_DIR}
+# RUN zsh ${TEMP_DIR}/setup_docker_env.zsh && rm -rf ${TEMP_DIR}
+
+RUN git clone --bare https://github.com/auratiger/dotfiles.git $HOME/.dotfiles
 
 # Connect your SSH keys directory
 VOLUME ${SSH_DIR}

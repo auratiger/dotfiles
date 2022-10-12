@@ -4,14 +4,14 @@ let mapleader = " "
 """ "Common settings"
 set incsearch
 set noerrorbells
-set idearefactormode=keep
+" set idearefactormode=keep
 set smartcase
 set ignorecase
 set easymotion
 " "set relativenumber"
 set showmode
 set number
-set scrolloff=6
+set scrolloff=8
 set sidescrolloff=4
 set history=100000
 
@@ -21,7 +21,6 @@ set clipboard+=ideaput
 set ideajoin
 
 set NERDTree
-
 
 " *** "Escaping" ***
 
@@ -48,9 +47,12 @@ nnoremap <c-=> :action Unsplit<CR>
 nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
 
 " "TAB in normal mode will move to text buffer"
-nnoremap <silent> <TAB> gt
+" nnoremap <silent> <TAB> gt
 " "SHIFT-TAB will go back"
-nnoremap <silent> <S-TAB> gT
+" nnoremap <silent> <S-TAB> gT
+
+nnoremap <silent> L gt
+nnoremap <silent> H gT
 
 " "navigaties to next and previous method"
 nnoremap [[ :action MethodUp<CR>
@@ -63,9 +65,8 @@ nnoremap zj :action ExpandRegion<CR>
 nnoremap <leader>zk :action CollapseAllRegions<CR>
 nnoremap <leader>zj :action ExpandAllRegions<CR>
 
-
 " "comment line"
-" nnoremap <leader>c :action CommentByLineComment<CR>
+nnoremap <leader>/ :action CommentByLineComment<CR>
 
 " "reformating"
 " nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
@@ -83,7 +84,7 @@ vnoremap<leader>y :action CopyReference<CR>
 nnoremap <leader>en :action EditSourceInNewWindow<CR>
 
 " "built in search looks better"
-nnoremap <leader>/ :action Find<CR>
+" nnoremap <leader>/ :action Find<CR>
 " "but preserve ideavim search"
 " nnoremap <leader>/ /
 

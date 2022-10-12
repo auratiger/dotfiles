@@ -31,6 +31,7 @@ alias gozsh="cd $ZDOTDIR"
 # alias l='ls -CF'
 
 alias g='git'
+alias gs="git status"
 # inspired from this blog post: https://www.atlassian.com/git/tutorials/dotfiles
 alias gd='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -51,6 +52,9 @@ alias fgrep='fgrep --color=auto'
 alias cd='change_dir(){ cd $1 && exa }; change_dir'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
 alias cd..='cd ..'
 
 alias cl="clear"
@@ -172,21 +176,20 @@ alias dins=__docker-inspect-container
 # where you are and without knowing any container names
 alias dsa="docker ps -q | awk '{print $1}' | xargs -o docker stop"
 
-# Start the docker-compose stack in the current directory
-# alias dcu="docker-compose up -d"
 
-# Start the docker-compose stack in the current directory and rebuild the images
-# alias dcub="docker-compose up -d --build"
+alias dm="docker compose"
+alias dmu="docker compose up -d" # Start the docker-compose stack in the current directory
+alias dmb="docker compose up -d --build" # Start the docker-compose stack in the current directory and rebuild the images
 
 # Stop, delete (down) or restart the docker-compose stack in the current directory
-# alias dcs="docker-compose stop"
-# alias dcd="docker-compose down"
-# alias dcr="docker-compose restart"
+alias dmc="docker compose stop"
+alias dmd="docker compose down"
+alias dmr="docker compose restart"
 
 # Show the logs for the docker-compose stack in the current directory
 # May be extended with the service name to get service-specific logs, like
 # 'dcl php' to get the logs of the php container
-# alias dcl="docker-compose logs"
+alias dml="docker compose logs"
 
 # >>>> ============ VERSIONS SCRIPT ==================================================== <<<< #
 
