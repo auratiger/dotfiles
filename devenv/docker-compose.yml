@@ -3,7 +3,7 @@ services:
     devenv-service:
         container_name: devenv
         build: .
-        network_mode: "host"        
+        network_mode: "host"
         volumes:
             - devenv-vol:/home
 

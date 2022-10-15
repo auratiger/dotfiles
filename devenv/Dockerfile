@@ -111,7 +111,9 @@ ENV PATH="${HOME}/.cargo/bin:${PATH}"
 # COPY --chown=${USER_ACCOUNT} . ${TEMP_DIR}
 # RUN zsh ${TEMP_DIR}/setup_docker_env.zsh && rm -rf ${TEMP_DIR}
 
-RUN git clone --bare https://github.com/auratiger/dotfiles.git $HOME/.dotfiles
+RUN git clone --bare https://github.com/auratiger/dotfiles.git $HOME/.dotfiles \
+   # && git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME status.showUntrackedFiles no \
+   && git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME reset --hard HEAD
 
 # Connect your SSH keys directory
 VOLUME ${SSH_DIR}

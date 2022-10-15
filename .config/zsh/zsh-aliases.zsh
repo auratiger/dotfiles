@@ -33,7 +33,7 @@ alias gozsh="cd $ZDOTDIR"
 alias g='git'
 alias gs="git status"
 # inspired from this blog post: https://www.atlassian.com/git/tutorials/dotfiles
-alias gd='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias ls='exa'                                   # ls
 alias l='exa -lbF'                         # list, size, type, git
