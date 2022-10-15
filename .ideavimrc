@@ -4,11 +4,12 @@ let mapleader = " "
 """ "Common settings"
 set incsearch
 set noerrorbells
-" set idearefactormode=keep
+set idearefactormode=visual
 set smartcase
 set ignorecase
-set easymotion
-" "set relativenumber"
+set ideamarks
+set relativenumber
+
 set showmode
 set number
 set scrolloff=8
@@ -20,32 +21,66 @@ set clipboard+=ideaput
 
 set ideajoin
 
-set NERDTree
+" ========== "EasyMotion" ==========
+Plug 'easymotion/vim-easymotion'
+set easymotion
+let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+"nmap F <Plug>(easymotion-f)
+nmap F <Plug>(easymotion-jumptoanywhere)
 
-" *** "Escaping" ***
-
+" ========== "ALIASES" ==========
+" copy to end of line"
+nmap Y y$
 inoremap jj <ESC>
 inoremap jk <ESC>
 
-" *** "Mappings" ***
+vnoremap < <gv
+vnoremap > >gv
+
+" replace currently selected text with default register without yanking it
+vnoremap p "_dP
 
 " "open ideavimrc file"
 nnoremap \e :e ~/.ideavimrc<CR>
-nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+nmap <a-r> <action>(IdeaVim.ReloadVimRc.reload)
 
-" ========== "NAVIGATION" =============
+" ========== "NERDTree" =============
+set NERDTree
+let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapJumpParent='h'
 
+nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>. :NERDTreeFind<CR>
+nnoremap <leader>nf :NERDTreeFocus<CR>
+
+" ========== "Surround" =============
+Plug 'tpope/vim-surround'
+set surround
+
+" This plugin adds four main commands in normal mode
+"   - cs: To change the surroundings.
+"   - ds: To delete the surroundings.
+"   - ys: To add surroundings.
+"   - S: To surround the currently selected text.
+" The following are some commands that I usually use. However, you can check the documentation for more:
+"
+"   - cs”’: Change the surrounding from double quotes to single quotes.
+"   - ds”: Delete the closest double-quotes surroundings.
+"   - ysiw<b>: Surround the current word with <b> tag (iw means inner word.)
+
+" ========== "SPLITS" =============
 " "move between split windows"
 nnoremap <leader>h <C-W><C-H>
 nnoremap <leader>j <C-W><C-J>
 nnoremap <leader>k <C-W><C-K>
 nnoremap <leader>l <C-W><C-L>
 
-nnoremap <c-\> :action SplitVertically<CR>
-nnoremap <c--> :action SplitHorizontally<CR>
-nnoremap <c-=> :action Unsplit<CR>
-nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
+nmap <a-v> <action>(SplitVertically)
+nmap <a-h> <action>(SplitHorizontally)
+nmap <a-u> <action>(Unsplit)
+nmap <a-m> <action>(MoveEditorToOppositeTabGroup)
 
+" ========== "NAVIGATION" =============
 " "TAB in normal mode will move to text buffer"
 " nnoremap <silent> <TAB> gt
 " "SHIFT-TAB will go back"
@@ -54,82 +89,187 @@ nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <silent> L gt
 nnoremap <silent> H gT
 
-" "navigaties to next and previous method"
-nnoremap [[ :action MethodUp<CR>
-nnoremap ]] :action MethodDown<CR>
+" "navigates to next and previous method"
+nmap [[ <action>(MethodUp)
+nmap ]] <action>(MethodDown)
 
-" ========== "EDITING" ========== 
+" ========== "FOLDING" ==========
 
-nnoremap zk :action CollapseRegion<CR>
-nnoremap zj :action ExpandRegion<CR>
-nnoremap <leader>zk :action CollapseAllRegions<CR>
-nnoremap <leader>zj :action ExpandAllRegions<CR>
+nmap zk <action>(CollapseRegion)
+nmap zj <action>(ExpandRegion)
+nmap zK <action>(CollapseAllRegions)
+nmap zJ <action>(ExpandAllRegions)
 
-" "comment line"
-nnoremap <leader>/ :action CommentByLineComment<CR>
+nmap zb <action>(CollapseDocComments)
 
-" "reformating"
-" nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
-" nnoremap <Leader>=  :action ReformatCode<CR>
-" nnoremap <leader>o :action OptimizeImports<CR>
+" CollapseDocComments
+" ExpandDocComments
 
-" ========== "ACTIONS" ========== 
+" ========== "PROJECT NAVIGATION" ==========
 
-nnoremap gi :action GotoImplementation<CR>
-nnoremap ge :action GotoNextError<CR>
-nnoremap gE :action GotoPreviousError<CR>
+nmap gd <action>(GotoDeclaration)
+nmap gi <action>(GotoImplementation)
+nmap ge <action>(GotoNextError)
+nmap gE <action>(GotoPreviousError)
+nmap go <action>(Generate)
+nmap ga <action>(GotoAction)
+nmap gc <action>(GotoClass)
+nmap gf <action>(GotoFile)
+nmap gs <action>(GotoSymbol)
 
-nnoremap <leader>x :action HideAllWindows<CR>
-vnoremap<leader>y :action CopyReference<CR>
-nnoremap <leader>en :action EditSourceInNewWindow<CR>
+" ========== "GLOBALS" ==========
+" -- ZEN mode
+nmap <c-z> <action>(ToggleDistractionFreeMode)
 
-" "built in search looks better"
-" nnoremap <leader>/ :action Find<CR>
-" "but preserve ideavim search"
-" nnoremap <leader>/ /
+nmap <leader>c <action>(CloseEditor)
+nmap <leader>x <action>(ReopenClosedTab)
+nmap <leader>f <action>(FindInPath)
+nmap <leader>/ <action>(CommentByLineComment)
+" Toggle git-blame window
+nmap <leader>g <action>(Annotate)
+vmap <leader>y <action>(CopyReference)
 
-" "Zen mode"
-nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
+" ========== "BUFFERS" ==========
+nmap <leader>ba <action>(CloseAllEditors)
+nmap <leader>bc <action>(CloseAllEditorsButActive)
+nmap <leader>bl <action>(CloseAllToTheRight)
+nmap <leader>bh <action>(CloseAllToTheLeft)
+nmap <leader>bp <action>(CloseAllUnpinnedEditors)
+nmap <leader>bu <action>(CloseAllUnmodifiedEditors)
+nmap <leader>bp <action>(PinActiveTabToggle)
 
-" "Rename a file"
-nnoremap <leader>rf :action RenameElement<CR>
-
-" "Show Usages"
-nnoremap <leader>su :action ShowUsages<CR>
-
-" "Toggle git-blame window"
-nnoremap <leader>g :action Annotate<CR>
-
+" ========== "PROJECT" ==========
 " "Show file methods in popup"
-nnoremap <leader>m :action FileStructurePopup<CR>
+nmap <leader>ps <action>(FileStructurePopup)
+nmap <leader>pd <action>(ShowErrorDescription)
+" -- Rename a file
+nmap <leader>pe <action>(RenameElement)
+nmap <leader>pf <action>(RenameFile)
+nmap <leader>pc <action>(CloseProject)
+nmap <leader>pt <action>(Actions)
+nmap <leader>py <action>(CopyFileName)
+nmap <leader>pn <action>(NewElement)
+nmap <leader>pm <action>(NewModule)
+nmap <leader>pp <action>(NewProject)
+nmap <leader>po <action>(OverrideMethods)
+nmap <leader>pb <action>(ShowBookmarks)
+" nmap <leader>pm <action>(NewFile)
+" nmap <leader>pN <action>(NewFolder)
+nmap <leader>pd <action>(SafeDelete)
 
-" ========== "DEBUGGING" ========== 
+" nnoremap <leader>pr :%s/
+nmap <leader>pr <action>(Replace)
+nmap <leader>pR <action>(ReplaceInPath)
+nmap <leader>px <action>(Refactorings.QuickListPopupAction)
 
-nnoremap ,r :action Run<CR>
-nnoremap ,c :action RunClass<CR>
-nnoremap ,f :action ChooseRunConfiguration<CR>
-nnoremap ,t :action ActivateRunToolWindow<CR>
-nnoremap ,u :action Rerun<CR>
-nnoremap ,b :action ToggleLineBreakpoint<CR>
-nnoremap ,d :action ContextDebug<CR>
-nnoremap ,n :action ActivateDebugToolWindow<CR>
+" ========== "RECENT" ==========
+nmap <leader>rf <action>(RecentChangedFiles)
+nmap <leader>rr <action>(RecentChanges)
+nmap <leader>rl <action>(RecentLocations)
 
-" ========== "ALIASES" ========== 
+" FileChooser.Delete
+" FileChooser.GotoDesktop <C-D>
+" FileChooser.GotoHome <C-1>
+" FileChooser.GotoJDK
+" FileChooser.GotoModule <C-3>
+" FileChooser.GotoProject <C-2>
+" FileChooser.GoToWslHome
+" FileChooser.LightEditGotoOpenedFile
+" FileChooser.NewFile
+" FileChooser.NewFolder <A-Ins> <C-N>
+" FileChooser.Refresh <A-C-Y>
+" FileChooser.ShowHidden
+" FileChooser.TogglePathBar <C-P>
+" FileChooserList
+" FileChooserList.LevelUp
+" FileChooserList.Root <C-/>
+" FileChooserToolbar
+" FileExportGroup
 
-" "copy to end of line"
-nnoremap Y y$
+" ========== "DEBUGGING" ==========
 
-" "NERDTree"
-nnoremap <leader>f :NERDTreeFocus<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>x :NERDTreeFind<CR>
+nmap ,r <action>(Run)
+nmap ,c <action>(RunClass)
+nmap ,f <action>(ChooseRunConfiguration)
+nmap ,t <action>(ActivateRunToolWindow)
+nmap ,u <action>(Rerun)
+nmap ,b <action>(ToggleLineBreakpoint)
+nmap ,d <action>(ContextDebug)
+nmap ,n <action>(ActivateDebugToolWindow)
+" nmap <leader>cd <action>(ChooseDebugConfiguration)
 
-" nnoremap <leader>cd :action ChooseDebugConfiguration<CR>
+" nnoremap ,r :action ContextRun<CR>
+" nnoremap ,f :action RerunFailedTests<CR>
+"
+" Run <S-F10>
+" RunAnything
+" RunClass <C-S-F10>
+" RunConfiguration
+" RunConfigurationTemplatesForNewProjects
+" RunContextGroup
+" RunContextGroupInner
+" RunContextGroupMore
+" RunContextPopupGroup
+" RunCoverage
+" RunDashboard.AddType
+" RunDashboard.ClearContent
+" RunDashboard.CopyConfiguration <C-D>
+" RunDashboard.Debug
+" RunDashboard.EditConfiguration <S-F4>
+" RunDashboard.Filter
+" RunDashboard.GroupBy
+" RunDashboard.GroupByStatus
+" RunDashboard.GroupByType
+" RunDashboard.GroupConfigurations
+" RunDashboard.HideConfiguration
+" RunDashboard.OpenRunningConfigInNewTab
+" RunDashboard.RemoveType
+" RunDashboard.RestoreConfiguration
+" RunDashboard.RestoreHiddenConfigurations
+" RunDashboard.Run <C-S-F10>
+" RunDashboard.Stop <C-F2>
+" RunDashboard.UngroupConfigurations
+" RunDashboardContentToolbar
+" RunDashboardPopup
+" RunInspection <A-C-S-I>
+" RunInspectionOn
+" RunMenu
 
-" nnoremap ga :action GotoAction<CR>
-" nnoremap gc :action GotoClass<CR>
-" nnoremap gd :action GotoDeclaration<CR>
-" nnoremap gf :action GotoFile<CR>
-" nnoremap gi :action GotoImplementaion<CR>
-" nnoremap gs :action GotoSymbolo<CR>
+" ========== "MISC" ==========
+" nmap <leader>en <action>(EditSourceInNewWindow)
+" nnoremap <leader>r <action>(Refactorings.QuickListPopupAction)
+" nnoremap <Leader>=  <action>(ReformatCode)
+" nnoremap <leader>o <action>(OptimizeImports)
+" nnoremap <leader>/ <action>(Find)
+nmap <leader>su <action>(ShowUsages)
+nmap <leader>md <action>(ShowColorPicker)
+nmap <leader>mf <action>(ShowFilePath)
+nmap <leader>ml <action>(ShowLog)
+nmap <leader>ms <action>(ShowProjectStructureSettings)
+nmap <leader>mx <action>(ShowSettings)
 
+
+" Generate <A-Ins>
+" GenerateAfterClassMethod
+" GenerateBeforeClassMethod
+" GenerateConstructor
+" GenerateCopyright
+" GenerateCoverageReport
+" GenerateCreateUI
+" GenerateDataMethod
+" GenerateDTD
+" GenerateEquals
+" GenerateExternalization
+" GenerateFromTestCreatorsGroup
+" GenerateGetter
+" GenerateGetterAndSetter
+" GenerateGradleDslGroup
+" GenerateGroup
+" GenerateJavadoc
+" GenerateModuleDescriptors
+" GeneratePattern
+" GenerateSetter
+" GenerateSetUpMethod
+" GenerateSuperMethodCall
+" GenerateTearDownMethod
+" GenerateTestMethod
