@@ -10,13 +10,14 @@ let mapleader = " "
 " ---------------------------- NORMAL ------------------------------
 "   ............. GLOBALS KEYS ...............
 "
-"   Y - yank to the end of the line
+"   Y - Yank to the end of the line
+"   Q - Plays back q macro.
 "   L - Change to left buffer tab
 "   H - Change to right buffer tab
 "   jj - ESC
 "   jk - ESC
 "
-"   F  - easymotion everywhere on file
+"   <leader>'  - easymotion everywhere on file
 "   Ef  - easymotion everywhere on line
 "   El  - easymotion everywhere on line
 "   En  - go to next easymotion match
@@ -27,6 +28,9 @@ let mapleader = " "
 "
 "   ]]  -  navigate to previous method
 "   ]]  -  navigate to previous method
+"
+"   !  -  Inverts words
+"   '  -  Shows Bookmarks
 "
 "   zk - collapse region
 "   zj - expand region
@@ -47,6 +51,7 @@ let mapleader = " "
 "   cs  - change surround - cs"' or cs"(
 "   cs  - delete surround - ds" or ds(
 "   ys  - add surround - ysw" or ysiw(
+"   S  -  shorthand for ysiW
 "
 "   ,r  - Runs current run configuration
 "   ,R  - Opens Run Menu
@@ -73,7 +78,8 @@ let mapleader = " "
 "
 "   ............. Control KEYS ...............
 "
-"   c-z  - Toggles Zen mode
+"   C-z  - Toggles Zen mode
+"   C-a  - Selects whole file
 "
 "   ............. LEADER KEYS ...............
 "
@@ -101,6 +107,9 @@ let mapleader = " "
 "    <leader>bp - Closes All unpinned buffer tabs
 "    <leader>bu - Closes all unmodified buffer tabs
 "    <leader>bt - Pins active buffer tab
+"    <leader>b1 - Go to first tab
+"    <leader>bj - Go to first tab
+"    <leader>bk - Go to last tab
 "
 "    <leader>ps - Opens class structure window
 "    <leader>pd - Show Error Description
@@ -137,38 +146,132 @@ let mapleader = " "
 "    <leader>md - Opens Color Picker
 "    <leader>mf - Show File Path
 "    <leader>ml - Opens logs location in file manager
-"    <leader>ms - Opens Project Structure settings 
-"    <leader>mx - Opens Settings  
+"    <leader>ms - Opens Project Structure settings
+"    <leader>mx - Opens Settings
 "
 " ---------------------------- VISUAL ------------------------------
+"
+"   ............. GLOBALS KEYS ...............
+"
+"    L - Select to the end of the line
+"    H - Select to the start of the line
+"    <BS> - Select to the previous paragraph
+"    <CR> - Select to the next paragraph
 "
 "   ............. LEADER KEYS ...............
 "
 "    <leader>y - Copy reference
+"    <leader>r - Replace
+"    <leader>p - ReplaceInPath
 "
 "
 
 
 
-""" "Common settings"
+" =================== Common settings ===================
 set incsearch
 set noerrorbells
+set visualbell                " removes errorbells
 set idearefactormode=visual
 set smartcase
 set ignorecase
 set ideamarks
+
 set relativenumber
 
 set showmode
 set number
-set scrolloff=8
-set sidescrolloff=4
-set history=100000
+set scrolloff=9
+set sidescrolloff=5
+set history=100001
 
 set clipboard+=unnamed
 set clipboard+=ideaput
 
 set ideajoin
+
+" ========== CUSTOM TEXT OBJECTS ========== 
+
+nnoremap ci/ T/ct/
+nnoremap ca/ F/ct/
+nnoremap ci, T,ct,
+nnoremap ca, F,ct,
+nnoremap ci. T.ct.
+nnoremap ca. F.ct.
+nnoremap ci_ T_ct_
+nnoremap ca_ F_ct_
+nnoremap ci- T-ct-
+nnoremap ca- F-ct-
+nnoremap ci% T%ct%
+nnoremap ca% F%ct%
+nnoremap ci= T=ct=
+nnoremap ca= F=ct=
+nnoremap ci? T?ct?
+nnoremap ca? F?ct?
+nnoremap ci! T!ct!
+nnoremap ca! F!ct!
+nnoremap ci& T&ct&
+nnoremap ca& F&ct&
+nnoremap di/ T/dt/
+nnoremap da/ F/dt/
+nnoremap di, T,dt,
+nnoremap da, F,dt,
+nnoremap di. T.dt.
+nnoremap da. F.dt.
+nnoremap di_ T_dt_
+nnoremap da_ F_dt_
+nnoremap di- T-dt-
+nnoremap da- F-dt-
+nnoremap di% T%dt%
+nnoremap da% F%dt%
+nnoremap di= T=dt=
+nnoremap da= F=dt=
+nnoremap di? T?dt?
+nnoremap da? F?dt?
+nnoremap di! T!dt!
+nnoremap da! F!dt!
+nnoremap di& T&dt&
+nnoremap da& F&dt&
+nnoremap vi/ T/vt/
+nnoremap va/ F/vt/
+nnoremap vi, T,vt,
+nnoremap va, F,vt,
+nnoremap vi. T.vt.
+nnoremap va. F.vt.
+nnoremap vi_ T_vt_
+nnoremap va_ F_vt_
+nnoremap vi- T-vt-
+nnoremap va- F-vt-
+nnoremap vi% T%vt%
+nnoremap va% F%vt%
+nnoremap vi= T=vt=
+nnoremap va= F=vt=
+nnoremap vi? T?vt?
+nnoremap va? F?vt?
+nnoremap vi! T!vt!
+nnoremap va! F!vt!
+nnoremap vi& T&vt&
+nnoremap va& F&vt&
+nnoremap yi/ T/yt/
+nnoremap ya/ F/yt/
+nnoremap yi, T,yt,
+nnoremap ya, F,yt,
+nnoremap yi. T.yt.
+nnoremap ya. F.yt.
+nnoremap yi_ T_yt_
+nnoremap ya_ F_yt_
+nnoremap yi- T-yt-
+nnoremap ya- F-yt-
+nnoremap yi% T%yt%
+nnoremap ya% F%yt%
+nnoremap yi= T=yt=
+nnoremap ya= F=yt=
+nnoremap yi? T?yt?
+nnoremap ya? F?yt?
+nnoremap yi! T!yt!
+nnoremap ya! F!yt!
+nnoremap yi& T&yt&
+nnoremap ya& F&yt&
 
 " ========== "ALIASES" ==========
 " copy to end of line"
@@ -176,8 +279,24 @@ nmap Y y$
 inoremap jj <ESC>
 inoremap jk <ESC>
 
+" Clear highlights.
+nnoremap <Esc> <Esc>:noh<CR>
+nmap ' <Action>(ShowBookmarks)
+
+" Q plays back q macro.
+nnoremap Q @q
+
 vnoremap < <gv
 vnoremap > >gv
+
+vmap <BS> {
+vmap <CR> }
+
+nmap + viB
+vmap + vviB
+
+vmap L $
+vmap H 1
 
 " replace currently selected text with default register without yanking it
 vnoremap p "_dP
@@ -185,6 +304,12 @@ vnoremap p "_dP
 " "open ideavimrc file"
 nnoremap \e :e ~/.ideavimrc<CR>
 nmap <a-r> <action>(IdeaVim.ReloadVimRc.reload)
+
+" ========== "Highlighted Yank" =============
+
+set highlightedyank
+let g:highlightedyank_highlight_duration = '300'
+let g:highlightedyank_highlight_color = 'rgb(131, 148, 150, 120)'
 
 " ========== "NERDTree" =============
 set NERDTree
@@ -199,9 +324,9 @@ nnoremap <leader>nf :NERDTreeFocus<CR>
 Plug 'easymotion/vim-easymotion'
 set easymotion
 let g:EasyMotion_keys = 'asdfghjkl;qwertyuiopzxcvbnm'
-let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_do_mapping = 1
 "nmap F <Plug>(easymotion-f)
-map F <Plug>(easymotion-jumptoanywhere)
+map <leader>' <Plug>(easymotion-jumptoanywhere)
 map Ef <Plug>(easymotion-lineanywhere)
 map El <Plug>(easymotion-lineanywhere)
 map En <Plug>(easymotion-next)
@@ -210,6 +335,8 @@ map EN <Plug>(easymotion-prev)
 " ========== "Surround" =============
 Plug 'tpope/vim-surround'
 set surround
+
+nmap S ysiW
 
 " This plugin adds four main commands in normal mode
 "   - cs: To change the surroundings.
@@ -234,6 +361,7 @@ nmap <a-h> <action>(SplitHorizontally)
 nmap <a-u> <action>(Unsplit)
 nmap <a-m> <action>(MoveEditorToOppositeTabGroup)
 
+" --- Fonts
 nmap <a-=> <action>(EditorIncreaseFontSizeGlobal)
 nmap <a--> <action>(EditorDecreaseFontSizeGlobal)
 nmap <a-.> <action>(EditorResetFontSize)
@@ -258,7 +386,6 @@ nmap zk <action>(CollapseRegion)
 nmap zj <action>(ExpandRegion)
 nmap zK <action>(CollapseAllRegions)
 nmap zJ <action>(ExpandAllRegions)
-
 nmap zb <action>(CollapseDocComments)
 
 " CollapseDocComments
@@ -270,15 +397,18 @@ nmap gd <action>(GotoDeclaration)
 nmap gi <action>(GotoImplementation)
 nmap ge <action>(GotoNextError)
 nmap gE <action>(GotoPreviousError)
-nmap go <action>(Generate)
 nmap ga <action>(GotoAction)
 nmap gc <action>(GotoClass)
 nmap gf <action>(GotoFile)
 nmap gs <action>(GotoSymbol)
 
+nmap go <action>(Generate)
+
 " ========== "GLOBALS" ==========
+
 " -- ZEN mode
-nmap <c-z> <action>(ToggleDistractionFreeMode)
+nmap <C-z> <action>(ToggleDistractionFreeMode)
+nmap <C-a> gg<S-v>G
 
 nmap <leader>c <action>(CloseEditor)
 nmap <leader>x <action>(ReopenClosedTab)
@@ -290,6 +420,7 @@ vmap <leader>y <action>(CopyReference)
 
 
 " ========== "BUFFERS" ==========
+
 nmap <leader>ba <action>(CloseAllEditors)
 nmap <leader>bc <action>(CloseAllEditorsButActive)
 nmap <leader>bl <action>(CloseAllToTheRight)
@@ -297,8 +428,12 @@ nmap <leader>bh <action>(CloseAllToTheLeft)
 nmap <leader>bp <action>(CloseAllUnpinnedEditors)
 nmap <leader>bu <action>(CloseAllUnmodifiedEditors)
 nmap <leader>bt <action>(PinActiveTabToggle)
+nmap <leader>b1 <action>(GoToTab1)
+nmap <leader>bj <action>(GoToTab2)
+nmap <leader>bk <action>(GoToLastTab)
 
 " ========== "PROJECT" ==========
+
 " "Show file methods in popup"
 nmap <leader>ps <action>(FileStructurePopup)
 nmap <leader>pd <action>(ShowErrorDescription)
@@ -316,17 +451,23 @@ nmap <leader>pb <action>(ShowBookmarks)
 " nmap <leader>pN <action>(NewFolder)
 
 " nnoremap <leader>pr :%s/
+vmap <leader>r <Action>(Replace)
 nmap <leader>pr <action>(Replace)
+vmap <leader>p <Action>(ReplaceInPath)
 nmap <leader>pR <action>(ReplaceInPath)
 nmap <leader>px <action>(Refactorings.QuickListPopupAction)
 
 " ========== "RECENT AND RANDOM" ==========
+
+" --- RECENT
 nmap <leader>rf <action>(RecentChangedFiles)
 nmap <leader>rr <action>(RecentChanges)
 nmap <leader>rl <action>(RecentLocations)
 
+" --- Refactoring
 nmap <leader>rp <action>(Refactorings.QuickListPopupAction)
 
+" --- Randomness
 nmap <leader>ri <action>(randomness.InsertInteger)
 nmap <leader>rI <action>(randomness.InsertIntegerArray)
 
@@ -361,6 +502,7 @@ nmap ,i <action>(RunInspection)
 " nmap ,f <action>RerunFailedTests
 
 " ========== "MISC" ==========
+
 " nmap <leader>en <action>(EditSourceInNewWindow)
 nmap <leader>=  <action>(ReformatCode)
 " nmap <leader>o <action>(OptimizeImports)
@@ -371,3 +513,37 @@ nmap <leader>mf <action>(ShowFilePath)
 nmap <leader>ml <action>(ShowLog)
 nmap <leader>ms <action>(ShowProjectStructureSettings)
 nmap <leader>mx <action>(ShowSettings)
+
+
+
+
+" Replaces word with it's opposite meaning. Example: true -> false, start -> end ...
+function! Invert(calledFromVisual)
+  let antonyms = ['true', 'false', 'after', 'before', 'start', 'end', 'left', 'right', 'first', 'last',
+                 \'True', 'False', 'After', 'Before', 'Start', 'End', 'Left', 'Right', 'First', 'Last']
+
+  if a:calledFromVisual
+    normal gv"wy
+  else
+    normal "wyiw
+  endif
+
+  let wordUnderCaret = @w
+  let eraseWord = a:calledFromVisual ? 'gvc' : 'ciw'
+
+  let count = 1
+  while (count < len(antonyms))
+
+    if (antonyms[count] ==# wordUnderCaret)
+      let antonym = (count % 3 ==? 0) ? antonyms[count + 1] : antonyms[count - 1]
+      execute 'normal ' .. eraseWord .. antonym
+      break
+    endif
+
+    let count += 2
+
+  endwhile
+endfunction
+
+nnoremap ! :call Invert(1)<CR>
+vnoremap ! :<C-u>call Invert(2)<CR>
