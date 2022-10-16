@@ -1,6 +1,155 @@
 """ "Map leader to space "
 let mapleader = " "
 
+
+
+
+
+" ============================ MAPPINGS ============================"
+"
+" ---------------------------- NORMAL ------------------------------
+"   ............. GLOBALS KEYS ...............
+"
+"   Y - yank to the end of the line
+"   L - Change to left buffer tab
+"   H - Change to right buffer tab
+"   jj - ESC
+"   jk - ESC
+"
+"   F  - easymotion everywhere on file
+"   Ef  - easymotion everywhere on line
+"   El  - easymotion everywhere on line
+"   En  - go to next easymotion match
+"   EN  - go to prev easymotion match
+"
+"   [[  -  navigate to previous method
+"   ]]  -  navigate to previous method
+"
+"   ]]  -  navigate to previous method
+"   ]]  -  navigate to previous method
+"
+"   zk - collapse region
+"   zj - expand region
+"   zK - collapse all regions
+"   zJ - collapse all regions
+"   zb - collapse doc comments
+"
+"   gd - Go to declaration
+"   gi - Go to implementation
+"   ge - Go to next error
+"   gE - Go to prev error
+"   go - Open Generate menu
+"   ga - Opens Action search menu
+"   gc - Opens Class search menu
+"   gf - Opens Files search menu
+"   gs - Opens Symbol search menu
+"
+"   cs  - change surround - cs"' or cs"(
+"   cs  - delete surround - ds" or ds(
+"   ys  - add surround - ysw" or ysiw(
+"
+"   ,r  - Runs current run configuration
+"   ,R  - Opens Run Menu
+"   ,c  - Runs current class file if able
+"   ,f  - Opens choose run configuration menu
+"   ,t  - Activates Run tool window
+"   ,u  - Rerun last run configuration
+"   ,b  - Toggle line breakpoint
+"   ,d  - Context Debug
+"   ,n  - Activates Debug tool window
+"   ,i  - Opens Run Inspection menu
+"
+"   ............. ALT KEYS ...............
+"
+"    a-r - refresh IdeaVim config
+"    a-v - Split vertically
+"    a-h - Split horizontally
+"    a-u - Unsplit
+"    a-m -
+"    a-= - Increase Font Size
+"    a-- - Decrease Font Size
+"    a-. - Reset Font Side to default
+"    a-; - Reset Font Side to default
+"
+"   ............. Control KEYS ...............
+"
+"   c-z  - Toggles Zen mode
+"
+"   ............. LEADER KEYS ...............
+"
+"    <leader>e - Toggle NERDTree
+"    <leader>. - Focuses the NERDTree panel on the current opened file
+"    <leader>nf - Focuses NERDTree panel
+"
+"    <leader>h - Navigate to left split
+"    <leader>j - Navigate to bottom split
+"    <leader>k - Navigate to upper split
+"    <leader>l - Navigate to right split
+"
+"    <leader>c  - Closes current buffer tab
+"    <leader>x  - Reopens last closed buffer tab
+"    <leader>f  - Opens Find in Path search
+"    <leader>/  - Comments current line
+"    <leader>=  - Reformat code
+"    <leader>g  - Toggles git blame
+"    <leader>su - Shows usages
+"
+"    <leader>ba - Closes All buffer tabs
+"    <leader>bc - Closes All buffer tabs except for active buffer
+"    <leader>bl - Closes all buffer tabs on the right
+"    <leader>bh - Closes all buffer tabs on the left
+"    <leader>bp - Closes All unpinned buffer tabs
+"    <leader>bu - Closes all unmodified buffer tabs
+"    <leader>bt - Pins active buffer tab
+"
+"    <leader>ps - Opens class structure window
+"    <leader>pd - Show Error Description
+"    <leader>pe - Rename Element
+"    <leader>pf - Rename File
+"    <leader>pc - Close Project
+"    <leader>pt - Opens Actions menu
+"    <leader>py - Copy File Name
+"    <leader>pn - Open new File menu
+"    <leader>pm - Open new Module menu
+"    <leader>pp - Open new Project menu
+"    <leader>po - Override Methods if any
+"    <leader>pb - Show Bookmarks
+"    <leader>pr - Open Replace
+"    <leader>pR - Open Replace In Path
+"    <leader>px - Open Refactor menu
+"
+"    <leader>rf - Opens Recent changed Files window
+"    <leader>rr - Opens Recent changes window
+"    <leader>rl - Opens Recent locations window
+"    <leader>rp - Open Refactor menu
+"    <leader>ri - Insert Random Integer
+"    <leader>rI - Insert Random Integer Array
+"    <leader>rd - Insert Random Decimal
+"    <leader>rD - Insert Random Decimal Array
+"    <leader>rs - Insert Random String
+"    <leader>rS - Insert Random String Array
+"    <leader>ru - Insert Random UUID
+"    <leader>rU - Insert Random UUID Array
+"    <leader>rw - Insert Random Word
+"    <leader>rW - Insert Random Word Array
+"    <leader>rg - Opens randomness menu
+"
+"    <leader>md - Opens Color Picker
+"    <leader>mf - Show File Path
+"    <leader>ml - Opens logs location in file manager
+"    <leader>ms - Opens Project Structure settings 
+"    <leader>mx - Opens Settings  
+"
+" ---------------------------- VISUAL ------------------------------
+"
+"   ............. LEADER KEYS ...............
+"
+"    <leader>y - Copy reference
+"
+"
+
+
+
 """ "Common settings"
 set incsearch
 set noerrorbells
@@ -20,13 +169,6 @@ set clipboard+=unnamed
 set clipboard+=ideaput
 
 set ideajoin
-
-" ========== "EasyMotion" ==========
-Plug 'easymotion/vim-easymotion'
-set easymotion
-let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
-"nmap F <Plug>(easymotion-f)
-nmap F <Plug>(easymotion-jumptoanywhere)
 
 " ========== "ALIASES" ==========
 " copy to end of line"
@@ -52,6 +194,18 @@ let g:NERDTreeMapJumpParent='h'
 nnoremap <leader>e :NERDTreeToggle<CR>
 nnoremap <leader>. :NERDTreeFind<CR>
 nnoremap <leader>nf :NERDTreeFocus<CR>
+
+" ========== "EasyMotion" ==========
+Plug 'easymotion/vim-easymotion'
+set easymotion
+let g:EasyMotion_keys = 'asdfghjkl;qwertyuiopzxcvbnm'
+let g:EasyMotion_do_mapping = 0
+"nmap F <Plug>(easymotion-f)
+map F <Plug>(easymotion-jumptoanywhere)
+map Ef <Plug>(easymotion-lineanywhere)
+map El <Plug>(easymotion-lineanywhere)
+map En <Plug>(easymotion-next)
+map EN <Plug>(easymotion-prev)
 
 " ========== "Surround" =============
 Plug 'tpope/vim-surround'
@@ -79,6 +233,11 @@ nmap <a-v> <action>(SplitVertically)
 nmap <a-h> <action>(SplitHorizontally)
 nmap <a-u> <action>(Unsplit)
 nmap <a-m> <action>(MoveEditorToOppositeTabGroup)
+
+nmap <a-=> <action>(EditorIncreaseFontSizeGlobal)
+nmap <a--> <action>(EditorDecreaseFontSizeGlobal)
+nmap <a-.> <action>(EditorResetFontSize)
+nmap <a-;> <action>(EditorResetFontSize)
 
 " ========== "NAVIGATION" =============
 " "TAB in normal mode will move to text buffer"
@@ -129,6 +288,7 @@ nmap <leader>/ <action>(CommentByLineComment)
 nmap <leader>g <action>(Annotate)
 vmap <leader>y <action>(CopyReference)
 
+
 " ========== "BUFFERS" ==========
 nmap <leader>ba <action>(CloseAllEditors)
 nmap <leader>bc <action>(CloseAllEditorsButActive)
@@ -136,13 +296,12 @@ nmap <leader>bl <action>(CloseAllToTheRight)
 nmap <leader>bh <action>(CloseAllToTheLeft)
 nmap <leader>bp <action>(CloseAllUnpinnedEditors)
 nmap <leader>bu <action>(CloseAllUnmodifiedEditors)
-nmap <leader>bp <action>(PinActiveTabToggle)
+nmap <leader>bt <action>(PinActiveTabToggle)
 
 " ========== "PROJECT" ==========
 " "Show file methods in popup"
 nmap <leader>ps <action>(FileStructurePopup)
 nmap <leader>pd <action>(ShowErrorDescription)
-" -- Rename a file
 nmap <leader>pe <action>(RenameElement)
 nmap <leader>pf <action>(RenameFile)
 nmap <leader>pc <action>(CloseProject)
@@ -155,40 +314,40 @@ nmap <leader>po <action>(OverrideMethods)
 nmap <leader>pb <action>(ShowBookmarks)
 " nmap <leader>pm <action>(NewFile)
 " nmap <leader>pN <action>(NewFolder)
-nmap <leader>pd <action>(SafeDelete)
 
 " nnoremap <leader>pr :%s/
 nmap <leader>pr <action>(Replace)
 nmap <leader>pR <action>(ReplaceInPath)
 nmap <leader>px <action>(Refactorings.QuickListPopupAction)
 
-" ========== "RECENT" ==========
+" ========== "RECENT AND RANDOM" ==========
 nmap <leader>rf <action>(RecentChangedFiles)
 nmap <leader>rr <action>(RecentChanges)
 nmap <leader>rl <action>(RecentLocations)
 
-" FileChooser.Delete
-" FileChooser.GotoDesktop <C-D>
-" FileChooser.GotoHome <C-1>
-" FileChooser.GotoJDK
-" FileChooser.GotoModule <C-3>
-" FileChooser.GotoProject <C-2>
-" FileChooser.GoToWslHome
-" FileChooser.LightEditGotoOpenedFile
-" FileChooser.NewFile
-" FileChooser.NewFolder <A-Ins> <C-N>
-" FileChooser.Refresh <A-C-Y>
-" FileChooser.ShowHidden
-" FileChooser.TogglePathBar <C-P>
-" FileChooserList
-" FileChooserList.LevelUp
-" FileChooserList.Root <C-/>
-" FileChooserToolbar
-" FileExportGroup
+nmap <leader>rp <action>(Refactorings.QuickListPopupAction)
+
+nmap <leader>ri <action>(randomness.InsertInteger)
+nmap <leader>rI <action>(randomness.InsertIntegerArray)
+
+nmap <leader>rd <action>(randomness.InsertDecimal)
+nmap <leader>rD <action>(randomness.InsertDecimalArray)
+
+nmap <leader>rs <action>(randomness.InsertString)
+nmap <leader>rS <action>(randomness.InsertStringArray)
+
+nmap <leader>ru <action>(randomness.InsertUuid)
+nmap <leader>rU <action>(randomness.InsertUuidArray)
+
+nmap <leader>rw <action>(randomness.InsertWord)
+nmap <leader>rW <action>(randomness.InsertWordArray)
+
+nmap <leader>rg <action>(randomness.ShowGroup)
 
 " ========== "DEBUGGING" ==========
 
 nmap ,r <action>(Run)
+nmap ,R <action>(RunMenu)
 nmap ,c <action>(RunClass)
 nmap ,f <action>(ChooseRunConfiguration)
 nmap ,t <action>(ActivateRunToolWindow)
@@ -196,80 +355,19 @@ nmap ,u <action>(Rerun)
 nmap ,b <action>(ToggleLineBreakpoint)
 nmap ,d <action>(ContextDebug)
 nmap ,n <action>(ActivateDebugToolWindow)
+nmap ,i <action>(RunInspection)
 " nmap <leader>cd <action>(ChooseDebugConfiguration)
-
-" nnoremap ,r :action ContextRun<CR>
-" nnoremap ,f :action RerunFailedTests<CR>
-"
-" Run <S-F10>
-" RunAnything
-" RunClass <C-S-F10>
-" RunConfiguration
-" RunConfigurationTemplatesForNewProjects
-" RunContextGroup
-" RunContextGroupInner
-" RunContextGroupMore
-" RunContextPopupGroup
-" RunCoverage
-" RunDashboard.AddType
-" RunDashboard.ClearContent
-" RunDashboard.CopyConfiguration <C-D>
-" RunDashboard.Debug
-" RunDashboard.EditConfiguration <S-F4>
-" RunDashboard.Filter
-" RunDashboard.GroupBy
-" RunDashboard.GroupByStatus
-" RunDashboard.GroupByType
-" RunDashboard.GroupConfigurations
-" RunDashboard.HideConfiguration
-" RunDashboard.OpenRunningConfigInNewTab
-" RunDashboard.RemoveType
-" RunDashboard.RestoreConfiguration
-" RunDashboard.RestoreHiddenConfigurations
-" RunDashboard.Run <C-S-F10>
-" RunDashboard.Stop <C-F2>
-" RunDashboard.UngroupConfigurations
-" RunDashboardContentToolbar
-" RunDashboardPopup
-" RunInspection <A-C-S-I>
-" RunInspectionOn
-" RunMenu
+" nmap ,r <action>ContextRun
+" nmap ,f <action>RerunFailedTests
 
 " ========== "MISC" ==========
 " nmap <leader>en <action>(EditSourceInNewWindow)
-" nnoremap <leader>r <action>(Refactorings.QuickListPopupAction)
-" nnoremap <Leader>=  <action>(ReformatCode)
-" nnoremap <leader>o <action>(OptimizeImports)
-" nnoremap <leader>/ <action>(Find)
+nmap <leader>=  <action>(ReformatCode)
+" nmap <leader>o <action>(OptimizeImports)
+" nmap <leader>/ <action>(Find)
 nmap <leader>su <action>(ShowUsages)
 nmap <leader>md <action>(ShowColorPicker)
 nmap <leader>mf <action>(ShowFilePath)
 nmap <leader>ml <action>(ShowLog)
 nmap <leader>ms <action>(ShowProjectStructureSettings)
 nmap <leader>mx <action>(ShowSettings)
-
-
-" Generate <A-Ins>
-" GenerateAfterClassMethod
-" GenerateBeforeClassMethod
-" GenerateConstructor
-" GenerateCopyright
-" GenerateCoverageReport
-" GenerateCreateUI
-" GenerateDataMethod
-" GenerateDTD
-" GenerateEquals
-" GenerateExternalization
-" GenerateFromTestCreatorsGroup
-" GenerateGetter
-" GenerateGetterAndSetter
-" GenerateGradleDslGroup
-" GenerateGroup
-" GenerateJavadoc
-" GenerateModuleDescriptors
-" GeneratePattern
-" GenerateSetter
-" GenerateSetUpMethod
-" GenerateSuperMethodCall
-" GenerateTearDownMethod
-" GenerateTestMethod
