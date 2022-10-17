@@ -1,9 +1,9 @@
 """ "Map leader to space "
 let mapleader = " "
 
-
-
-
+" Useful reads"
+" https://darekkay.com/blog/intellij-idea-settings/"
+" https://www.jetbrains.com/help/idea/pro-tips.html#editor"
 
 " ============================ MAPPINGS ============================"
 "
@@ -75,6 +75,10 @@ let mapleader = " "
 "    a-- - Decrease Font Size
 "    a-. - Reset Font Side to default
 "    a-; - Reset Font Side to default
+"    a-UP - Move text stream up
+"    a-DOWN - Move text stream down
+"    a-j - Move text stream up
+"    a-k - Move text stream down
 "
 "   ............. Control KEYS ...............
 "
@@ -168,11 +172,15 @@ let mapleader = " "
 
 
 
+" NOTE Mappings to <Action> don't work with `noremap` mappings.
+" Find more examples here: https://jb.gg/share-ideavimrc
 " =================== Common settings ===================
+
 set incsearch
 set noerrorbells
 set visualbell                " removes errorbells
 set idearefactormode=visual
+set ideavimsupport=dialog
 set smartcase
 set ignorecase
 set ideamarks
@@ -281,7 +289,9 @@ inoremap jk <ESC>
 
 " Clear highlights.
 nnoremap <Esc> <Esc>:noh<CR>
-nmap ' <Action>(ShowBookmarks)
+nnoremap ' <Action>(ShowBookmarks)
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " Q plays back q macro.
 nnoremap Q @q
@@ -304,6 +314,8 @@ vnoremap p "_dP
 " "open ideavimrc file"
 nnoremap \e :e ~/.ideavimrc<CR>
 nmap <a-r> <action>(IdeaVim.ReloadVimRc.reload)
+
+nmap <F7> <action>(InvalidateCaches)
 
 " ========== "Highlighted Yank" =============
 
@@ -366,6 +378,16 @@ nmap <a-=> <action>(EditorIncreaseFontSizeGlobal)
 nmap <a--> <action>(EditorDecreaseFontSizeGlobal)
 nmap <a-.> <action>(EditorResetFontSize)
 nmap <a-;> <action>(EditorResetFontSize)
+
+" --- Resize
+map <A-Up> <Action>(MoveStatementUp)
+map <A-Down> <Action>(MoveStatementDown)
+map <A-k> <Action>(MoveStatementUp)
+map <A-j> <Action>(MoveStatementDown)
+imap <A-Up> <Action>(MoveStatementUp)
+imap <A-Down> <Action>(MoveStatementDown)
+imap <A-k> <Action>(MoveStatementUp)
+imap <A-j> <Action>(MoveStatementDown)
 
 " ========== "NAVIGATION" =============
 " "TAB in normal mode will move to text buffer"
@@ -440,7 +462,7 @@ nmap <leader>pd <action>(ShowErrorDescription)
 nmap <leader>pe <action>(RenameElement)
 nmap <leader>pf <action>(RenameFile)
 nmap <leader>pc <action>(CloseProject)
-nmap <leader>pt <action>(Actions)
+nmap <leader>pt <action>(ActivateTODOToolWindow)
 nmap <leader>py <action>(CopyFileName)
 nmap <leader>pn <action>(NewElement)
 nmap <leader>pm <action>(NewModule)
