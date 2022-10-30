@@ -7,6 +7,13 @@
 
 # >>>> ============ ALIASES ==================================================== <<<< #
 
+# >> ------------ SUFFIX ------------ << #
+# With suffix aliases, you can launch files with a specific extension (or suffix) in your favorite tool.
+alias -s {png,jpg,avif,jpeg,pdf,svg}=display
+alias -s {ts,tsx,js,jsx,json,env,m,html,css,scss,zsh,sh,py,toml,java}=vi
+alias -s {mp3,mp4,mov,avi,wav,mpeg,mpg}=vi
+alias -s git="git clone"
+
 # >> ------------ EDITORS ------------ << #
 alias v="${EDITOR}"
 alias vi="${EDITOR}"
@@ -104,6 +111,19 @@ alias runDb="psql -U admin -d postgres -f ~/Downloads/postgres_2021-04-19_1001.s
 # Config and images for neofetch are located in ~/.config/neofetch/
 alias neofetch="neofetch --source ~/.config/neofetch/neofetch_ascii/merlin.txt"
 
+
+# >> ------------ IMAGES ------------ << #
+
+ico() {
+   convert $1 x:
+}
+
+alias ide="identify"
+
+iconv() {
+   convert $1 -resize $2\! -quality 75 -define webp:lossless=true $3
+}
+
 # >> ------------ TMUX ------------ << #
 alias mx="tmux"
 alias mxl="tmux list-sessions"
@@ -130,32 +150,21 @@ alias gdev="gatsby develop"
 alias gser="gatsby serve"
 alias gres="gatsby clean && gatsby develop"
 
-# delete later
-alias migrationVPN="sshuttle --dns --to-ns=192.168.0.253 -r root@10.105.25.14 192.168.0.0/16"
-alias vpn="sshuttle --dns --to-ns=192.168.0.253 -r root@10.26.220.75 192.168.0.0/16"
-alias vpp="sshuttle --dns --to-ns=192.168.0.253 -r root@10.105.25.10 192.168.0.0/16"
-
 alias dDrop="mongo < ~/Project/dropDb.js"
 
 # >> ------------ DOCKER ------------ << #
 
-function __docker-show-logs {
-	docker logs -f $1
-}
 
-function __docker-inspect-container {
-	docker inspect $1 | less
-}
 
-function __docker-exec-bash {
-    docker container exec -it $1 bash
-}
 
 # Container commands
 alias dc="docker container"
 alias dcs="docker container stats"
 alias dcx="docker container exec -it"  # Quickly run the docker exec command like this: 'dex container-name bash'
-alias dcb=__docker-exec-bash
+
+dcb() { # execute container in bash
+    docker container exec -it $1 bash
+}
 
 # Image commands
 alias di="docker image"
@@ -169,8 +178,14 @@ alias dv="docker volume"
 alias dvp="docker volume prune"
 
 alias dfp="docker system prune --all"
-alias dl=__docker-show-logs
-alias dins=__docker-inspect-container
+
+dl() {
+   docker logs -f $1
+}
+
+dins() { # inspect container with less command
+   docker inspect $1 | less
+}
 
 # This command is a neat shell pipeline to stop all running containers no matter
 # where you are and without knowing any container names

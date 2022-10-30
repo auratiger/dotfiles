@@ -1,4 +1,3 @@
-
 ##### PLUGINS ########################################################################
 #                                                                                    #
 # >> -------- PLUGINS: ---------------------------------------------------------- << #
@@ -19,6 +18,7 @@ zsh_add_plugin "hlissner/zsh-autopair"
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
 
+# The '^' character reffers to the alt key
 bindkey '^l' autosuggest-accept
 
 VI_MODE_SET_CURSOR=true
