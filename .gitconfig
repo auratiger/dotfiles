@@ -8,7 +8,7 @@
 	name = Georgi Georgiev
 
 [core]
-	editor = nvim
+	editor = $GIT_EDITOR
 [apply]
     # Detect whitespace errors when applying a patch.
     whitespace = fix
@@ -35,9 +35,19 @@
     # Include summaries of merged commits in newly created merge commit messages
     log = true
 
+; [mergetool "vimdiff3"]
+;   cmd = vim -u ~/.vimrc -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+
+
 [alias]
 
 # ======================================== MISC ======================================== #
+
+   # returns the path of the top-level directory of the working tree.
+   root = rev-parse --show-toplevel
+
+   # returns current branch
+   current = rev-parse --abbrev-ref HEAD
 
    unmerged = !git ls-files --unmerged | cut -f2 | uniq
    untracked = ls-files --other --exclude-standard
@@ -50,12 +60,18 @@
    vmo = !$EDITOR `git modified`
    vt = !$EDITOR `git untracked`
 
+   out = log --branches --not --remotes
+   in = pull --dry-run
+
 # ======================================== LOGS ======================================== #
    # View abbreviated SHA, description, and history graph of all commits
    l = log --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an%Creset, %ar'
    la = log --all --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an %Cblue<%ae>%Creset, %ar'
    lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
    ls = log -m --simplify-merges --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%ar) %Cblue%an <%ae>%Creset' --abbrev-commit --date=relative
+
+   # log head commit
+   head = !git l -1
 
    rf = reflog
    # !IMPORTANT!: clears reflog history
