@@ -133,7 +133,12 @@
 
 # ======================================== FETCH ======================================== #
 
+   f = fetch
    fp = fetch --prune
+
+   fu = !git fetch `git upstream-remote`
+   fa = fetch --all
+   fo = fetch origin
 
 # ======================================== CLEAN ======================================== #
    # clean untracked files
@@ -188,7 +193,9 @@
    rdd = !"git rebase origin/dev"
 
    squash = !"f() { NL=$1; git rebase -i HEAD~$NL; }; f"
+   squash-simple = !"f() { NL=$1; git reset --soft HEAD~$NL; git commit; }; f"
    sq = !git squash $1
+   sqs = !git squash-simple $1
 
 # ======================================== MERGE ======================================== #
 
