@@ -4,7 +4,7 @@
 	process = git-lfs filter-process
 	required = true
 [user]
-	email = gegeorgiev@vmware.com
+	email = auratiger00@gmail.com
 	name = Georgi Georgiev
 
 [core]
@@ -91,6 +91,12 @@
    cl = clean -fd
 
    cln = "!f() { git clone $1; git remote add upstream $1; }; f"
+
+   # Command for overriding commit attributes
+   # git change-commits GIT_COMMITTER_NAME "old name" "new name"
+   # git change-commits GIT_AUTHOR_EMAIL "gegeorgiev@vmware.com" "auratiger00@gmail.com" b0ea1d9..HEAD
+   change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+   change-commits-force = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
 
 # restore all staged files
    rsa = !"git restore --staged . && git status"
