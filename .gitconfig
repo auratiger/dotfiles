@@ -37,60 +37,125 @@
 
 [alias]
 
-# View abbreviated SHA, description, and history graph of all commits
-   l = log --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an%Creset, %ar'
-   la = log --all --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an%Creset, %ar'
-   lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+# ======================================== MISC ======================================== #
 
-# Color graph log view
+   unmerged = !git ls-files --unmerged | cut -f2 | uniq
+   untracked = ls-files --other --exclude-standard
+   staged = ls-files --staged
+   modified = ls-files --modified
+   deleted = ls-files --deleted
+   gitignored = ls-files -o -i --exclude-standard
+
+   vm = !$EDITOR `git unmerged`
+   vmo = !$EDITOR `git modified`
+   vt = !$EDITOR `git untracked`
+
+# ======================================== LOGS ======================================== #
+   # View abbreviated SHA, description, and history graph of all commits
+   l = log --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an%Creset, %ar'
+   la = log --all --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an %Cblue<%ae>%Creset, %ar'
+   lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+   ls = log -m --simplify-merges --color --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%ar) %Cblue%an <%ae>%Creset' --abbrev-commit --date=relative
+
+   rf = reflog
+   # !IMPORTANT!: clears reflog history
+   rfe = reflog expire --expire=now --all
+
+   # Color graph log view
    gr = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
 
-# View the current working tree status using the short format
+# ======================================== STATUS ======================================== #
+   # View the current working tree status using the short format
    s = status
 
-# Stashes local changes with specified name
+   sttc = !git status | grep typechange | awk '{print $2}'
+   stmo = !git status | grep modified | awk '{print $2}'
+
+# ======================================== STASH ======================================== #
+   sh = stash
+   shp = stash pop
+   shl = stash list
+   shd = stash drop
+   shc = stash clear
+   sha = stash apply
+
+   # Stashes local changes with specified name
    sp = "!f() { git stash push -m $1; }; f"
 
    so = "!f() { git stash pop stash@{$1}; }; f"
 
-   show = !"git show --patch-with-stat $1"
-   sh = !"git show --patch-with-stat $1"
+# ======================================== SHOW ======================================== #
 
+   show = !"git show --patch-with-stat $1"
+   sl = show --color --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
+   sd = show --color -C --stat
+
+# ======================================== ADD ======================================== #
    a = add
+   add-untracked = !git add `git untracked`
 
    al = !"d() { git add .; git status;}; clear && d"
    alu = !"d() { git add -u .; git status;}; clear && d"
 
-# Show the diff between the latest commit and the current state
-   d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat -- . ':!*/package-lock.json'"
+# ======================================== DIFF ======================================== #
 
-# `git di $number` shows the diff between the state `$number` revisions ago and the current state
-   di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+   # Show the diff between the latest commit and the current state
+   d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat -- . ':!*/package-lock.json'"
+   ds = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+' -- . ':!*/package-lock.json'"
 
    dc = !"git diff-index --quiet HEAD -- || clear; git diff --staged --patch-with-stat -- . ':!*/package-lock.json'"
+   dcs = !"git diff-index --quiet HEAD -- || clear; git diff --staged --patch-with-stat --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+' -- . ':!*/package-lock.json'"
 
-# Compare differences from dev to your branch
+   # `git di $number` shows the diff between the state `$number` revisions ago and the current state
+   di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+   # Compare differences from dev to your branch
    dd = !"git d origin/dev $(git branch --show-current)"
 
+   # Compare differences from main to your branch
    dm = !"git d origin/main $(git branch --show-current)"
 
+   # Compare differences from current branch to it's origin
    do = !"git d origin/$(git branch --show-current) $(git branch --show-current)"
+
+# ======================================== PUSH ======================================== #
 
    p = push
 
    pf = push --force
 
-# pushed the branch upstream creating a remote branch
+   # pushed the branch upstream creating a remote branch
    pp = !"git push --set-upstream origin $(git branch --show-current)"
+
+# ======================================== REMOTE ======================================== #
 
    up = !"git remote add upstream"
 
+# ======================================== FETCH ======================================== #
+
    fp = fetch --prune
 
-# clean untracked files
+# ======================================== CLEAN ======================================== #
+   # clean untracked files
    cl = clean -fd
 
+   # 'dry run' This will show you which files are going to be removed without actually removing them.
+   cn = clean -n
+
+   cf = clean -f
+
+# ======================================== CLONE ======================================== #
+
    cln = "!f() { git clone $1; git remote add upstream $1; }; f"
+
+# ======================================== COMMIT ======================================== #
+
+   c = commit
+
+   # Commit all changes
+   ca = !git add -A && git commit -av
+
+   amend = !"git commit --amend --no-edit && git status"
 
    # Command for overriding commit attributes
    # git change-commits GIT_COMMITTER_NAME "old name" "new name"
@@ -98,42 +163,59 @@
    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
    change-commits-force = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
 
-# restore all staged files
+   # Find commits by commit message
+   fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+# ======================================== RESTORE ======================================== #
+
+   # restore all staged files
    rsa = !"git restore --staged . && git status"
 
    rs = !"git restore . && git status"
 
-   cn = clean -n
+# ======================================== REBASE ======================================== #
 
-   cf = clean -f
-
+   r = rebase
+   ri = rebase -i
    rc = rebase --continue
-
    ra = rebase --abort
+   rs = rebase --skip
 
-   mc = merge --continue
-
-   ma = merge --abort
-
-   cp = cherry-pick
-
-   cpc = cherry-pick --continue
-
-   cpa = cherry-pick --abort
-
-# rebases current branch to it's origin
+   # rebases current branch to it's origin
    roi = !"git rebase origin/$(git branch --show-current)"
 
-# rebases current branch to origin/dev
+   # rebases current branch to origin/dev
    rdd = !"git rebase origin/dev"
 
-   rh = reset --hard
+   squash = !"f() { NL=$1; git rebase -i HEAD~$NL; }; f"
+   sq = !git squash $1
 
+# ======================================== MERGE ======================================== #
+
+   mc = merge --continue
+   ma = merge --abort
+
+# ======================================== CHERRY PICK ======================================== #
+
+   cp = cherry-pick
+   cpc = cherry-pick --continue
+   cpa = cherry-pick --abort
+   cpq = cherry-pick --quit
+
+# ======================================== RESET ======================================== #
+
+   rh = reset --hard
    rss = reset --soft
 
-   co = checkout
+# ======================================== REVERT ======================================== #
 
-   c = commit
+   rv = revert
+   rvc = revert --continue
+   rva = revert --abort
+
+# ======================================== CHECKOUT / BRANCH ======================================== #
+
+   co = checkout
 
    copy = !"git co -b $(git branch --show-current)-COPY"
 
@@ -143,18 +225,10 @@
 
    dcopyall = "!zsh ~/.config/gitcommands/dcopyall.sh"
 
-# Commit all changes
-   ca = !git add -A && git commit -av
-
-   amend = !"git commit --amend --no-edit && git status"
-
-# show local branches
+   # show local branches
    b = branch
 
-# show all branches
+   # show all branches
    ba = branch -a
 
    rename = branch -m
-
-# Find commits by commit message
-   fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"

@@ -35,17 +35,17 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 PATHS=(
-  "/usr/local/opt/openjdk/bin"
-  "/usr/local/bin"
-  "/usr/local/opt/openjdk/bin"
-  "/usr/local/opt/openssl/bin"
-  "/usr/local/opt/openvpn/sbin"
-  "$HOME/.local/bin"
-  "$HOME/.cargo/bin"
+	"/usr/local/opt/openjdk/bin"
+	"/usr/local/bin"
+	"/usr/local/opt/openjdk/bin"
+	"/usr/local/opt/openssl/bin"
+	"/usr/local/opt/openvpn/sbin"
+	"$HOME/.local/bin"
+	"$HOME/.cargo/bin"
 )
 
 for new_path in "${PATHS[@]}"; do
-  export PATH="${new_path}:$PATH"
+	export PATH="${new_path}:$PATH"
 done
 
 # For compilers to find openjdk you may need to set:
@@ -74,15 +74,17 @@ export BROWSER="vivaldi-stable"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+	export EDITOR='vim'
 else
 
-  if [[ -e ~/.local/bin/lvim ]]; then
-    export EDITOR='lvim'
-  elif [[ -e /usr/bin/nvim ]]; then
-    export EDITOR='nvim'
-  else
-    export EDITOR='vim'
-  fi
+	if [[ -e ~/.local/bin/lvim ]]; then
+		export EDITOR='lvim'
+	elif [[ -e /usr/bin/nvim ]]; then
+		export EDITOR='nvim'
+	else
+		export EDITOR='vim'
+	fi
 
 fi
+
+export GIT_EDITOR=$EDITOR
