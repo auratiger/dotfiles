@@ -74,7 +74,7 @@
    head = !git l -1
 
    rf = reflog
-   # !IMPORTANT!: clears reflog history
+   # !IMPORTANT!: clears reflog history!! USE AT YOUR OWN RISK
    rfe = reflog expire --expire=now --all
 
    # Color graph log view
@@ -85,7 +85,7 @@
    s = status
 
    sttc = !git status | grep typechange | awk '{print $2}'
-   stmo = !git status | grep modified | awk '{print $2}'
+   stmo = !git status | grep modified | awk '{print $2}
 
 # ======================================== STASH ======================================== #
    sh = stash
@@ -200,7 +200,7 @@
    ri = rebase -i
    rc = rebase --continue
    ra = rebase --abort
-   rs = rebase --skip
+   ; rs = rebase --skip
 
    # rebases current branch to it's origin
    roi = !"git rebase origin/$(git branch --show-current)"
@@ -229,6 +229,7 @@
 
    rh = reset --hard
    rss = reset --soft
+   rsl = reset --soft HEAD~1
 
 # ======================================== REVERT ======================================== #
 

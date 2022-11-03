@@ -144,6 +144,7 @@ alias rmn="rm -rf ./node_modules"
 alias nress="rm -rf ./node_modules ./node && npm i"
 alias nressf="rm -rf ./node_modules ./node && npm i -f"
 
+alias ginit="npm init gatsby"
 alias gcl="gatsby clean"
 alias gbuild="gatsby build"
 alias gdev="gatsby develop"
