@@ -82,6 +82,10 @@ alias -g or='||'
 
 # >> ------------ MISC ------------ << #
 
+relative_dir() { # returns the current dirrectory relative from where it is called. Used for scripts.
+   cd "$(dirname "$0")" && pwd
+}
+
 alias dirSizeK="du -h | grep -E '([0-9]+\.[0-9]+K)|([0-9]+K)'" # Prints the sizes of all files in Kb
 alias dirSizeM="du -h | grep -E '[0-9]+\.[0-9]+M|[0-9]+M'"     # Prints the sizes of all files in Mb
 alias dirSizeG="du -h | grep -E '[0-9]+\.[0-9]+G|[0-9]+G'"     # Prints the sizes of all files in Gb
@@ -138,11 +142,22 @@ alias mxnew="tmux new -s"
 alias mci="mvn clean install"
 alias depResolve="mvn dependency:resolve"
 
+alias dev="npm run dev"
 alias serve="npm run serve"
 alias build="npm run build"
-alias rmn="rm -rf ./node_modules"
-alias nress="rm -rf ./node_modules ./node && npm i"
-alias nressf="rm -rf ./node_modules ./node && npm i -f"
+alias book="npm run storybook"
+
+alias yai="yarn install"
+alias yau="yarn upgrade --latest"
+alias yaui="yarn upgrade-interactive --latest"
+alias ydev="yarn run dev"
+alias yserve="yarn run serve"
+alias ybuild="yarn run build"
+alias ybook="yarn run storybook"
+
+alias rmn="rm -rf ./node_modules ./node"
+alias rmns="rm -rf ./node_modules ./node yarn.lock package-lock.json && yarn install"
+alias rmnsf="rm -rf ./node_modules ./node yarn.lock package-lock.json && yarn install -f"
 
 alias ginit="npm init gatsby"
 alias gcl="gatsby clean"
@@ -151,12 +166,13 @@ alias gdev="gatsby develop"
 alias gser="gatsby serve"
 alias gres="gatsby clean && gatsby develop"
 
+helpweb() {
+   cat "$ZDOTDIR/alias-help/web.txt"
+}
+
 alias dDrop="mongo < ~/Project/dropDb.js"
 
 # >> ------------ DOCKER ------------ << #
-
-
-
 
 # Container commands
 alias dc="docker container"
