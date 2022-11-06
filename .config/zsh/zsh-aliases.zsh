@@ -225,18 +225,6 @@ alias dml="docker compose logs"
 
 # >>>> ============ VERSIONS SCRIPT ==================================================== <<<< #
 
-typeset -A application_version_map=(
-    [NPM]="npm --version"
-    [NODE]="node --version"
-    [MAVEN]="mvn --version"
-    [PYTHON]="python3 --version"
-    [TMUX]="tmux -V"
-    [ZSH]="zsh --version"
-    [BASH]="bash --version"
-    [RUBY]="ruby --version"
-    [LUA]="lua -v"
-)
-
 function __print_versions {
     local RED_BOLD=$fg_bold[red]
     local YELLOW=$fg[yellow]
@@ -252,6 +240,19 @@ EOF
         echo  "[ ====================== $RED_BOLD $1 $reset_color ====================== ] \n"
     }
 
+   typeset -A application_version_map=(
+       [NPM]="npm --version"
+       [YARN]="yarn -v"
+       [NODE]="node --version"
+       [MAVEN]="mvn --version"
+       [GRADLE]="gradle -v"
+       [PYTHON]="python3 --version"
+       [TMUX]="tmux -V"
+       [ZSH]="zsh --version"
+       [BASH]="bash --version"
+       [RUBY]="ruby --version"
+       [LUA]="lua -v"
+   )
 
     for key val in "${(@kv)application_version_map}"; do
         __print_title $key
