@@ -63,6 +63,9 @@
    out = log --branches --not --remotes
    in = pull --dry-run
 
+   # number of commits in the repo
+   commits-count = rev-list --all --count
+
 # ======================================== LOGS ======================================== #
    # View abbreviated SHA, description, and history graph of all commits
    l = log --decorate --graph --pretty=format:'%C(auto)%d%Creset %Cgreen%h%Creset %s -> %C(yellow)%an%Creset, %ar'
@@ -79,6 +82,12 @@
 
    # Color graph log view
    gr = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+
+   # Show log of new commits after you fetched, with stats, excluding merges
+   log-fresh = log ORIG_HEAD.. --stat --no-merges
+
+   # Show the log for my own user email
+   log-me = !git ls --author $(git config user.email)
 
 # ======================================== STATUS ======================================== #
    # View the current working tree status using the short format
@@ -108,10 +117,18 @@
 
 # ======================================== ADD ======================================== #
    a = add
+
+   # add just the files that are updated.
+   au = add --update
+
    add-untracked = !git add `git untracked`
+   aun = add-untracked
 
    al = !"d() { git add .; git status;}; clear && d"
    alu = !"d() { git add -u .; git status;}; clear && d"
+
+   # add by patch - looks at each change, and asks if we want to put it in the repo.
+   ap = add --patch
 
 # ======================================== DIFF ======================================== #
 
