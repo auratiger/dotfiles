@@ -74,6 +74,10 @@ alias rmf="rm -vrf"
 alias mkdir="mkdir -pv"
 alias ex="exit"
 
+alias -g ,1='2>&1'
+# Redirects the error output to dev/null
+alias -g ,2='2>/dev/null'
+
 alias -g L='| less'
 alias -g gr='| grep'
 alias -g yes='y |'
@@ -295,15 +299,20 @@ Linux) # Maps only for Linux distros
    if [[ -f "/etc/lsb-release" ]];then # Checks if using Arch distro
       # pacman and yay
       alias pac=pacman
-      alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
-      alias update='sudo pacman -Syyu'                 # Refresh pkglist & update standard pkgs
-      alias pacsyyu='sudo pacman -Syyu'                # Refresh pkglist & update standard pkgs
-      alias yaysua='yay -Sua --noconfirm'              # update only AUR pkgs (yay)
-      alias yaysyu='yay -Syu --noconfirm'              # update standard pkgs and AUR pkgs (yay)
-      alias parsua='paru -Sua --noconfirm'             # update only AUR pkgs (paru)
-      alias parsyu='paru -Syu --noconfirm'             # update standard pkgs and AUR pkgs (paru)
-      alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
-      alias cleanup='sudo pacman -Rns $(pacman -Qtdq)' # remove orphaned packages
+      alias pacsyu='sudo pacman -Syu'                             # update only standard pkgs
+      alias pacsyyu='sudo pacman -Syyu'                           # Refresh pkglist & update standard pkgs
+      alias update='sudo pacman -Syyu && sudo pamac update -a'    # Refresh pkglist & update standard pkgs
+
+      alias pc=pamac
+      alias psearch=pamac search
+      alias pinfo=pamac info
+
+      alias yaysua='yay -Sua --noconfirm'                         # update only AUR pkgs (yay)
+      alias yaysyu='yay -Syu --noconfirm'                         # update standard pkgs and AUR pkgs (yay)
+      alias parsua='paru -Sua --noconfirm'                        # update only AUR pkgs (paru)
+      alias parsyu='paru -Syu --noconfirm'                        # update standard pkgs and AUR pkgs (paru)
+      alias unlock='sudo rm /var/lib/pacman/db.lck'               # remove pacman lock
+      alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'            # remove orphaned packages
 
    elif [[ -f "/etc/debian_version" ]]; then # Checks if using Debian distro
       echo "Hello Debian (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
