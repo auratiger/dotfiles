@@ -3,7 +3,7 @@ lvim.leader = "space"
 
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "lunar"
 lvim.transparent_window = true
 
 

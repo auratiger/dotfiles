@@ -92,6 +92,7 @@
 # ======================================== STATUS ======================================== #
    # View the current working tree status using the short format
    s = status
+   su = status -uno
 
    sttc = !git status | grep typechange | awk '{print $2}'
    stmo = !git status | grep modified | awk '{print $2}
@@ -125,7 +126,7 @@
    aun = add-untracked
 
    al = !"d() { git add .; git status;}; clear && d"
-   alu = !"d() { git add -u .; git status;}; clear && d"
+   alu = !"d() { git add -u .; git su;}; clear && d"
 
    # add by patch - looks at each change, and asks if we want to put it in the repo.
    ap = add --patch

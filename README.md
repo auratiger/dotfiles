@@ -33,16 +33,20 @@ clone the bare repo into a chosen directory on the system, in this case ~/.dotfi
 Set an alias linking the ~/.dotfiles repo to the home directory. In this case it is already set in
 zsh-aliases.zsh
 
-`alias gd="/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME"`
+`alias dot="/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME"`
 
 
-use the set `gd` alias from the zsh config to disable untracked files for the bare repo
+use the set `dot` alias from the zsh config to disable untracked files for the bare repo
 
-`gd status.showUntrackedFiles no`
+`dot status.showUntrackedFiles no`
 
-At this point if you do `gd status` it will show all divergences of your home and the repo
+At this point if you do `dot status` it will show all divergences of your home and the repo
 dotfiles. Here it's safe to either manually backup all your dotfiles, or just do 
 
-`gd stash`
+If `dot status.showUntrackedFiles no` gave an error, use `dot su` to show changes without untracked files
 
-which will stash the changes and in practically overrider with the dotfiles 
+`dot stash`
+
+Which will stash the changes and in practicality will override the current files with the dotfiles 
+
+When adding new changes use the `dot alu` to add all changed files ignoring untracked files

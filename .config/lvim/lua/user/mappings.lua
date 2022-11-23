@@ -4,6 +4,9 @@ M.setup = function()
    local opts = { noremap = true, silent = true }
    local keymap = vim.api.nvim_set_keymap
 
+   keymap("i", "jj", '<ESC>', opts)
+   keymap("i", "jk", '<ESC>', opts)
+
    -- Character delete uses specific register
    keymap("n", "x", '"xx', opts)
 
