@@ -45,6 +45,7 @@ alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias ls='exa'                                   # ls
 alias l='exa -lbF'                         # list, size, type, git
 alias ll='exa -lbFa'                       # long list
+alias lf='exa -lbFa --group-directories-first'
 alias llm='exa -lbGb --sort=modified'      # long list, modified date sort
 alias la='exa -lbhHigUmuSa --color-scale'  # all list
 alias lx='exa -lbhHigUmuSa@ --color-scale' # all + extended list
