@@ -12,6 +12,7 @@ M.setup = function()
       wrapmargin = 2,
       scrolloff = 8, -- minimal number of screen lines to keep above and below the cursor.
       sidescrolloff = 8, -- minimal number of screen lines to keep left and right of the cursor.
+      timeoutlen = 400, -- time to wait for a mapped sequence to complete (in milliseconds)
 
       -- Uses treesitter fold queries for finding and setting correct folds
       -- custom queries are possible, read: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#parser-configurations

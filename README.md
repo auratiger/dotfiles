@@ -13,7 +13,7 @@
              -----------------------------------------------------------------------
              This repository is the collection of configurations that I learned over
              time and still use for my  daily work. The repository contains  configs
-             files for vim, tmux, zsh and much more. Also if you're on windows or   
+             files for vim, tmux, zsh and much more. Also if you're on windows or
              can't be botherd setting up a new machine, I have created a Dockerfile
              container which can be used as a standalone working environment.
              Enjoy!!
@@ -22,7 +22,7 @@
 "
 ```
 
-## How to install 
+## How to install
 
 Before starting the installation, I recommend reading [Storing dotfiles with Git](https://engineeringwith.kalkayan.io/series/developer-experience/storing-dotfiles-with-git-this-is-the-way/?utm_source=github.com) to understand how this repository makes the best of Git using `--bare`. 
 
