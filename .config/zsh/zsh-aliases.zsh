@@ -87,6 +87,21 @@ alias -g or='||'
 
 # >> ------------ MISC ------------ << #
 
+# --- Languages ---
+
+# gives you layouts (~100 on modern systems)
+alias lang-layout=localectl list-x11-keymap-layouts 
+
+# gives you variants for this layout (or all variants if no layout specified, ~300 on modern systems)
+alias lang-variant=localectl list-x11-keymap-variants de 
+
+# gives you all layout switching options
+alias lang-options=localectl list-x11-keymap-options | grep grp: 
+
+alias set-lang=setxkbmap -option grp:switch,grp_led:scroll,grp:ctrl_shift_toggle -layout us,bg -variant ,phonetic
+
+# ---------------------
+
 relative_dir() { # returns the current dirrectory relative from where it is called. Used for scripts.
    cd "$(dirname "$0")" && pwd
 }
