@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # beeping is annoying
 unsetopt BEEP
 
@@ -17,7 +19,8 @@ zsh_add_file "zsh-plugins.zsh"
 zsh_add_file "zsh-prompt.zsh"
 zsh_add_file "zsh-aliases.zsh"
 
-set-lang
+# Sets keyboard language layouts
+setxkbmap -option grp:switch,grp_led:scroll,grp:ctrl_shift_toggle -layout us,bg -variant ,phonetic
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
