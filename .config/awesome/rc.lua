@@ -11,27 +11,19 @@
 
 --]]
 
--- {{{ Required libraries
-awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
-ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
-
 --https://awesomewm.org/doc/api/documentation/05-awesomerc.md.html
 -- Standard awesome library
-local gears = require("gears") --Utilities such as color parsing and objects
-local awful = require("awful") --Everything related to window managment
+--
 require("awful.autofocus")
--- Widget and layout library
-local wibox = require("wibox")
+local gears     = require("gears") --Utilities such as color parsing and objects
+local awful     = require("awful") --Everything related to window managment
+local wibox     = require("wibox") -- Widget and layout library
+local beautiful = require("beautiful") -- Theme handling library
 
--- Theme handling library
-local beautiful = require("beautiful")
-
--- Notification library
-local naughty                        = require("naughty")
+local naughty = require("naughty") -- Notification library
 naughty.config.defaults['icon_size'] = 100
 
 --local menubar       = require("menubar")
-
 local lain        = require("lain")
 local freedesktop = require("freedesktop")
 
@@ -39,11 +31,11 @@ local freedesktop = require("freedesktop")
 -- when client with a matching name is opened:
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
-my_table  = awful.util.table or gears.table -- 4.{0,1} compatibility
 local dpi = require("beautiful.xresources").apply_dpi
 -- }}}
 
-
+my_table    = awful.util.table or gears.table -- 4.{0,1} compatibility
+home_folder = os.getenv("HOME")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -54,8 +46,7 @@ if awesome.startup_errors then
       text = awesome.startup_errors })
 end
 
--- Handle runtime errors after startup
-do
+do -- Handle runtime errors after startup
    local in_error = false
    awesome.connect_signal("debug::error", function(err)
       if in_error then return end
@@ -95,8 +86,7 @@ awful.spawn.with_shell(
 
 -- {{{ Variable definitions
 
--- keep themes in alfabetical order for ATT
-local themes = {
+local themes = { -- keep themes in alfabetical order for ATT
    "blackburn", -- 1
    "copland", -- 2
    "multicolor", -- 3
@@ -105,16 +95,14 @@ local themes = {
    "powerarrow-dark", -- 6
 }
 
--- choose your theme here
-local chosen_theme = themes[3]
+local chosen_theme = themes[3] -- choose your theme here
 
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
+local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", home_folder, chosen_theme)
 beautiful.init(theme_path)
 
 -- modkey or mod4 = super key
-modkey  = "Mod4"
-altkey  = "Mod1"
-modkey1 = "Control"
+modkey = "Mod4"
+altkey = "Mod1"
 
 -- personal variables
 --change these variables if you want
@@ -124,7 +112,7 @@ browser3       = "chromium -no-default-browser-check"
 terminal       = "alacritty"
 editor         = os.getenv("EDITOR") or "nvim"
 editor_cmd     = terminal .. " -e " .. editor
-editorgui      = "atom"
+editorgui      = "code"
 filemanager    = "thunar"
 mailclient     = "evolution"
 mediaplayer    = "spotify"
@@ -201,7 +189,7 @@ lain.layout.cascade.tile.extra_padding = dpi(5)
 lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 
-beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", home_folder, chosen_theme))
 -- }}}
 
 

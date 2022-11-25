@@ -96,9 +96,9 @@ alias lang-layout=localectl list-x11-keymap-layouts
 alias lang-variant=localectl list-x11-keymap-variants de 
 
 # gives you all layout switching options
-alias lang-options=localectl list-x11-keymap-options | grep grp: 
+alias lang-options="localectl list-x11-keymap-options | grep grp:"
 
-alias set-lang=setxkbmap -option grp:switch,grp_led:scroll,grp:ctrl_shift_toggle -layout us,bg -variant ,phonetic
+alias set-lang="setxkbmap -option grp:switch,grp_led:scroll,grp:ctrl_alt_toggle -layout us,bg -variant ,phonetic"
 
 # ---------------------
 
