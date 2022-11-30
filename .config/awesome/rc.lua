@@ -6,8 +6,7 @@
      Freedesktop : https://github.com/lcpz/awesome-freedesktop
 
      Copycats themes : https://github.com/lcpz/awesome-copycats
-
-     lain : https://github.com/lcpz/lain
+lain : https://github.com/lcpz/lain
 
 --]]
 
@@ -30,7 +29,7 @@ local freedesktop = require("freedesktop")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-require("awful.hotkeys_popup.keys")
+-- require("awful.hotkeys_popup.keys")
 local dpi = require("beautiful.xresources").apply_dpi
 -- }}}
 
@@ -115,8 +114,10 @@ editor_cmd     = terminal .. " -e " .. editor
 editorgui      = "code"
 filemanager    = "thunar"
 mailclient     = "evolution"
-mediaplayer    = "spotify"
+mediaplayer    = "vlc"
+musicplayer    = "spotify"
 virtualmachine = "virtualbox"
+chat           = "discord"
 
 -- awesome variables
 awful.util.terminal = terminal
@@ -191,8 +192,6 @@ lain.layout.cascade.tile.ncol          = 2
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", home_folder, chosen_theme))
 -- }}}
-
-
 
 -- {{{ Menu
 local myawesomemenu = {
@@ -319,8 +318,8 @@ awful.rules.rules = {
    { rule = { class = "inkscape" },
       properties = { maximized = true } },
 
-   { rule = { class = mediaplayer },
-      properties = { maximized = true } },
+   { rule = { instance = musicplayer },
+      properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true, maximized = true } },
 
    { rule = { class = "Vlc" },
       properties = { maximized = true } },
@@ -331,8 +330,8 @@ awful.rules.rules = {
    { rule = { class = "VirtualBox Machine" },
       properties = { maximized = true } },
 
-   --    { rule = { class = "Vivaldi-stable" },
-   --          properties = { maximized = false, floating = false } },
+   { rule = { instance = browser1 },
+      properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true, fullscreen = true } },
 
    --    { rule = { class = "Vivaldi-stable" },
    --          properties = { callback = function (c) c.maximized = false end } },
@@ -343,6 +342,9 @@ awful.rules.rules = {
 
    --    { rule = { class = "Vivaldi-snapshot" },
    --          properties = { callback = function (c) c.maximized = false end } },
+   --
+   { rule = { instance = chat },
+      properties = { screen = 1, tag = awful.util.tagnames[3], switchtotag = true, maximized = true } },
 
    { rule = { class = "Xfce4-settings-manager" },
       properties = { floating = false } },

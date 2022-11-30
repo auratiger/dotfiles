@@ -4,37 +4,38 @@ local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
 
-local close_all_sub_panels = function(s)
-   s.stats.visible  = false
-   s.pacs.visible   = false
-   s.repos.visible  = false
-   s.docker.visible = false
-   s.user.visible   = false
-end
-
-local modkey, altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, mediaplayer, mailclient = modkey
-    , altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, mediaplayer, mailclient
+local modkey, altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, musicplayer, mailclient = modkey
+    , altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, musicplayer, mailclient
 
 local my_table, client, screen, awesome = my_table, client, screen, awesome
+
+
+--- UTILS
+
+local matcher = function(c, value)
+   return awful.rules.match(c, { class = value }) or
+       awful.rules.match(c, { name = value }) or
+       awful.rules.match(c, { instance = value })
+end
+
+local raise_or_spawn = function(instance)
+   awful.client.run_or_raise(instance, function(c) return matcher(c, instance) end)
+end
 
 -- {{{ Key bindings
 globalkeys = my_table.join(
 
--- {{{ Personal keybindings
-   awful.key({ modkey }, "b", function() awful.util.spawn(browser1) end,
-      { description = browser1, group = "function keys" }),
-
-   -- Function keys
-   -- -----------------------------
-   -- | SUPER + ... function keys |
-   -- -----------------------------
-   --
-   -- awful.key({ modkey }, "F1", function() awful.util.spawn(mediaplayer) end,
-   --    { description = mediaplayer, group = "function keys" }),
-   -- awful.key({ modkey }, "F2", function() awful.util.spawn(editorgui) end,
-   --    { description = editorgui, group = "function keys" }),
-   -- awful.key({ modkey }, "F3", function() awful.util.spawn("inkscape") end,
-   --    { description = "inkscape", group = "function keys" }),
+-- Function keys
+-- -----------------------------
+-- | SUPER + ... function keys |
+-- -----------------------------
+--
+-- awful.key({ modkey }, "F1", function() awful.util.spawn(musicplayer) end,
+--    { description = musicplayer, group = "function keys" }),
+-- awful.key({ modkey }, "F2", function() awful.util.spawn(editorgui) end,
+--    { description = editorgui, group = "function keys" }),
+-- awful.key({ modkey }, "F3", function() awful.util.spawn("inkscape") end,
+--    { description = "inkscape", group = "function keys" }),
    awful.key({ modkey }, "F4", function() awful.util.spawn("gimp") end,
       { description = "gimp", group = "function keys" }),
    awful.key({ modkey }, "F5", function() awful.util.spawn("discord") end,
@@ -47,11 +48,19 @@ globalkeys = my_table.join(
       { description = filemanager, group = "function keys" }),
    awful.key({ modkey }, "F9", function() awful.util.spawn(mailclient) end,
       { description = mailclient, group = "function keys" }),
-   awful.key({ modkey }, "F10", function() awful.util.spawn(mediaplayer) end,
-      { description = mediaplayer, group = "function keys" }),
-   -- awful.key({ modkey }, "F11",
-   --    function() awful.util.spawn("rofi -theme-str 'window {width: 100%;height: 100%;}' -show drun") end,
-   --    { description = "rofi fullscreen", group = "function keys" }),
+
+   awful.key({ modkey }, "F10",
+      function() awful.util.spawn("rofi -theme-str 'window {width: 100%;height: 100%;}' -show drun") end,
+      { description = "rofi fullscreen", group = "function keys" }),
+
+   awful.key({ modkey }, "F11",
+      function()
+         awful.spawn(string.format("dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn NotoMonoRegular:bold:pixelsize=14"
+            ,
+            beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
+      end,
+      { description = "show dmenu", group = "hotkeys" }),
+
    awful.key({ modkey }, "F12", function() awful.util.spawn("rofi -show drun") end,
       { description = "rofi", group = "function keys" }),
 
@@ -68,17 +77,30 @@ globalkeys = my_table.join(
    --awful.key({ modkey }, "h", function () awful.util.spawn( "urxvt -T 'htop task manager' -e htop" ) end,
    --{description = "htop", group = "super"}),
    --
+
+   awful.key({ modkey }, "b", function() raise_or_spawn(browser1) end,
+      { description = browser1, group = "hotkeys" }),
+
+   awful.key({ modkey }, "[", function() raise_or_spawn(musicplayer) end,
+      { description = musicplayer, group = "hotkeys" }),
+
+   awful.key({ modkey }, "]", function() raise_or_spawn(chat) end,
+      { description = chat, group = "hotkeys" }),
+
+   awful.key({ modkey }, ";", function() awful.util.spawn("rofi -show drun") end,
+      { description = "rofi", group = "hotkeys" }),
+
    awful.key({ modkey, }, "s", hotkeys_popup.show_help,
       { description = "show help", group = "awesome" }),
 
    awful.key({ modkey, }, "Return", function() awful.spawn(terminal) end,
-      { description = terminal, group = "super" }),
+      { description = terminal, group = "hotkeys" }),
 
    awful.key({ modkey }, "r", function() awful.util.spawn("rofi-theme-selector") end,
-      { description = "rofi theme selector", group = "super" }),
+      { description = "rofi theme selector", group = "hotkeys" }),
 
    awful.key({ modkey }, "v", function() awful.util.spawn("pavucontrol") end,
-      { description = "pulseaudio control", group = "super" }),
+      { description = "pulseaudio control", group = "hotkeys" }),
 
    --awful.key({ modkey }, "u", function () awful.screen.focused().mypromptbox:run() end,
    --{description = "run prompt", group = "super"}),
@@ -112,6 +134,15 @@ globalkeys = my_table.join(
 
    awful.key({ modkey, }, "space", function() awful.layout.inc(1) end,
       { description = "select next grid layout", group = "layout" }),
+
+   -- Widgets popups
+   awful.key({ modkey, }, "p", function() lain.widget.cal().show(10) end,
+      { description = "show calendar", group = "widgets" }),
+   -- awful.key({ modkey, }, "p", function() if beautiful.fs then beautiful.fs.show(7) end end,
+   --    { description = "show filesystem", group = "widgets" }),
+   --awful.key({ modkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
+   --{description = "show weather", group = "widgets"}),
+
 
    -- -----------------------
    -- | SUPER + SHIFT + ... |
@@ -194,22 +225,28 @@ globalkeys = my_table.join(
    -- -------------
    -- | ALT + ... |
    -- -------------
-   awful.key({ altkey }, "t", function() awful.util.spawn("variety -t") end,
-      { description = "Wallpaper trash", group = "altkey" }),
-   awful.key({ altkey }, "n", function() awful.util.spawn("variety -n") end,
-      { description = "Wallpaper next", group = "altkey" }),
-   awful.key({ altkey }, "p", function() awful.util.spawn("variety -p") end,
-      { description = "Wallpaper previous", group = "altkey" }),
-   awful.key({ altkey }, "f", function() awful.util.spawn("variety -f") end,
-      { description = "Wallpaper favorite", group = "altkey" }),
-   awful.key({ altkey }, "Left", function() awful.util.spawn("variety -p") end,
-      { description = "Wallpaper previous", group = "altkey" }),
-   awful.key({ altkey }, "Right", function() awful.util.spawn("variety -n") end,
-      { description = "Wallpaper next", group = "altkey" }),
-   awful.key({ altkey }, "Up", function() awful.util.spawn("variety --pause") end,
-      { description = "Wallpaper pause", group = "altkey" }),
-   awful.key({ altkey }, "Down", function() awful.util.spawn("variety --resume") end,
-      { description = "Wallpaper resume", group = "altkey" }),
+   -- awful.key({ altkey }, "t", function() awful.util.spawn("variety -t") end,
+   --    { description = "Wallpaper trash", group = "altkey" }),
+   -- awful.key({ altkey }, "n", function() awful.util.spawn("variety -n") end,
+   --    { description = "Wallpaper next", group = "altkey" }),
+   -- awful.key({ altkey }, "p", function() awful.util.spawn("variety -p") end,
+   --    { description = "Wallpaper previous", group = "altkey" }),
+   -- awful.key({ altkey }, "s", function() awful.util.spawn("variety --selector") end,
+   --    { description = "Wallpaper previous", group = "altkey" }),
+   -- awful.key({ altkey }, "f", function() awful.util.spawn("variety -f") end,
+   --    { description = "Wallpaper favorite", group = "altkey" }),
+   -- awful.key({ altkey }, "Left", function() awful.util.spawn("variety -p") end,
+   --    { description = "Wallpaper previous", group = "altkey" }),
+   -- awful.key({ altkey }, "Right", function() awful.util.spawn("variety -n") end,
+   --    { description = "Wallpaper next", group = "altkey" }),
+   -- awful.key({ altkey }, "Up", function() awful.util.spawn("variety --pause") end,
+   --    { description = "Wallpaper pause", group = "altkey" }),
+   -- awful.key({ altkey }, "Down", function() awful.util.spawn("variety --resume") end,
+   --    { description = "Wallpaper resume", group = "altkey" }),
+   awful.key({ altkey }, "r", function() awful.util.spawn("nitrogen --set-zoom-fill --save --random") end,
+      { description = "Wallpaper random", group = "altkey" }),
+   awful.key({ altkey }, "s", function() awful.util.spawn("nitrogen") end,
+      { description = "Wallpaper selector", group = "altkey" }),
 
    -- ---------------
    -- | SCREENSHOTS |
@@ -340,7 +377,6 @@ globalkeys = my_table.join(
       end,
       { description = "go back, back to the past", group = "client" }),
 
-
    -- -------------------
    -- | DYNAMIC TAGGING |
    -- -------------------
@@ -373,14 +409,6 @@ globalkeys = my_table.join(
       { description = "increase the number of columns", group = "layout" }),
    awful.key({ "Control", modkey }, "l", function() awful.tag.incncol(-1, nil, true) end,
       { description = "decrease the number of columns", group = "layout" }),
-
-   -- Widgets popups
-   --awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end,
-   --{description = "show calendar", group = "widgets"}),
-   --awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
-   --{description = "show filesystem", group = "widgets"}),
-   --awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
-   --{description = "show weather", group = "widgets"}),
 
    -- Brightness
    awful.key({}, "XF86MonBrightnessUp", function() os.execute("xbacklight -inc 10") end,
@@ -499,7 +527,7 @@ globalkeys = my_table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+for i = 0, 9 do
    -- Hack to only show tags 1 and 9 in the shortcut window (mod+s)
    local descr_view, descr_toggle, descr_move, descr_toggle_focus
    if i == 1 or i == 9 then
@@ -509,32 +537,40 @@ for i = 1, 9 do
       descr_toggle_focus = { description = "toggle focused client on tag #", group = "tag" }
    end
 
+   local binding = "#" .. i + 9
+   local tagIndex = i;
+
+   if i == 0 then
+      binding = '0'
+      tagIndex = 1
+   end
+
    globalkeys = my_table.join(globalkeys,
       -- View tag only.
-      awful.key({ modkey }, "#" .. i + 9,
+      awful.key({ modkey }, binding,
          function()
             local screen = awful.screen.focused()
-            local tag = screen.tags[i]
+            local tag = screen.tags[tagIndex]
             if tag then
                tag:view_only()
             end
          end,
          descr_view),
       -- Toggle tag display.
-      awful.key({ "Control", modkey }, "#" .. i + 9,
+      awful.key({ "Control", modkey }, binding,
          function()
             local screen = awful.screen.focused()
-            local tag = screen.tags[i]
+            local tag = screen.tags[tagIndex]
             if tag then
                awful.tag.viewtoggle(tag)
             end
          end,
          descr_toggle),
       -- Move client to tag.
-      awful.key({ modkey, "Shift" }, "#" .. i + 9,
+      awful.key({ modkey, "Shift" }, binding,
          function()
             if client.focus then
-               local tag = client.focus.screen.tags[i]
+               local tag = client.focus.screen.tags[tagIndex]
                if tag then
                   client.focus:move_to_tag(tag)
                   tag:view_only()
@@ -543,10 +579,10 @@ for i = 1, 9 do
          end,
          descr_move),
       -- Toggle tag on focused client.
-      awful.key({ "Control", modkey, "Shift" }, "#" .. i + 9,
+      awful.key({ "Control", modkey, "Shift" }, binding,
          function()
             if client.focus then
-               local tag = client.focus.screen.tags[i]
+               local tag = client.focus.screen.tags[tagIndex]
                if tag then
                   client.focus:toggle_tag(tag)
                end
