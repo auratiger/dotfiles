@@ -8,12 +8,12 @@ cfg = {
    },
    tags = {
       -- names = { "web", "dev", "misc" },
-      names = { "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒" },
+      -- names = { "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒" },
       -- names = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" },
       -- names = { "⌘", "♐", "⌥", "ℵ" },
       -- names = { "www", "edit", "gimp", "inkscape", "music" },
       -- Use this : https://fontawesome.com/cheatsheet
-      -- names = { "", "", "", "", "" },
+      names = { "", "", "", "", "", "", "" },
       shape = shape_utils.default_frr
    },
    panels = {

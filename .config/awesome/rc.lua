@@ -256,7 +256,7 @@ awful.rules.rules = {
       properties = { maximized = true } },
 
    { rule = { instance = musicplayer },
-      properties = { screen = 1, tag = cfg.tags.names[2], switchtotag = true, maximized = true } },
+      properties = { screen = 1, tag = cfg.tags.names[7], switchtotag = true, maximized = true } },
 
    { rule = { class = "Vlc" },
       properties = { maximized = true } },
@@ -281,7 +281,7 @@ awful.rules.rules = {
    --          properties = { callback = function (c) c.maximized = false end } },
    --
    { rule = { instance = chat },
-      properties = { screen = 1, tag = cfg.tags.names[3], switchtotag = true, maximized = true } },
+      properties = { screen = 1, tag = cfg.tags.names[6], switchtotag = true, maximized = true } },
 
    { rule = { class = "Xfce4-settings-manager" },
       properties = { floating = false } },

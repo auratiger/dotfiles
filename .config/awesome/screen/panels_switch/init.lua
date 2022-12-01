@@ -27,20 +27,17 @@ end
 
 local create_munu_panel_button = function(glyph, text, btn_fn)
 
-   local icon = icons.wbic(glyph, 12, beautiful.fg_normal)
+   local icon = icons.wbic(glyph, beautiful.font_size, beautiful.fg_normal)
 
    local btn = wibox.widget {
+      bg     = beautiful.palette_c7,
+      shape  = cfg.tags.shape,
+      widget = wibox.container.background,
       {
          icon,
-         forced_width  = dpi(25),
-         forced_heigth = dpi(15),
-         bg            = beautiful.palette_c7,
-         shape         = shapes.circle(dpi(25)),
-         widget        = wibox.container.background
+         widget = wibox.container.margin,
+         margins = dpi(10),
       },
-      margins = dpi(5),
-      widget  = wibox.container.margin
-
    }
 
    awful.tooltip {
@@ -105,6 +102,7 @@ return {
 
    create = function(s)
       local body = wibox.layout.fixed.horizontal()
+      body.spacing = dpi(10)
 
       if cfg.panels.user.enabled then
          body:add(create_munu_panel_button("", "User", btn_setup(s, s.user)))

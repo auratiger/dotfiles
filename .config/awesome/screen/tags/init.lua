@@ -37,7 +37,7 @@ return {
             },
             layout = wibox.layout.fixed.horizontal,
          },
-         margins = dpi(8),
+         margins = dpi(10),
          widget  = wibox.container.margin
       }
 
@@ -46,14 +46,10 @@ return {
          id     = 'background_role',
          widget = wibox.container.background,
          {
-            widget = wibox.container.margin,
-            margins = 3,
-            {
-               name_section,
-               bg     = beautiful.palette_c7,
-               shape  = cfg.tags.shape,
-               widget = wibox.container.background
-            },
+            bg     = beautiful.palette_c7,
+            shape  = cfg.tags.shape,
+            widget = wibox.container.background,
+            name_section,
          },
       }
 

@@ -22,7 +22,7 @@ return {
 
       -- -- -- CPU
       local wbm_cpu = wbm.create("CPU: ")
-      awesome.connect_signal("iostat", function(val, postfix)
+      awesome.connect_signal("sysstat::cpu", function(val, postfix)
          wbm_cpu.wbm_body.wbm_labels.wbm_valtext.text = val .. postfix
          wbm_cpu.wbm_body.wbm_graphs_margin.wbm_graphs.wbm_graph:add_value(val, 1)
       end)
@@ -115,22 +115,22 @@ return {
                },
                {
                   widget = wibox.container.margin,
-                  left   = dpi(10),
+                  left   = dpi(20),
                   {
                      widget = wibox.container.background,
                      bg     = beautiful.palette_c3,
                      shape  = shape_utils.default_frr,
                      {
+                        left   = dpi(5),
+                        right  = dpi(5),
                         widget = wibox.container.margin,
-                        left   = dpi(10),
-                        right  = dpi(10),
                         panels_switch.create(s)
                      }
                   }
                },
                {
                   widget = wibox.container.margin,
-                  left = dpi(10),
+                  left = dpi(20),
                   {
                      {
                         layout = wibox.layout.fixed.horizontal,
