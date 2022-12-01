@@ -27,6 +27,9 @@ alias ideavimconfig="$EDITOR ~/.ideavimrc"
 # alias mxconfig="$EDITOR ~/.tmux.conf"
 alias mxconfig="$EDITOR ~/.config/tmux/tmux.conf"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+alias aweres="echo 'awesome.restart()' | awesome-client"
 
 alias golunar="cd ~/.local/share/lunarvim/lvim"
 alias golvim="cd ~/.config/lvim"

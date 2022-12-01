@@ -7,6 +7,8 @@
       * (c) 2013, Luca CPZ
 
 --]]
+--
+--TODO: Delete lain and move all needed widgets to the widgets directory
 
 return {
     layout = require("lain.layout"),

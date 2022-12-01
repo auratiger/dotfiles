@@ -19,8 +19,9 @@ local awful     = require("awful") --Everything related to window managment
 local wibox     = require("wibox") -- Widget and layout library
 local beautiful = require("beautiful") -- Theme handling library
 
+require("common.nd_utils")
+
 local naughty = require("naughty") -- Notification library
-naughty.config.defaults['icon_size'] = 100
 
 --local menubar       = require("menubar")
 local lain        = require("lain")
@@ -59,7 +60,7 @@ do -- Handle runtime errors after startup
 end
 -- }}}
 
-
+require("config")
 
 -- {{{ Autostart windowless processes
 local function run_once(cmd_arr)
@@ -86,16 +87,10 @@ awful.spawn.with_shell(
 -- {{{ Variable definitions
 
 local themes = { -- keep themes in alfabetical order for ATT
-   "blackburn", -- 1
-   "copland", -- 2
-   "multicolor", -- 3
-   "powerarrow", -- 4
-   "powerarrow-blue", -- 5
-   "powerarrow-dark", -- 6
+   "custom", -- 1
 }
 
-local chosen_theme = themes[3] -- choose your theme here
-
+local chosen_theme = themes[1] -- choose your theme here
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", home_folder, chosen_theme)
 beautiful.init(theme_path)
 
@@ -121,64 +116,6 @@ chat           = "discord"
 
 -- awesome variables
 awful.util.terminal = terminal
-awful.util.tagnames = { "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒" }
---awful.util.tagnames = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" }
---awful.util.tagnames = { "⌘", "♐", "⌥", "ℵ" }
---awful.util.tagnames = { "www", "edit", "gimp", "inkscape", "music" }
--- Use this : https://fontawesome.com/cheatsheet
---awful.util.tagnames = { "", "", "", "", "" }
-
-awful.util.taglist_buttons = my_table.join(
-   awful.button({}, 1, function(t) t:view_only() end),
-   awful.button({ modkey }, 1, function(t)
-      if client.focus then
-         client.focus:move_to_tag(t)
-      end
-   end),
-   awful.button({}, 3, awful.tag.viewtoggle),
-   awful.button({ modkey }, 3, function(t)
-      if client.focus then
-         client.focus:toggle_tag(t)
-      end
-   end),
-   awful.button({}, 4, function(t) awful.tag.viewnext(t.screen) end),
-   awful.button({}, 5, function(t) awful.tag.viewprev(t.screen) end)
-)
-
-awful.util.tasklist_buttons = my_table.join(
-   awful.button({}, 1, function(c)
-      if c == client.focus then
-         c.minimized = true
-      else
-         --c:emit_signal("request::activate", "tasklist", {raise = true})<Paste>
-
-         -- Without this, the following
-         -- :isvisible() makes no sense
-         c.minimized = false
-         if not c:isvisible() and c.first_tag then
-            c.first_tag:view_only()
-         end
-         -- This will also un-minimize
-         -- the client, if needed
-         client.focus = c
-         c:raise()
-      end
-   end),
-   awful.button({}, 3, function()
-      local instance = nil
-
-      return function()
-         if instance and instance.wibox.visible then
-            instance:hide()
-            instance = nil
-         else
-            instance = awful.menu.clients({ theme = { width = dpi(250) } })
-         end
-      end
-   end),
-   awful.button({}, 4, function() awful.client.focus.byidx(1) end),
-   awful.button({}, 5, function() awful.client.focus.byidx(-1) end)
-)
 
 lain.layout.termfair.nmaster           = 3
 lain.layout.termfair.ncol              = 1
@@ -189,8 +126,6 @@ lain.layout.cascade.tile.offset_y      = dpi(32)
 lain.layout.cascade.tile.extra_padding = dpi(5)
 lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
-
-beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", home_folder, chosen_theme))
 -- }}}
 
 -- {{{ Menu
@@ -224,6 +159,7 @@ awful.util.mymainmenu = freedesktop.menu.build({
 require("bindings")
 require("layout")
 require("screen")
+require("notifications")
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
@@ -319,7 +255,7 @@ awful.rules.rules = {
       properties = { maximized = true } },
 
    { rule = { instance = musicplayer },
-      properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true, maximized = true } },
+      properties = { screen = 1, tag = cfg.tags.names[2], switchtotag = true, maximized = true } },
 
    { rule = { class = "Vlc" },
       properties = { maximized = true } },
@@ -331,7 +267,7 @@ awful.rules.rules = {
       properties = { maximized = true } },
 
    { rule = { instance = browser1 },
-      properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true, fullscreen = true } },
+      properties = { screen = 1, tag = cfg.tags.names[1], switchtotag = true, maximized = true } },
 
    --    { rule = { class = "Vivaldi-stable" },
    --          properties = { callback = function (c) c.maximized = false end } },
@@ -344,7 +280,7 @@ awful.rules.rules = {
    --          properties = { callback = function (c) c.maximized = false end } },
    --
    { rule = { instance = chat },
-      properties = { screen = 1, tag = awful.util.tagnames[3], switchtotag = true, maximized = true } },
+      properties = { screen = 1, tag = cfg.tags.names[3], switchtotag = true, maximized = true } },
 
    { rule = { class = "Xfce4-settings-manager" },
       properties = { floating = false } },
@@ -473,9 +409,6 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
-
-
--- }}}
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")

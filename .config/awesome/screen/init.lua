@@ -1,7 +1,8 @@
 local awful     = require("awful")
 local gears     = require("gears")
 local beautiful = require("beautiful")
-local wibox     = require("wibox")
+
+local wibar = require("screen.wibar")
 
 -- {{{ Screen
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -28,9 +29,9 @@ screen.connect_signal("arrange", function(s)
       end
    end
 end)
+
 -- Create a wibox for each screen and add it
-awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s)
-   s.systray = wibox.widget.systray()
-   s.systray.visible = true
+awful.screen.connect_for_each_screen(function(s)
+   wibar.create(s)
 end)
 -- }}}
