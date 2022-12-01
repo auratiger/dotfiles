@@ -420,32 +420,9 @@ globalkeys = my_table.join(
 
    -- ALSA volume control
    --awful.key({ "Control" }, "Up",
-   awful.key({}, "XF86AudioRaiseVolume",
-      function()
-         os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
-         beautiful.volume.update()
-      end),
-   --awful.key({ "Control" }, "Down",
-   awful.key({}, "XF86AudioLowerVolume",
-      function()
-         os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
-         beautiful.volume.update()
-      end),
-   awful.key({}, "XF86AudioMute",
-      function()
-         os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
-         beautiful.volume.update()
-      end),
-   awful.key({ "Control", "Shift" }, "m",
-      function()
-         os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
-         beautiful.volume.update()
-      end),
-   awful.key({ "Control", "Shift" }, "0",
-      function()
-         os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
-         beautiful.volume.update()
-      end),
+   awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("amixer -D pulse sset Master 2%+", false) end),
+   awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("amixer -D pulse sset Master 2%-", false) end),
+   awful.key({}, "XF86AudioMute", function() awful.util.spawn("amixer -D pulse sset Master toggle", false) end),
 
    --Media keys supported by vlc, spotify, audacious, xmm2, ...
    --awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl play-pause", false) end),
@@ -453,11 +430,23 @@ globalkeys = my_table.join(
    --awful.key({}, "XF86AudioPrev", function() awful.util.spawn("playerctl previous", false) end),
    --awful.key({}, "XF86AudioStop", function() awful.util.spawn("playerctl stop", false) end),
 
-   --Media keys supported by mpd.
-   awful.key({}, "XF86AudioPlay", function() awful.util.spawn("mpc toggle") end),
-   awful.key({}, "XF86AudioNext", function() awful.util.spawn("mpc next") end),
-   awful.key({}, "XF86AudioPrev", function() awful.util.spawn("mpc prev") end),
-   awful.key({}, "XF86AudioStop", function() awful.util.spawn("mpc stop") end),
+   --Media keys supported by dbus.
+   awful.key({}, "XF86AudioPlay", function() awful.util.spawn(
+         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+         , false)
+   end),
+   awful.key({}, "XF86AudioNext", function() awful.util.spawn(
+         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+         , false)
+   end),
+   awful.key({}, "XF86AudioPrev", function() awful.util.spawn(
+         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+         , false)
+   end),
+   awful.key({}, "XF86AudioStop", function() awful.util.spawn(
+         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+         , false)
+   end),
 
    -- MPD control
    awful.key({ "Control", "Shift" }, "Up",

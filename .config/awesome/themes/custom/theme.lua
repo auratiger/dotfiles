@@ -13,7 +13,7 @@ local os = os
 
 local theme = {}
 
-theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
+theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/custom"
 --theme.wallpaper                                 = theme.confdir .. "/wallpaper.jpg"
 --theme.wallpaper                                 = "/usr/share/backgrounds/arcolinux/arco-wallpaper.jpg"
 --theme.wallpaper                                 = "/usr/share/archlinux-tweak-tool/data/wallpaper/wallpaper.png"
@@ -173,6 +173,6 @@ theme.titlebar_maximized_button_focus_inactive  = theme.confdir .. "/icons/title
 theme.titlebar_maximized_button_normal_active   = theme.confdir .. "/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
 
--- theme.profile_pic = home_folder .. "/profile.png"
+theme.profile_pic = home_folder .. "/.config/awesome/profile.png"
 
 return theme
