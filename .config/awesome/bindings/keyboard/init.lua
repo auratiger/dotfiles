@@ -3,6 +3,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
+local spotify       = require("common.spotify")
 
 local modkey, altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, musicplayer, mailclient = modkey
     , altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, musicplayer, mailclient
@@ -431,22 +432,10 @@ globalkeys = my_table.join(
    --awful.key({}, "XF86AudioStop", function() awful.util.spawn("playerctl stop", false) end),
 
    --Media keys supported by dbus.
-   awful.key({}, "XF86AudioPlay", function() awful.util.spawn(
-         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
-         , false)
-   end),
-   awful.key({}, "XF86AudioNext", function() awful.util.spawn(
-         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
-         , false)
-   end),
-   awful.key({}, "XF86AudioPrev", function() awful.util.spawn(
-         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
-         , false)
-   end),
-   awful.key({}, "XF86AudioStop", function() awful.util.spawn(
-         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
-         , false)
-   end),
+   awful.key({}, "XF86AudioPlay", function() awful.util.spawn(spotify.commands.toggle, false) end),
+   awful.key({}, "XF86AudioNext", function() awful.util.spawn(spotify.commands.next, false) end),
+   awful.key({}, "XF86AudioPrev", function() awful.util.spawn(spotify.commands.prev, false) end),
+   awful.key({}, "XF86AudioStop", function() awful.util.spawn(spotify.commands.stop, false) end),
 
    -- MPD control
    awful.key({ "Control", "Shift" }, "Up",

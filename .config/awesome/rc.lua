@@ -60,7 +60,6 @@ do -- Handle runtime errors after startup
 end
 -- }}}
 
-require("config")
 
 -- {{{ Autostart windowless processes
 local function run_once(cmd_arr)
@@ -156,10 +155,12 @@ awful.util.mymainmenu = freedesktop.menu.build({
 -- }}}
 
 
+require("config")
 require("bindings")
 require("layout")
 require("screen")
 require("notifications")
+require("common.playerctl")
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
