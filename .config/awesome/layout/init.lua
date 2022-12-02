@@ -1,6 +1,6 @@
 local awful = require("awful")
 
--- awful.layout.suit.tile.left.mirror = true
+awful.layout.suit.tile.left.mirror = true
 
 awful.layout.layouts = {
    awful.layout.suit.tile,

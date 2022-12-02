@@ -180,7 +180,7 @@ return {
                      },
                      awful.widget.keyboardlayout(),
                      wibox.widget.systray(),
-                     -- s.mylayoutbox,
+                     s.mylayoutbox,
                   }
                }
             }

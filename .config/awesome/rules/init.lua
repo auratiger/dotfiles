@@ -120,7 +120,7 @@ awful.rules.rules = {
    --          properties = { callback = function (c) c.maximized = false end } },
    --
    { rule = { instance = chat },
-      properties = { screen = 1, tag = cfg.tags.names[6], switchtotag = true, maximized = true } },
+      properties = { screen = 2, tag = cfg.tags.names[6], switchtotag = true, maximized = true } },
 
    { rule = { class = "Xfce4-settings-manager" },
       properties = { floating = false } },
