@@ -90,11 +90,12 @@ lain.layout.cascade.tile.ncol          = 2
 -- }}}
 
 
+require("global_events")
+require("common.widget_factory")
 require("bindings")
 require("layout")
 require("screen")
 require("notifications")
-require("common.playerctl")
 require("rules")
 
 -- {{{ Signals

@@ -105,9 +105,7 @@ cfg = {
          }
       },
       stats = {
-
          enabled = true,
-         version = 'v2' -- v1, v2
       },
       user = {
          --[[

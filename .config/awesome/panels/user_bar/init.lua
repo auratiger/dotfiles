@@ -1,9 +1,10 @@
-local awful       = require("awful")
-local wibox       = require("wibox")
-local dpi         = require("beautiful").xresources.apply_dpi
-local shape_utils = require("common.shape")
-local card        = require("widgets.card")
+local awful = require("awful")
+local wibox = require("wibox")
+local dpi   = require("beautiful").xresources.apply_dpi
 
+local shape_utils = require("common.shape")
+
+local card     = require("widgets.card")
 local calendar = require("widgets.calendar").create()
 local todo     = require("widgets.todo").create()
 local player   = require("widgets.player.std")

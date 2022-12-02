@@ -10,8 +10,15 @@ local modkey, altkey, filemanager, terminal, browser, browser1, browser2, browse
 
 local my_table, client, screen, awesome = my_table, client, screen, awesome
 
-
 --- UTILS
+
+local close_all_sub_panels = function(s)
+   s.stats.visible = false
+   -- s.pacs.visible   = false
+   -- s.repos.visible  = false
+   -- s.docker.visible = false
+   -- s.user.visible   = false
+end
 
 local matcher = function(c, value)
    return awful.rules.match(c, { class = value }) or
@@ -158,6 +165,12 @@ globalkeys = my_table.join(
       { description = "quit awesome", group = "awesome" }),
    --
    -- awful.key({ modkey, "Shift" }, "Return", function() awful.util.spawn(filemanager) end),
+
+   awful.key({ modkey, "Shift" }, "s", function()
+      local screen = awful.screen.focused()
+      -- close_all_sub_panels(screen)
+      screen.stats.visible = not screen.stats.visible
+   end, { description = "open statistics wibar", group = "wibars" }),
 
    -- ----------------------
    -- | CTRL + SHIFT + ... |

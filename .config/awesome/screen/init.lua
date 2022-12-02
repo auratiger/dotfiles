@@ -6,6 +6,9 @@ require("screen.rclick_menu")
 
 local wibar = require("screen.wibar")
 
+local panels_switch = require("screen.panels_switch")
+local stat_bar      = require("panels.stat_bar")
+
 -- {{{ Screen
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", function(s)
@@ -34,6 +37,12 @@ end)
 
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
+
+   if cfg.panels.stats.enabled then
+      s.stats = stat_bar.create(s)
+      panels_switch.add_panel(s, s.stats)
+   end
+
    wibar.create(s)
 end)
 -- }}}
