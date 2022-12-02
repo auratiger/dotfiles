@@ -10,6 +10,6 @@
 --]]
 
 return {
-    desktop  = require("freedesktop.desktop"),
-    menu     = require("freedesktop.menu")
+    desktop  = require("screen.rclick_menu.freedesktop.desktop"),
+    menu     = require("screen.rclick_menu.freedesktop.menu")
 }

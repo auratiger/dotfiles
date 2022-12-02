@@ -1,5 +1,34 @@
+local gears = require("gears") --Utilities such as color parsing and objects
+local awful = require("awful") --Everything related to window managment
+
 local shape_utils = require("common.shape")
 local naughty     = require("naughty")
+
+my_table    = awful.util.table or gears.table -- 4.{0,1} compatibility
+home_folder = os.getenv("HOME")
+
+-- {{{ Variable definitions
+--
+-- modkey or mod4 = super key
+modkey = "Mod4"
+altkey = "Mod1"
+
+-- personal variables
+--change these variables if you want
+browser1       = "vivaldi-stable"
+browser2       = "firefox"
+browser3       = "chromium -no-default-browser-check"
+terminal       = "alacritty"
+editor         = os.getenv("EDITOR") or "nvim"
+editor_cmd     = terminal .. " -e " .. editor
+editorgui      = "code"
+filemanager    = "thunar"
+mailclient     = "evolution"
+mediaplayer    = "vlc"
+musicplayer    = "spotify"
+virtualmachine = "virtualbox"
+chat           = "discord"
+
 
 cfg = {
    theme = {

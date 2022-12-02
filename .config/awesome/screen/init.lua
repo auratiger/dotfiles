@@ -2,6 +2,8 @@ local awful     = require("awful")
 local gears     = require("gears")
 local beautiful = require("beautiful")
 
+require("screen.rclick_menu")
+
 local wibar = require("screen.wibar")
 
 -- {{{ Screen

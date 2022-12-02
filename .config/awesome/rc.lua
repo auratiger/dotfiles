@@ -14,7 +14,6 @@ lain : https://github.com/lcpz/lain
 -- Standard awesome library
 --
 require("awful.autofocus")
-local gears     = require("gears") --Utilities such as color parsing and objects
 local awful     = require("awful") --Everything related to window managment
 local wibox     = require("wibox") -- Widget and layout library
 local beautiful = require("beautiful") -- Theme handling library
@@ -24,18 +23,13 @@ require("common.nd_utils")
 local naughty = require("naughty") -- Notification library
 
 --local menubar       = require("menubar")
-local lain        = require("lain")
-local freedesktop = require("freedesktop")
+local lain = require("lain")
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
-local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- require("awful.hotkeys_popup.keys")
 local dpi = require("beautiful.xresources").apply_dpi
 -- }}}
-
-my_table    = awful.util.table or gears.table -- 4.{0,1} compatibility
-home_folder = os.getenv("HOME")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -60,7 +54,6 @@ do -- Handle runtime errors after startup
 end
 -- }}}
 
-
 -- {{{ Autostart windowless processes
 local function run_once(cmd_arr)
    for _, cmd in ipairs(cmd_arr) do
@@ -69,21 +62,10 @@ local function run_once(cmd_arr)
 end
 
 run_once({ "unclutter -root" }) -- entries must be comma-separated
--- }}}
 
--- This function implements the XDG autostart specification
---[[
-awful.spawn.with_shell(
-    'if (xrdb -query | grep -q "^awesome\\.started:\\s*true$"); then exit; fi;' ..
-    'xrdb -merge <<< "awesome.started:true";' ..
-    -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
-    'dex --environment Awesome --autostart --search-paths "$XDG_CONFIG_DIRS/autostart:$XDG_CONFIG_HOME/autostart"' -- https://github.com/jceb/dex
-)
---]]
 
--- }}}
+require("config")
 
--- {{{ Variable definitions
 
 local themes = { -- keep themes in alfabetical order for ATT
    "custom", -- 1
@@ -92,26 +74,6 @@ local themes = { -- keep themes in alfabetical order for ATT
 local chosen_theme = themes[1] -- choose your theme here
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", home_folder, chosen_theme)
 beautiful.init(theme_path)
-
--- modkey or mod4 = super key
-modkey = "Mod4"
-altkey = "Mod1"
-
--- personal variables
---change these variables if you want
-browser1       = "vivaldi-stable"
-browser2       = "firefox"
-browser3       = "chromium -no-default-browser-check"
-terminal       = "alacritty"
-editor         = os.getenv("EDITOR") or "nvim"
-editor_cmd     = terminal .. " -e " .. editor
-editorgui      = "code"
-filemanager    = "thunar"
-mailclient     = "evolution"
-mediaplayer    = "vlc"
-musicplayer    = "spotify"
-virtualmachine = "virtualbox"
-chat           = "discord"
 
 -- awesome variables
 awful.util.terminal = terminal
@@ -127,219 +89,13 @@ lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 -- }}}
 
--- {{{ Menu
-local myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end },
-   { "arandr", "arandr" },
-}
 
-awful.util.mymainmenu = freedesktop.menu.build({
-   before = {
-      { "Awesome", myawesomemenu },
-      --{ "Atom", "atom" },
-      -- other triads can be put here
-   },
-   after = {
-      { "Terminal", terminal },
-      { "Log out", function() awesome.quit() end },
-      { "Sleep", "systemctl suspend" },
-      { "Restart", "systemctl reboot" },
-      { "Shutdown", "systemctl poweroff" },
-      -- other triads can be put here
-   }
-})
--- hide menu when mouse leaves it
---awful.util.mymainmenu.wibox:connect_signal("mouse::leave", function() awful.util.mymainmenu:hide() end)
-
---menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
--- }}}
-
-
-require("config")
 require("bindings")
 require("layout")
 require("screen")
 require("notifications")
 require("common.playerctl")
-
--- {{{ Rules
--- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = {
-   -- All clients will match this rule.
-   { rule = {},
-      properties = { border_width = beautiful.border_width,
-         border_color = beautiful.border_normal,
-         focus = awful.client.focus.filter,
-         raise = true,
-         keys = clientkeys,
-         buttons = clientbuttons,
-         screen = awful.screen.preferred,
-         placement = awful.placement.no_overlap + awful.placement.no_offscreen,
-         size_hints_honor = false
-      }
-   },
-
-   -- Titlebars
-   { rule_any = { type = { "dialog", "normal" } },
-      properties = { titlebars_enabled = false } },
-   -- Set applications to always map on the tag 2 on screen 1.
-   --{ rule = { class = "Subl" },
-   --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-
-   -- Set applications to always map on the tag 1 on screen 1.
-   -- find class or role via xprop command
-   --{ rule = { class = browser2 },
-   --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
-
-   --{ rule = { class = browser1 },
-   --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
-
-   --{ rule = { class = "Vivaldi-stable" },
-   --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true } },
-
-   --{ rule = { class = "Chromium" },
-   --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
-
-   --{ rule = { class = "Opera" },
-   --properties = { screen = 1, tag = awful.util.tagnames[1],switchtotag = true  } },
-
-   -- Set applications to always map on the tag 2 on screen 1.
-   --{ rule = { class = "Subl" },
-   --properties = { screen = 1, tag = awful.util.tagnames[2],switchtotag = true  } },
-
-   --{ rule = { class = editorgui },
-   --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-   --{ rule = { class = "Brackets" },
-   --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-   --{ rule = { class = "Code" },
-   --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-   --    { rule = { class = "Geany" },
-   --  properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-
-   -- Set applications to always map on the tag 3 on screen 1.
-   --{ rule = { class = "Inkscape" },
-   --properties = { screen = 1, tag = awful.util.tagnames[3], switchtotag = true  } },
-
-   -- Set applications to always map on the tag 4 on screen 1.
-   --{ rule = { class = "Gimp" },
-   --properties = { screen = 1, tag = awful.util.tagnames[4], switchtotag = true  } },
-
-   -- Set applications to always map on the tag 5 on screen 1.
-   --{ rule = { class = "Meld" },
-   --properties = { screen = 1, tag = awful.util.tagnames[5] , switchtotag = true  } },
-
-
-   -- Set applications to be maximized at startup.
-   -- find class or role via xprop command
-
-   { rule = { class = editorgui },
-      properties = { maximized = true } },
-
-   { rule = { class = "Geany" },
-      properties = { maximized = false, floating = false } },
-
-   -- { rule = { class = "Thunar" },
-   --     properties = { maximized = false, floating = false } },
-
-   { rule = { class = "Gimp*", role = "gimp-image-window" },
-      properties = { maximized = true } },
-
-   { rule = { class = "Gnome-disks" },
-      properties = { maximized = true } },
-
-   { rule = { class = "inkscape" },
-      properties = { maximized = true } },
-
-   { rule = { instance = musicplayer },
-      properties = { screen = 1, tag = cfg.tags.names[7], switchtotag = true, maximized = true } },
-
-   { rule = { class = "Vlc" },
-      properties = { maximized = true } },
-
-   { rule = { class = "VirtualBox Manager" },
-      properties = { maximized = true } },
-
-   { rule = { class = "VirtualBox Machine" },
-      properties = { maximized = true } },
-
-   { rule = { instance = browser1 },
-      properties = { screen = 1, tag = cfg.tags.names[1], switchtotag = true, maximized = true } },
-
-   --    { rule = { class = "Vivaldi-stable" },
-   --          properties = { callback = function (c) c.maximized = false end } },
-
-   --IF using Vivaldi snapshot you must comment out the rules above for Vivaldi-stable as they conflict
-   --    { rule = { class = "Vivaldi-snapshot" },
-   --          properties = { maximized = false, floating = false } },
-
-   --    { rule = { class = "Vivaldi-snapshot" },
-   --          properties = { callback = function (c) c.maximized = false end } },
-   --
-   { rule = { instance = chat },
-      properties = { screen = 1, tag = cfg.tags.names[6], switchtotag = true, maximized = true } },
-
-   { rule = { class = "Xfce4-settings-manager" },
-      properties = { floating = false } },
-
-   -- Floating clients.
-   { rule_any = {
-      instance = {
-         "DTA", -- Firefox addon DownThemAll.
-         "copyq", -- Includes session name in class.
-      },
-      class = {
-         "Arandr",
-         "Arcolinux-welcome-app.py",
-         "Blueberry",
-         "Galculator",
-         "Gnome-font-viewer",
-         "Gpick",
-         "Imagewriter",
-         "Font-manager",
-         "Kruler",
-         "MessageWin", -- kalarm.
-         "archlinux-logout",
-         "Peek",
-         "Skype",
-         "System-config-printer.py",
-         "Sxiv",
-         "Unetbootin.elf",
-         "Wpa_gui",
-         "pinentry",
-         "veromix",
-         "xtightvncviewer",
-         "Xfce4-terminal"
-      },
-
-      name = {
-         "Event Tester", -- xev.
-      },
-      role = {
-         "AlarmWindow", -- Thunderbird's calendar.
-         "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
-         "Preferences",
-         "setup",
-      }
-   }, properties = { floating = true } },
-
-   -- Floating clients but centered in screen
-   { rule_any = {
-      class = {
-         "Polkit-gnome-authentication-agent-1",
-         "Arcolinux-calamares-tool.py"
-      },
-   },
-      properties = { floating = true },
-      callback = function(c)
-         awful.placement.centered(c, nil)
-      end }
-}
--- }}}
+require("rules")
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
