@@ -6,6 +6,7 @@ local naughty     = require("naughty")
 
 my_table    = awful.util.table or gears.table -- 4.{0,1} compatibility
 home_folder = os.getenv("HOME")
+user        = os.getenv("USER")
 
 -- {{{ Variable definitions
 --
@@ -123,7 +124,7 @@ cfg = {
 					2. Export API Key into environment variable WEATHER_API_COM_API_KEY in .profile file
 					3. Export Your city location into environment variable WEATHER_API_COM_CITY in .profile file
 			]]     --
-         enabled = false,
+         enabled = true,
       }
    },
 

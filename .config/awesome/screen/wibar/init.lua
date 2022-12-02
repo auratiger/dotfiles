@@ -98,8 +98,6 @@ return {
          widget = wibox.container.margin,
          top    = dpi(2),
          bottom = dpi(2),
-         left   = dpi(7),
-         right  = dpi(7),
          {
             layout = wibox.layout.align.horizontal,
             { -- Left widgets

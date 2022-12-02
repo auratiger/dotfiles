@@ -8,6 +8,7 @@ local wibar = require("screen.wibar")
 
 local panels_switch = require("screen.panels_switch")
 local stat_bar      = require("panels.stat_bar")
+local user_bar      = require("panels.user_bar")
 
 -- {{{ Screen
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -38,9 +39,17 @@ end)
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
 
+   show_sub_panel = false
+   sub_panel_mode = 'user'
+
    if cfg.panels.stats.enabled then
       s.stats = stat_bar.create(s)
       panels_switch.add_panel(s, s.stats)
+   end
+
+   if cfg.panels.user.enabled then
+      s.user = user_bar.create(s)
+      panels_switch.add_panel(s, s.user)
    end
 
    wibar.create(s)

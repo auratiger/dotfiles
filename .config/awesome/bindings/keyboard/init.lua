@@ -166,10 +166,16 @@ globalkeys = my_table.join(
    --
    -- awful.key({ modkey, "Shift" }, "Return", function() awful.util.spawn(filemanager) end),
 
+   awful.key({ modkey, "Shift" }, "u", function()
+      local focused_screen = awful.screen.focused()
+      -- close_all_sub_panels(focused_screen )
+      focused_screen.user.visible = not focused_screen.user.visible
+   end, { description = "open user wiabar", group = "wibars" }),
+
    awful.key({ modkey, "Shift" }, "s", function()
-      local screen = awful.screen.focused()
-      -- close_all_sub_panels(screen)
-      screen.stats.visible = not screen.stats.visible
+      local focused_screen = awful.screen.focused()
+      -- close_all_sub_panels(focused_screen )
+      focused_screen.stats.visible = not focused_screen.stats.visible
    end, { description = "open statistics wibar", group = "wibars" }),
 
    -- ----------------------
