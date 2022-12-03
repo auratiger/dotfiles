@@ -4,7 +4,11 @@ local awful = require("awful") --Everything related to window managment
 local shape_utils = require("common.shape")
 local naughty     = require("naughty")
 
-my_table    = awful.util.table or gears.table -- 4.{0,1} compatibility
+my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
+
+-- NOTE: Awesomewm loads before zsh, and thus reads it's env variables from the /etc/profile config.
+-- A workaround to this is to source your zsh files from the /etc/profile file so they get loaded at
+-- the correct time.
 home_folder = os.getenv("HOME")
 user        = os.getenv("USER")
 
