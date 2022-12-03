@@ -40,6 +40,7 @@ cfg = {
       name = "neon-dream-v2",
       cache_file = home_folder .. '/.cache/awesome/themes',
    },
+   show_primary_wibar_only = true,
    tags = {
       -- names = { "web", "dev", "misc" },
       -- names = { "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒" },
@@ -131,8 +132,6 @@ cfg = {
          enabled = true,
       }
    },
-
-
    widgets = {
 
       todo = {
