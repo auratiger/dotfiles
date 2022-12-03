@@ -3,8 +3,11 @@ local gears     = require("gears")
 local beautiful = require("beautiful")
 local wibox     = require("wibox")
 local dpi       = beautiful.xresources.apply_dpi
-local icons     = require("common.icons")
-local shapes    = require("common.shape")
+
+local icons = require("common.icons")
+
+local sub_panel_mode = sub_panel_mode
+local show_sub_panel = show_sub_panel
 
 local active_panel_switch_icon
 local active_panel_switch_icon_section
@@ -24,8 +27,41 @@ local close_all_sub_panels = function(s)
    end
 end
 
+local create_menu_panel_button = function(glyph, mode, screen, panel)
 
-local create_munu_panel_button = function(glyph, text, btn_fn)
+   local toggle = function(icon)
+
+      local close = function()
+         panel.visible  = false
+         show_sub_panel = false
+         icon.markup    = "<span foreground='" .. beautiful.fg_normal .. "'>" .. glyph .. "</span>"
+      end
+
+      local close_active = function()
+         show_sub_panel = false
+         icon.markup    = "<span foreground='" .. beautiful.fg_normal .. "'>" .. glyph .. "</span>"
+         close_all_sub_panels(screen)
+      end
+
+      if sub_panel_mode == mode and show_sub_panel then
+         close()
+      else
+         if (not sub_panel_mode) ~= mode then
+            close_active()
+         end
+
+         sub_panel_mode = mode
+         show_sub_panel = true
+         panel.visible  = true
+         icon.markup    = "<span foreground='" .. beautiful.fg_focus .. "'>" .. glyph .. "</span>"
+
+         active_panel_switch_icon = glyph
+         active_panel_switch_icon_section = icon
+
+      end
+
+   end
+
 
    local icon = icons.wbic(glyph, beautiful.font_size, beautiful.fg_normal)
 
@@ -43,51 +79,20 @@ local create_munu_panel_button = function(glyph, text, btn_fn)
    awful.tooltip {
       objects        = { btn },
       timer_function = function()
-         return text
+         return mode
       end,
    }
 
-   btn_fn(btn, icon, glyph, text)
+   -- asign the toggle function to each panel
+   panel.toggle = function() toggle(icon) end
+
+   btn:buttons(gears.table.join(awful.button({}, 1, function()
+      toggle(icon)
+   end)))
+
    return btn
 end
 
-local btn_setup = function(screen, panel)
-
-   local close = function(icon, glyph)
-      panel.visible  = false
-      show_sub_panel = false
-      icon.markup    = "<span foreground='" .. beautiful.fg_normal .. "'>" .. glyph .. "</span>"
-   end
-
-
-   local close_active = function(icon, glyph)
-      show_sub_panel = false
-      icon.markup    = "<span foreground='" .. beautiful.fg_normal .. "'>" .. glyph .. "</span>"
-      close_all_sub_panels(screen)
-   end
-
-
-   return function(btn, icon, glyph, mode)
-      btn:buttons(gears.table.join(awful.button({}, 1, function()
-         if sub_panel_mode == mode and show_sub_panel then
-            close(icon, glyph)
-         else
-            if not sub_panel_mode ~= mode then
-               close_active(icon, glyph)
-            end
-
-            sub_panel_mode = mode
-            show_sub_panel = true
-            panel.visible  = true
-            icon.markup    = "<span foreground='" .. beautiful.fg_focus .. "'>" .. glyph .. "</span>"
-
-            active_panel_switch_icon = glyph
-            active_panel_switch_icon_section = icon
-
-         end
-      end)))
-   end
-end
 
 
 return {
@@ -105,23 +110,23 @@ return {
       body.spacing = dpi(10)
 
       if cfg.panels.user.enabled then
-         body:add(create_munu_panel_button("", "User", btn_setup(s, s.user)))
+         body:add(create_menu_panel_button("", "User", s, s.user))
       end
 
       if cfg.panels.packages.enabled then
-         body:add(create_munu_panel_button("", "Packages", btn_setup(s, s.pacs)))
+         body:add(create_menu_panel_button("", "Packages", s, s.pacs))
       end
 
       if cfg.panels.git.enabled then
-         body:add(create_munu_panel_button("", "Repos", btn_setup(s, s.repos)))
+         body:add(create_menu_panel_button("", "Repos", s, s.repos))
       end
 
       if cfg.panels.docker.enabled then
-         body:add(create_munu_panel_button("", "Docker", btn_setup(s, s.docker)))
+         body:add(create_menu_panel_button("", "Docker", s, s.docker))
       end
 
       if cfg.panels.stats.enabled then
-         body:add(create_munu_panel_button("", "Stats", btn_setup(s, s.stats)))
+         body:add(create_menu_panel_button("", "Stats", s, s.stats))
       end
 
       return body

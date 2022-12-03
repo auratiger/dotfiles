@@ -12,14 +12,6 @@ local my_table, client, screen, awesome = my_table, client, screen, awesome
 
 --- UTILS
 
-local close_all_sub_panels = function(s)
-   s.stats.visible = false
-   -- s.pacs.visible   = false
-   -- s.repos.visible  = false
-   -- s.docker.visible = false
-   -- s.user.visible   = false
-end
-
 local matcher = function(c, value)
    return awful.rules.match(c, { class = value }) or
        awful.rules.match(c, { name = value }) or
@@ -168,14 +160,12 @@ globalkeys = my_table.join(
 
    awful.key({ modkey, "Shift" }, "u", function()
       local focused_screen = awful.screen.focused()
-      -- close_all_sub_panels(focused_screen )
-      focused_screen.user.visible = not focused_screen.user.visible
+      focused_screen.user.toggle()
    end, { description = "open user wiabar", group = "wibars" }),
 
    awful.key({ modkey, "Shift" }, "s", function()
       local focused_screen = awful.screen.focused()
-      -- close_all_sub_panels(focused_screen )
-      focused_screen.stats.visible = not focused_screen.stats.visible
+      focused_screen.stats.toggle()
    end, { description = "open statistics wibar", group = "wibars" }),
 
    -- ----------------------

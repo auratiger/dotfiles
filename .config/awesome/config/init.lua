@@ -52,7 +52,7 @@ cfg = {
    },
    panels = {
       packages = {
-         enabled = true,
+         enabled = false,
          names = {
             'git', 'lua', 'awesome-git',
             'alacritty', 'zsh', 'neovim',
