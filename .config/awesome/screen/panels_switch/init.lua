@@ -67,12 +67,14 @@ local create_menu_panel_button = function(glyph, mode, screen, panel)
 
    local btn = wibox.widget {
       bg     = beautiful.palette_c7,
-      shape  = cfg.tags.shape,
+      shape  = cfg.screens[1].shape,
       widget = wibox.container.background,
       {
          icon,
          widget = wibox.container.margin,
-         margins = dpi(10),
+         left = 15,
+         right = 15
+         -- margins = dpi(10),
       },
    }
 
@@ -110,11 +112,11 @@ return {
       body.spacing = dpi(10)
 
       if cfg.panels.user.enabled then
-         body:add(create_menu_panel_button("", "User", s, s.user))
+         body:add(create_menu_panel_button("  ", "User", s, s.user))
       end
 
       if cfg.panels.packages.enabled then
-         body:add(create_menu_panel_button("", "Packages", s, s.pacs))
+         body:add(create_menu_panel_button("  ", "Packages", s, s.pacs))
       end
 
       if cfg.panels.git.enabled then
@@ -126,7 +128,7 @@ return {
       end
 
       if cfg.panels.stats.enabled then
-         body:add(create_menu_panel_button("", "Stats", s, s.stats))
+         body:add(create_menu_panel_button("  ", "Stats", s, s.stats))
       end
 
       return body

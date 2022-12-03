@@ -42,10 +42,6 @@ awful.screen.connect_for_each_screen(function(s)
    show_sub_panel = false
    sub_panel_mode = 'user'
 
-   if cfg.show_primary_wibar_only and s.index > 1 then
-      return
-   end
-
    if cfg.panels.stats.enabled then
       s.stats = stat_bar.create(s)
       panels_switch.add_panel(s, s.stats)

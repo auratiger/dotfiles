@@ -77,7 +77,7 @@ return {
 
 
       -- --
-      awful.tag(cfg.tags.names, s, awful.layout.layouts[1])
+      awful.tag(cfg.screens[s.index].tags, s, awful.layout.layouts[1])
 
       s.mylayoutbox = awful.widget.layoutbox(s)
       s.mylayoutbox:buttons(my_table.join(
@@ -105,6 +105,8 @@ return {
          widget = wibox.container.margin,
          top    = dpi(2),
          bottom = dpi(2),
+         left   = dpi(8),
+         right  = dpi(8),
          {
             layout = wibox.layout.align.horizontal,
             { -- Left widgets
@@ -126,8 +128,6 @@ return {
                      bg     = beautiful.palette_c3,
                      shape  = shape_utils.default_frr,
                      {
-                        left   = dpi(5),
-                        right  = dpi(5),
                         widget = wibox.container.margin,
                         panels_switch.create(s)
                      }

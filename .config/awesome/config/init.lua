@@ -27,29 +27,39 @@ terminal       = "alacritty"
 editor         = os.getenv("EDITOR") or "nvim"
 editor_cmd     = terminal .. " -e " .. editor
 editorgui      = "code"
-filemanager    = "thunar"
+filemanager    = "nemo"
 mailclient     = "evolution"
 mediaplayer    = "vlc"
 musicplayer    = "spotify"
 virtualmachine = "virtualbox"
 chat           = "discord"
-
+bitwarden      = "bitwarden"
 
 cfg = {
    theme = {
       name = "neon-dream-v2",
       cache_file = home_folder .. '/.cache/awesome/themes',
    },
-   show_primary_wibar_only = true,
-   tags = {
-      -- names = { "web", "dev", "misc" },
-      -- names = { "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒" },
-      -- names = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" },
-      -- names = { "⌘", "♐", "⌥", "ℵ" },
-      -- names = { "www", "edit", "gimp", "inkscape", "music" },
-      -- Use this : https://fontawesome.com/cheatsheet
-      names = { "", "", "", "", "", "", "" },
-      shape = shape_utils.default_frr
+   screens = {
+      { -- NOTE: screen 1 (primary screen)
+
+         -- tags = { "web", "dev", "misc" },
+         -- tags = { "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒" },
+         -- tags = { "⠐", "⠡", "⠲", "⠵", "⠻", "⠿" },
+         -- tags = { "⌘", "♐", "⌥", "ℵ" },
+         -- tags = { "www", "edit", "gimp", "inkscape", "music" },
+         -- Use this : https://fontawesome.com/cheatsheet
+         tags = { "", "", "", "", "" },
+         shape = shape_utils.default_frr
+      },
+      { -- screen 2
+         tags = { "", "" },
+         shape = shape_utils.default_frr
+      },
+      { -- screen 3
+         tags = { "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒" },
+         shape = shape_utils.default_frr
+      }
    },
    panels = {
       packages = {

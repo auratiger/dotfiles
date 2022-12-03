@@ -37,17 +37,17 @@ return {
             },
             layout = wibox.layout.fixed.horizontal,
          },
-         margins = dpi(10),
-         widget  = wibox.container.margin
+         left   = 12,
+         right  = 12,
+         widget = wibox.container.margin
       }
-
 
       local widget_template = {
          id     = 'background_role',
          widget = wibox.container.background,
          {
             bg     = beautiful.palette_c7,
-            shape  = cfg.tags.shape,
+            shape  = cfg.screens[s.index].shape,
             widget = wibox.container.background,
             name_section,
          },
@@ -59,6 +59,10 @@ return {
          screen  = s,
          filter  = awful.widget.taglist.filter.all,
          buttons = taglist_buttons,
+
+         style = {
+            shape = cfg.screens[s.index].shape,
+         },
 
          layout = {
             spacing = dpi(10),

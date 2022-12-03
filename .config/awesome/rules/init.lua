@@ -21,69 +21,15 @@ awful.rules.rules = {
    -- Titlebars
    { rule_any = { type = { "dialog", "normal" } },
       properties = { titlebars_enabled = false } },
-   -- Set applications to always map on the tag 2 on screen 1.
-   --{ rule = { class = "Subl" },
-   --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-
-   -- Set applications to always map on the tag 1 on screen 1.
-   -- find class or role via xprop command
-   --{ rule = { class = browser2 },
-   --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
-
-   --{ rule = { class = browser1 },
-   --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
-
-   --{ rule = { class = "Vivaldi-stable" },
-   --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true } },
-
-   --{ rule = { class = "Chromium" },
-   --properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
-
-   --{ rule = { class = "Opera" },
-   --properties = { screen = 1, tag = awful.util.tagnames[1],switchtotag = true  } },
-
-   -- Set applications to always map on the tag 2 on screen 1.
-   --{ rule = { class = "Subl" },
-   --properties = { screen = 1, tag = awful.util.tagnames[2],switchtotag = true  } },
-
-   --{ rule = { class = editorgui },
-   --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-   --{ rule = { class = "Brackets" },
-   --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-   --{ rule = { class = "Code" },
-   --properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-   --    { rule = { class = "Geany" },
-   --  properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-
-
-   -- Set applications to always map on the tag 3 on screen 1.
-   --{ rule = { class = "Inkscape" },
-   --properties = { screen = 1, tag = awful.util.tagnames[3], switchtotag = true  } },
-
-   -- Set applications to always map on the tag 4 on screen 1.
-   --{ rule = { class = "Gimp" },
-   --properties = { screen = 1, tag = awful.util.tagnames[4], switchtotag = true  } },
-
-   -- Set applications to always map on the tag 5 on screen 1.
-   --{ rule = { class = "Meld" },
-   --properties = { screen = 1, tag = awful.util.tagnames[5] , switchtotag = true  } },
-
 
    -- Set applications to be maximized at startup.
-   -- find class or role via xprop command
+   -- NOTE: find class or role via xprop command
 
    { rule = { class = editorgui },
       properties = { maximized = true } },
 
    { rule = { class = "Geany" },
       properties = { maximized = false, floating = false } },
-
-   -- { rule = { class = "Thunar" },
-   --     properties = { maximized = false, floating = false } },
 
    { rule = { class = "Gimp*", role = "gimp-image-window" },
       properties = { maximized = true } },
@@ -94,33 +40,26 @@ awful.rules.rules = {
    { rule = { class = "inkscape" },
       properties = { maximized = true } },
 
-   { rule = { instance = musicplayer },
-      properties = { screen = 1, tag = cfg.tags.names[7], switchtotag = true, maximized = true } },
-
-   { rule = { class = "Vlc" },
-      properties = { maximized = true } },
-
    { rule = { class = "VirtualBox Manager" },
       properties = { maximized = true } },
 
    { rule = { class = "VirtualBox Machine" },
       properties = { maximized = true } },
 
+   { rule = { instance = bitwarden },
+      properties = { floating = true, ontop = true } },
+
    { rule = { instance = browser1 },
-      properties = { screen = 1, tag = cfg.tags.names[1], switchtotag = true, maximized = true } },
+      properties = { screen = 1, tag = cfg.screens[1].tags[1], switchtotag = true, maximized = true } },
 
-   --    { rule = { class = "Vivaldi-stable" },
-   --          properties = { callback = function (c) c.maximized = false end } },
+   { rule = { instance = mediaplayer },
+      properties = { screen = 1, tag = cfg.screens[1].tags[3], switchtotag = true, maximized = true } },
 
-   --IF using Vivaldi snapshot you must comment out the rules above for Vivaldi-stable as they conflict
-   --    { rule = { class = "Vivaldi-snapshot" },
-   --          properties = { maximized = false, floating = false } },
-
-   --    { rule = { class = "Vivaldi-snapshot" },
-   --          properties = { callback = function (c) c.maximized = false end } },
-   --
    { rule = { instance = chat },
-      properties = { screen = 2, tag = cfg.tags.names[6], switchtotag = true, maximized = true } },
+      properties = { screen = 2, tag = cfg.screens[2].tags[1], switchtotag = true, maximized = true } },
+   { rule = { instance = musicplayer },
+      properties = { screen = 2, tag = cfg.screens[2].tags[2], switchtotag = true, maximized = true } },
+
 
    { rule = { class = "Xfce4-settings-manager" },
       properties = { floating = false } },
