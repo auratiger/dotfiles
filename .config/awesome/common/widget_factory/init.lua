@@ -31,4 +31,3 @@ createWidget = function(module, params)
 
    return module.create(params);
 end
-

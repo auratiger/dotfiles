@@ -168,6 +168,11 @@ globalkeys = my_table.join(
       focused_screen.stats.toggle()
    end, { description = "open statistics wibar", group = "wibars" }),
 
+   awful.key({ modkey, "Shift" }, "d", function()
+      local focused_screen = awful.screen.focused()
+      focused_screen.docker.toggle()
+   end, { description = "open docker wibar", group = "wibars" }),
+
    -- ----------------------
    -- | CTRL + SHIFT + ... |
    -- ----------------------

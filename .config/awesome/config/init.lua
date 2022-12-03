@@ -98,7 +98,7 @@ cfg = {
 				Packages Required:
 				1. docker
 			]]     --
-         enabled = false,
+         enabled = true,
          cache_file = home_folder .. '/.cache/awesome/docker_containers',
          pagination_defaults = {
             size          = 10, -- items per page,

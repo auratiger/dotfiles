@@ -9,6 +9,7 @@ local wibar = require("screen.wibar")
 local panels_switch = require("screen.panels_switch")
 local stat_bar      = require("panels.stat_bar")
 local user_bar      = require("panels.user_bar")
+local docker_bar    = require("panels.docker_bar")
 
 -- {{{ Screen
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -50,6 +51,11 @@ awful.screen.connect_for_each_screen(function(s)
    if cfg.panels.user.enabled then
       s.user = user_bar.create(s)
       panels_switch.add_panel(s, s.user)
+   end
+
+   if cfg.panels.docker.enabled then
+      s.docker = docker_bar.create(s)
+      panels_switch.add_panel(s, s.docker)
    end
 
    wibar.create(s)
