@@ -136,12 +136,12 @@ globalkeys = my_table.join(
       { description = "select next grid layout", group = "layout" }),
 
    -- Widgets popups
-   awful.key({ modkey, }, "p", function() lain.widget.cal().show(10) end,
+   awful.key({ modkey, }, "p", function() require("widgets.float_calendar").toggle() end,
       { description = "show calendar", group = "widgets" }),
-   awful.key({ modkey, }, "i", function() cw.toggle() end,
-      { description = "show calendar", group = "widgets" }),
+
    -- awful.key({ modkey, }, "p", function() if beautiful.fs then beautiful.fs.show(7) end end,
    --    { description = "show filesystem", group = "widgets" }),
+
    --awful.key({ modkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
    --{description = "show weather", group = "widgets"}),
 

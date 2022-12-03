@@ -50,6 +50,7 @@ return {
       }
 
 
+      -- -- -- Calendar
       local markup = lain.util.markup
 
       -- Textclock
@@ -59,17 +60,23 @@ return {
          markup("#535f7a", ">") .. markup("#de5e1e", " %H:%M "))
       mytextclock.font = beautiful.font
 
-      -- Calendar
-      local cal = lain.widget.cal({
-         attach_to = { mytextclock },
-         notification_preset = {
-            font = "Noto Sans Mono Medium 10",
-            fg   = beautiful.fg_normal,
-            bg   = beautiful.bg_normal
-         }
+      local calendar_widget = require("widgets.float_calendar")
+      local cw = calendar_widget({
+         theme = 'outrun',
+         placement = 'top',
+         start_sunday = false,
+         radius = 8,
+         previous_month_button = 1,
+         next_month_button = 3,
       })
 
+      mytextclock:connect_signal("button::press",
+         function(_, _, _, button)
+            if button == 1 then cw.toggle() end
+         end)
 
+
+      -- --
       awful.tag(cfg.tags.names, s, awful.layout.layouts[1])
 
       s.mylayoutbox = awful.widget.layoutbox(s)
