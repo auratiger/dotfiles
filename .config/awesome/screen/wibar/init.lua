@@ -82,7 +82,6 @@ return {
             if button == 1 then cw.toggle() end
          end)
 
-
       -- --
       awful.tag(cfg.screens[s.index].tags, s, awful.layout.layouts[1])
 
@@ -192,7 +191,7 @@ return {
                      },
                      awful.widget.keyboardlayout(),
                      wibox.widget.systray(),
-                     s.mylayoutbox,
+                     -- s.mylayoutbox,
                   }
                }
             }
