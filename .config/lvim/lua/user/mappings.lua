@@ -35,9 +35,11 @@ M.setup = function()
 
    local mappings = {
       insert_mode = {
+         ["<C-Z>"] = "ZZ", -- Force Exit
       },
 
       normal_mode = {
+         ["<C-Z>"] = "ZZ", -- Force Exit
          -- Resize with arrows
          ["<C-Up>"] = ":resize -4<CR>",
          ["<C-Down>"] = ":resize +4<CR>",
@@ -59,16 +61,20 @@ M.setup = function()
       },
 
       term_mode = {
+         ["<C-Z>"] = "ZZ", -- Force Exit
       },
 
       visual_mode = {
+         ["<C-Z>"] = "ZZ", -- Force Exit
          ["R"] = function() require('spectre').open_visual() end
       },
 
       visual_block_mode = {
+         ["<C-Z>"] = "ZZ", -- Force Exit
       },
 
       command_mode = {
+         ["<C-Z>"] = "ZZ", -- Force Exit
       },
    }
 
