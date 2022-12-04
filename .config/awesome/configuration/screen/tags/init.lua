@@ -65,7 +65,7 @@ return {
          },
 
          layout = {
-            spacing = dpi(10),
+            spacing = dpi(5),
             layout  = wibox.layout.fixed.horizontal
          },
 

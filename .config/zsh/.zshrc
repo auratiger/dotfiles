@@ -9,6 +9,8 @@ autoload -U colors && colors
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 autoload -Uz compinit && compinit
 
+zmodload zsh/mapfile
+
 # Useful Functions
 source "$ZDOTDIR/zsh-functions.zsh"
 

@@ -118,8 +118,12 @@ return {
                   bg     = beautiful.palette_c3,
                   shape  = shape_utils.default_frr,
                   {
-                     layout = wibox.layout.fixed.horizontal,
-                     s.mytaglist,
+                     widget = wibox.container.margin,
+                     margins = dpi(4),
+                     {
+                        layout = wibox.layout.fixed.horizontal,
+                        s.mytaglist,
+                     }
                   },
                },
                {
@@ -131,6 +135,7 @@ return {
                      shape  = shape_utils.default_frr,
                      {
                         widget = wibox.container.margin,
+                        margins = dpi(4),
                         panels_switch.create(s)
                      }
                   }

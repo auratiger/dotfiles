@@ -109,14 +109,14 @@ return {
 
    create = function(s)
       local body = wibox.layout.fixed.horizontal()
-      body.spacing = dpi(10)
+      body.spacing = dpi(5)
 
       if cfg.panels.user.enabled then
          body:add(create_menu_panel_button("  ", "User", s, s.user))
       end
 
       if cfg.panels.packages.enabled then
-         body:add(create_menu_panel_button("  ", "Packages", s, s.pacs))
+         body:add(create_menu_panel_button("", "Packages", s, s.pacs))
       end
 
       if cfg.panels.git.enabled then
