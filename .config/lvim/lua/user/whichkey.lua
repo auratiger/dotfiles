@@ -17,6 +17,14 @@ M.setup = function()
       w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
       t = { "<cmd>TodoQuickFix<cr>", "Find Todo" },
       T = { "<cmd>TodoTelescope<cr>", "Find Todo Telescope" },
+      p = { "<cmd>TodoTelescope<cr>", "test" },
+   }
+
+   mappings["R"] = {
+      name = "Replace",
+      r = { function() require('spectre').open() end, "Replace all" },
+      w = { function() require('spectre').open_visual({ select_word = true }) end, "Replace word" },
+      f = { function() require('spectre').open_file_search() end, "In file" },
    }
 
    mappings["q"] = nil -- removes duplicate close option

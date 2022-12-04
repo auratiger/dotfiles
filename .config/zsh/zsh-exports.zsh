@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # >>>> ============ EXPORTED PATHS ==================================================== <<<< #
 
 ########### ZSH UPDATE SCHEDULE ####################################################
@@ -63,6 +65,10 @@ export LESS_TERMCAP_so=$'\E[01;47;31m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-R
+
+# >>>> ============ WEATHER API ==================================================== <<<< #
+
+source "$HOME/.weatherapi.zsh"
 
 # >>>> ============ USER CONFIGURATION ==================================================== <<<< #
 
