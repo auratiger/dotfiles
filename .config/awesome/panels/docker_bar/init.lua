@@ -2,7 +2,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful").xresources.apply_dpi
 
-local shape_utils = require("common.shape")
+
 
 local card = require("widgets.card")
 local containers = card.create_with_header_placeholder(createWidget(require("widgets.docker_containers")))

@@ -3,14 +3,12 @@ local beautiful = require("beautiful")
 local wibox     = require("wibox")
 local dpi       = beautiful.xresources.apply_dpi
 
-local shape_utils = require("common.shape")
-
 local wbm = require("widgets.wibar_monitor")
 
-local tags          = require("screen.tags")
-local tasks         = require("screen.tasks")
-local notifi        = require("screen.notif_icon")
-local panels_switch = require("screen.panels_switch")
+local tags          = require("configuration.screen.tags")
+local tasks         = require("configuration.screen.tasks")
+local notifi        = require("configuration.screen.notif_icon")
+local panels_switch = require("configuration.screen.panels_switch")
 
 return {
    create = function(s)

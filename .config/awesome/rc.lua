@@ -12,11 +12,14 @@ lain : https://github.com/lcpz/lain
 
 --https://awesomewm.org/doc/api/documentation/05-awesomerc.md.html
 -- Standard awesome library
---
+
+
+pcall(require, "luarocks.loader")
+
 require("awful.autofocus")
-local awful     = require("awful") --Everything related to window managment
-local beautiful = require("beautiful") -- Theme handling library
-local naughty   = require("naughty") -- Notification library
+
+local awful   = require("awful") --Everything related to window managment
+local naughty = require("naughty") -- Notification library
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -53,25 +56,11 @@ end
 
 run_once({ "unclutter -root" }) -- entries must be comma-separated
 
-
-require("config")
-
-
-local themes = { -- keep themes in alfabetical order for ATT
-   "custom", -- 1
-}
-
-local chosen_theme = themes[1] -- choose your theme here
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", home_folder, chosen_theme)
-beautiful.init(theme_path)
-
 require("common.utils")
+require("user_settings")
 require("global_events")
-require("bindings")
-require("layout")
-require("screen")
+require("configuration")
 require("notifications")
-require("rules")
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")

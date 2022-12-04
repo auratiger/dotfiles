@@ -1,6 +1,5 @@
 local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
-local shapes    = require("common.shape")
 local gears     = require("gears")
 local wibox     = require("wibox")
 
@@ -32,7 +31,7 @@ return {
                resize = true,
                forced_height = 100,
                forced_width = 100,
-               clip_shape = shapes.default_frr,
+               clip_shape = shape_utils.default_frr,
                halign = "left",
                valign = "center",
                widget = wibox.widget.imagebox,
@@ -65,4 +64,3 @@ return {
       }
    end
 }
-

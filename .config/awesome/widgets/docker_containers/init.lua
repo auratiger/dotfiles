@@ -5,7 +5,7 @@ local dpi       = beautiful.xresources.apply_dpi
 local gears     = require("gears")
 
 local icons       = require("common.icons")
-local shape_utils = require("common.shape")
+
 local pagination  = require("common.pagination")
 local caching     = require("common.caching")
 

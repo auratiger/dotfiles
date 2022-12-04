@@ -1,6 +1,5 @@
 local awful = require("awful")
 local wibox = require("wibox")
-local shape = require("common.shape")
 
 -- awful.util.tasklist_buttons = my_table.join(
 --    awful.button({}, 1, function(c)
@@ -77,7 +76,7 @@ return {
 
       local widget_template = {
          name_section,
-         shape  = shape.default_frr,
+         shape  = shape_utils.default_frr,
          widget = wibox.container.background,
       }
 

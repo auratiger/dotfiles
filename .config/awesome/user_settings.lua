@@ -1,8 +1,7 @@
 local gears = require("gears") --Utilities such as color parsing and objects
 local awful = require("awful") --Everything related to window managment
 
-local shape_utils = require("common.shape")
-local naughty     = require("naughty")
+local naughty = require("naughty")
 
 my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
@@ -37,7 +36,7 @@ bitwarden      = "bitwarden"
 
 cfg = {
    theme = {
-      name = "neon-dream-v2",
+      name = "neon-dream",
       cache_file = home_folder .. '/.cache/awesome/themes',
    },
    screens = {

@@ -1,0 +1,5 @@
+require("configuration.theme")
+require("configuration.layouts")
+require("configuration.bindings")
+require("configuration.screen")
+require("configuration.rules")

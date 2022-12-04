@@ -1,6 +1,5 @@
 local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
-local shapes    = require("common.shape")
 local wibox     = require("wibox")
 
 return {
@@ -15,7 +14,7 @@ return {
          {
             id     = 'marg',
             widget = wibox.container.background,
-            shape  = shapes.default_frr,
+            shape  = shape_utils.default_frr,
             bg     = beautiful.palette_c6,
             {
                id     = 'i_marg',

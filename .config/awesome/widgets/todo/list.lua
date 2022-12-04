@@ -1,7 +1,7 @@
 local dpi   = require("beautiful").xresources.apply_dpi
 local wibox = require("wibox")
 
-local shape_utils = require("common.shape")
+
 
 return wibox.widget({
    layout = require("dependencies.overflow").vertical,

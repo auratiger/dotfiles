@@ -2,7 +2,6 @@ local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful").xresources.apply_dpi
 
-local shape_utils   = require("common.shape")
 local arcchart_stat = require("widgets.arcchart_stat")
 
 local module = {

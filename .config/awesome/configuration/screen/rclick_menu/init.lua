@@ -4,7 +4,7 @@ local beautiful     = require("beautiful")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local menubar       = require("menubar")
 
-local freedesktop = require("screen.rclick_menu.freedesktop")
+local freedesktop = require("configuration.screen.rclick_menu.freedesktop")
 
 -- {{{ Menu
 local myawesomemenu = {

@@ -4,7 +4,7 @@ local wibox     = require("wibox")
 local dpi       = beautiful.xresources.apply_dpi
 
 local notif_center = require("widgets.notification_center")
-local delete_btn   = require("screen.notifications.delete_btn")
+local delete_btn   = require("configuration.screen.notifications.delete_btn")
 
 return {
 

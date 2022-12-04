@@ -5,7 +5,7 @@ local dpi       = beautiful.xresources.apply_dpi
 local gears     = require("gears")
 local naughty   = require('naughty')
 
-local shape_utils = require("common.shape")
+
 local icons       = require("common.icons")
 
 local notifications = wibox.widget({

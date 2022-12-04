@@ -2,7 +2,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful").xresources.apply_dpi
 
-local shape_utils = require("common.shape")
+
 
 local card     = require("widgets.card")
 local calendar = require("widgets.calendar").create()

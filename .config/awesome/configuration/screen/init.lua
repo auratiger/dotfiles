@@ -2,11 +2,11 @@ local awful     = require("awful")
 local gears     = require("gears")
 local beautiful = require("beautiful")
 
-require("screen.rclick_menu")
+require("configuration.screen.rclick_menu")
 
-local wibar = require("screen.wibar")
+local wibar = require("configuration.screen.wibar")
 
-local panels_switch = require("screen.panels_switch")
+local panels_switch = require("configuration.screen.panels_switch")
 local stat_bar      = require("panels.stat_bar")
 local user_bar      = require("panels.user_bar")
 local docker_bar    = require("panels.docker_bar")
