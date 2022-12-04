@@ -1,8 +1,9 @@
 local awful = require("awful")
-local lain  = require("lain")
 
 clientkeys = my_table.join(
-   awful.key({ altkey, "Shift" }, "m", lain.util.magnify_client,
+   awful.key({ modkey, "Shift" }, "m", function()
+      utils.magnify_client()
+   end,
       { description = "magnify client", group = "client" }),
    awful.key({ modkey, }, "f",
       function(c)

@@ -65,7 +65,7 @@ local chosen_theme = themes[1] -- choose your theme here
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", home_folder, chosen_theme)
 beautiful.init(theme_path)
 
-require("common.nd_utils")
+require("common.utils")
 require("global_events")
 require("common.widget_factory")
 require("bindings")

@@ -8,7 +8,7 @@ local commands    = require("common.commands")
 local icons       = require("common.icons")
 local shape_utils = require("common.shape")
 local pagination  = require("common.pagination")
-local utils       = require("common.caching")
+local caching     = require("common.caching")
 
 local droplist       = require("widgets.droplist")
 local paginator      = require("widgets.paginator")
@@ -29,20 +29,20 @@ return {
             stdout = stdout:gsub("||||||", "|||Noinfo|||")
             stdout = stdout:gsub(", ", "@")
 
-            local lines = nd_utils.split(stdout, '\n')
+            local lines = utils.split(stdout, '\n')
 
             local containers = {}
             for _, value in ipairs(lines) do
                if #value > 0 then
-                  value = nd_utils.trim(value)
+                  value = utils.trim(value)
                   table.insert(containers, value)
                end
             end
 
-            utils.procedures.caching(cfg.panels.docker.cache_file, "sysstat::docker_container_add", containers,
+            caching.procedures.caching(cfg.panels.docker.cache_file, "sysstat::docker_container_add", containers,
                function(value, callback)
 
-                  local line_data = nd_utils.split(nd_utils.trim(value), "|||")
+                  local line_data = utils.split(utils.trim(value), "|||")
 
                   line_data[5] = line_data[5]:match("^%w+")
 
@@ -130,7 +130,7 @@ return {
 
          for line in containers:gmatch('([^\n]+)') do
 
-            local arr = nd_utils.split(line, ' ')
+            local arr = utils.split(line, ' ')
 
             local id     = arr[1]
             local image  = arr[2]

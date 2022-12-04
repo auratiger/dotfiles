@@ -12,8 +12,6 @@ local tasks         = require("screen.tasks")
 local notifi        = require("screen.notif_icon")
 local panels_switch = require("screen.panels_switch")
 
-local lain = require("lain")
-
 return {
    create = function(s)
 
@@ -58,7 +56,7 @@ return {
       end
 
       -- -- -- Calendar
-      local markup = lain.util.markup
+      local markup = require("common.utils.markup")
 
       -- Textclock
       os.setlocale(os.getenv("LANG")) -- to localize the clock

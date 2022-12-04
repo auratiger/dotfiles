@@ -1,8 +1,6 @@
 local awful         = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local beautiful     = require("beautiful")
-local naughty       = require("naughty")
-local lain          = require("lain")
 local spotify       = require("common.spotify")
 
 local modkey, altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, musicplayer, mailclient = modkey
@@ -233,11 +231,10 @@ globalkeys = my_table.join(
       { description = "Pamac Manager", group = "alt+ctrl" }),
 
    -- On the fly useless gaps change
-   awful.key({ "Control", altkey }, "j", function() lain.util.useless_gaps_resize(1) end,
+   awful.key({ "Control", altkey }, "j", function() utils.useless_gaps_resize(1) end,
       { description = "increment useless gaps", group = "tag" }),
-   awful.key({ "Control", altkey }, "h", function() lain.util.useless_gaps_resize(-1) end,
+   awful.key({ "Control", altkey }, "h", function() utils.useless_gaps_resize(-1) end,
       { description = "decrement useless gaps", group = "tag" }),
-
 
    -- -------------
    -- | ALT + ... |
@@ -297,13 +294,6 @@ globalkeys = my_table.join(
       { description = "view next", group = "tag" }),
    awful.key({ modkey, "Shift" }, "Tab", awful.tag.viewprev,
       { description = "view previous", group = "tag" }),
-
-
-   -- Non-empty tag browsing
-   --awful.key({ modkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
-   --{description = "view  previous nonempty", group = "tag"}),
-   -- awful.key({ modkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
-   -- {description = "view  next nonempty", group = "tag"}),
 
    -- ---------------------------
    -- | CLIENT FOCUS NAVIGATION |
@@ -393,22 +383,6 @@ globalkeys = my_table.join(
       end,
       { description = "go back, back to the past", group = "client" }),
 
-   -- -------------------
-   -- | DYNAMIC TAGGING |
-   -- -------------------
-
-   awful.key({ modkey, "Shift" }, "n", function() lain.util.add_tag() end,
-      { description = "add new tag", group = "tag" }),
-   awful.key({ "Control", modkey }, "r", function() lain.util.rename_tag() end,
-      { description = "rename tag", group = "tag" }),
-   -- awful.key({ modkey, "Shift" }, "Left", function () lain.util.move_tag(-1) end,
-   --          {description = "move tag to the left", group = "tag"}),
-   -- awful.key({ modkey, "Shift" }, "Right", function () lain.util.move_tag(1) end,
-   --          {description = "move tag to the right", group = "tag"}),
-   awful.key({ modkey, "Shift" }, "d", function() lain.util.delete_tag() end,
-      { description = "delete tag", group = "tag" }),
-
-
    -- -----------------
    -- | RESIZE CLIENT |
    -- -----------------
@@ -457,37 +431,27 @@ globalkeys = my_table.join(
          beautiful.mpd.update()
       end,
       { description = "mpc toggle", group = "widgets" }),
+
    awful.key({ "Control", "Shift" }, "Down",
       function()
          os.execute("mpc stop")
          beautiful.mpd.update()
       end,
       { description = "mpc stop", group = "widgets" }),
+
    awful.key({ "Control", "Shift" }, "Left",
       function()
          os.execute("mpc prev")
          beautiful.mpd.update()
       end,
       { description = "mpc prev", group = "widgets" }),
+
    awful.key({ "Control", "Shift" }, "Right",
       function()
          os.execute("mpc next")
          beautiful.mpd.update()
       end,
       { description = "mpc next", group = "widgets" }),
-   awful.key({ "Control", "Shift" }, "s",
-      function()
-         local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
-         if beautiful.mpd.timer.started then
-            beautiful.mpd.timer:stop()
-            common.text = common.text .. lain.util.markup.bold("OFF")
-         else
-            beautiful.mpd.timer:start()
-            common.text = common.text .. lain.util.markup.bold("ON")
-         end
-         naughty.notify(common)
-      end,
-      { description = "mpc on/off", group = "widgets" }),
 
    -- Copy primary to clipboard (terminals to gtk)
    --awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
