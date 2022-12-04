@@ -177,17 +177,22 @@ return {
                   bg     = beautiful.palette_c3,
                   shape  = shape_utils.default_frr,
                   {
-                     layout = wibox.layout.fixed.horizontal,
-                     clockicon,
-                     mytextclock,
+                     widget = wibox.container.margin,
+                     left = dpi(10),
+                     right = dpi(10),
                      {
-                        notif_icon,
-                        margins = 10,
-                        widget  = wibox.container.margin
-                     },
-                     awful.widget.keyboardlayout(),
-                     wibox.widget.systray(),
-                     -- s.mylayoutbox,
+                        layout = wibox.layout.fixed.horizontal,
+                        clockicon,
+                        mytextclock,
+                        wibox.widget.systray(),
+                        {
+                           notif_icon,
+                           margins = 10,
+                           widget  = wibox.container.margin
+                        },
+                        awful.widget.keyboardlayout(),
+                        -- s.mylayoutbox,
+                     }
                   }
                }
             }
