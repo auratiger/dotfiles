@@ -62,6 +62,7 @@ M.setup = function()
       },
 
       visual_mode = {
+         ["R"] = function() require('spectre').open_visual() end
       },
 
       visual_block_mode = {

@@ -1,7 +1,9 @@
 local M = {}
 
+local lvim = lvim
+
 M.setup = function()
-   local configs = require("user.plugins.plugin-configs")
+   -- local configs = require("user.plugins.plugin-configs")
 
    lvim.builtin.alpha.active = true
    lvim.builtin.alpha.mode = "dashboard"
@@ -16,26 +18,8 @@ M.setup = function()
    lvim.builtin.treesitter.highlight.enabled = true
    lvim.builtin.treesitter.rainbow.enable = true
 
-   lvim.builtin.telescope.on_config_done = function(telescope)
-      pcall(telescope.load_extension, "media_files")
-      telescope.setup {
-         defaults = {
-            extensions = {
-               media_files = {
-                  -- filetypes whitelist
-                  -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-                  filetypes = { "png", "webp", "jpg", "jpeg" },
-                  find_cmd = "rg" -- find command (defaults to `fd`)
-               }
-            },
-         }
-      }
-   end
-
-
    -- Additional Plugins --
    lvim.plugins = {
-      { "nvim-telescope/telescope-media-files.nvim" },
       { "milisims/nvim-luaref" },
       {
          "folke/trouble.nvim",
@@ -67,17 +51,30 @@ M.setup = function()
       --    end
       -- },
       {
-         "norcalli/nvim-colorizer.lua",
+         "NvChad/nvim-colorizer.lua",
          config = function()
-            require("colorizer").setup({ "css", "scss", "html", "typescript", "javascript", "eruby" }, {
-               RGB = true, -- #RGB hex codes
-               RRGGBB = true, -- #RRGGBB hex codes
-               RRGGBBAA = true, -- #RRGGBBAA hex codes
-               rgb_fn = true, -- CSS rgb() and rgba() functions
-               hsl_fn = true, -- CSS hsl() and hsla() functions
-               css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-               css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-            })
+            require("colorizer").setup {
+               filetypes = { "css", "scss", "html", "typescript", "javascript", "lua" },
+               user_default_options = {
+                  RGB = true, -- #RGB hex codes
+                  RRGGBB = true, -- #RRGGBB hex codes
+                  names = true, -- "Name" codes like Blue or blue
+                  RRGGBBAA = false, -- #RRGGBBAA hex codes
+                  AARRGGBB = false, -- 0xAARRGGBB hex codes
+                  rgb_fn = false, -- CSS rgb() and rgba() functions
+                  hsl_fn = false, -- CSS hsl() and hsla() functions
+                  css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+                  css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+                  -- Available modes for `mode`: foreground, background,  virtualtext
+                  mode = "background", -- Set the display mode.
+                  -- Available methods are false / true / "normal" / "lsp" / "both"
+                  -- True is same as normal
+                  tailwind = true, -- Enable tailwind colors
+                  -- parsers can contain values used in |user_default_options|
+                  sass = { enable = false, parsers = { css }, }, -- Enable sass colors
+                  virtualtext = "■",
+               }
+            }
          end,
       },
       -- {
@@ -91,7 +88,6 @@ M.setup = function()
       -- },
       {
          "windwp/nvim-ts-autotag",
-         event = "InsertEnter",
          config = function()
             require("nvim-ts-autotag").setup()
          end,
@@ -100,11 +96,6 @@ M.setup = function()
       --   "metakirby5/codi.vim",
       --   cmd = "Codi",
       -- },
-      {
-         "lukas-reineke/indent-blankline.nvim",
-         setup = configs.setup_indent_blankline,
-         config = configs.indent_blankline
-      },
       {
          "folke/todo-comments.nvim",
          event = "BufRead",
@@ -125,8 +116,8 @@ M.setup = function()
       },
       {
          "phaazon/hop.nvim",
-         as = "hop",
-         keys = { "s", "S" },
+         branch = 'v2', -- optional but strongly recommended
+         event = "BufRead",
          config = function()
             require("hop").setup()
             vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
@@ -166,7 +157,25 @@ M.setup = function()
          config = function()
             require('fold-preview').setup()
          end
-      }
+      },
+      {
+         "ray-x/lsp_signature.nvim",
+         event = "BufRead",
+         config = function()
+            require "lsp_signature".on_attach({
+               hint_enable = true, -- virtual hint enable
+               hint_prefix = "", --  NOTE: for the terminal not support emoji, might crash
+               hint_scheme = "String",
+            })
+         end,
+      },
+      {
+         "windwp/nvim-spectre",
+         event = "BufRead",
+         config = function()
+            require("spectre").setup()
+         end,
+      },
    }
 
    -- Autocommands (https://neovim.io/doc/user/autocmd.html)
