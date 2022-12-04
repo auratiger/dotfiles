@@ -173,7 +173,15 @@ M.setup = function()
          "windwp/nvim-spectre",
          event = "BufRead",
          config = function()
-            require("spectre").setup()
+            require("spectre").setup({
+               mapping = {
+                  ['run_replace'] = {
+                     map = "<leader>ra",
+                     cmd = "<cmd>lua require('spectre.actions').run_replace()<CR>",
+                     desc = "replace all"
+                  },
+               }
+            })
          end,
       },
    }

@@ -20,11 +20,12 @@ M.setup = function()
       p = { "<cmd>TodoTelescope<cr>", "test" },
    }
 
-   mappings["R"] = {
+   mappings["r"] = {
       name = "Replace",
-      r = { function() require('spectre').open() end, "Replace all" },
+      a = { function() require('spectre').open() end, "Replace all" },
       w = { function() require('spectre').open_visual({ select_word = true }) end, "Replace word" },
       f = { function() require('spectre').open_file_search() end, "In file" },
+      -- a  -- occupied by plugin
    }
 
    mappings["q"] = nil -- removes duplicate close option
