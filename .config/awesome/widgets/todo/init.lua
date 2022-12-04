@@ -5,8 +5,6 @@ local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
 
-local commands = require("common.commands")
-
 local task_factory = require("widgets.todo.task_factory")
 local header       = require("widgets.todo.header")
 

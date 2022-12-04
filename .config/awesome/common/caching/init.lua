@@ -1,5 +1,4 @@
-local awful    = require('awful')
-local commands = require('common.commands')
+local awful = require('awful')
 
 local function caching(cache_file, signal, data_table, single_item_processor, full_text, index)
    awful.spawn.with_shell(commands.create_text_file(cache_file))

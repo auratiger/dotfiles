@@ -3,7 +3,6 @@ local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
 
-local commands       = require("common.commands")
 local icons          = require("common.icons")
 local slider_factory = require("widgets.control_slider")
 

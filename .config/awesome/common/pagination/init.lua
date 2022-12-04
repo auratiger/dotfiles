@@ -1,5 +1,4 @@
-local awful    = require("awful")
-local commands = require("common.commands")
+local awful = require("awful")
 
 return {
    getPage = function(path, callback, page, size, col, order)
@@ -59,4 +58,3 @@ return {
 
    end
 }
-

@@ -1,8 +1,6 @@
 local awful = require("awful")
 local gears = require("gears")
 
-local commands = require("common.commands")
-
 local btn  = require('widgets.todo.delete_btn')
 local task = require('widgets.todo.task')
 

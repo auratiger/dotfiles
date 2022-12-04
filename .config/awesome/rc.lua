@@ -67,7 +67,6 @@ beautiful.init(theme_path)
 
 require("common.utils")
 require("global_events")
-require("common.widget_factory")
 require("bindings")
 require("layout")
 require("screen")

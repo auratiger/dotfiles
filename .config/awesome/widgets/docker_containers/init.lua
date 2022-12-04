@@ -4,7 +4,6 @@ local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
 local gears     = require("gears")
 
-local commands    = require("common.commands")
 local icons       = require("common.icons")
 local shape_utils = require("common.shape")
 local pagination  = require("common.pagination")
