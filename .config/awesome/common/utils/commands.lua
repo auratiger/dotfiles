@@ -1,5 +1,7 @@
 commands = {
 
+   audio_device_switch = "bash ~/.config/awesome/scripts/audio-device-switch.sh",
+
    svol =
    [[
      zsh -c "amixer get Master | tail -1 | awk '{print $4}' | grep -o '[0-9]\+'"

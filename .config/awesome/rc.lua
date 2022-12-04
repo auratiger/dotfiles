@@ -63,5 +63,5 @@ require("configuration")
 require("notifications")
 
 -- Autostart applications
-awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+awful.spawn.with_shell("~/.config/awesome/scripts/autostart.sh")
 awful.spawn.with_shell("picom -b --config  $HOME/.config/awesome/picom.conf")

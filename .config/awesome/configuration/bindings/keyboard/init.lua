@@ -47,9 +47,8 @@ globalkeys = my_table.join(
    awful.key({ modkey }, "F9", function() awful.util.spawn(mailclient) end,
       { description = mailclient, group = "function keys" }),
 
-   awful.key({ modkey }, "F10",
-      function() awful.util.spawn("rofi -theme-str 'window {width: 100%;height: 100%;}' -show drun") end,
-      { description = "rofi fullscreen", group = "function keys" }),
+   awful.key({ modkey }, "F10", function() awful.spawn.with_shell(commands.audio_device_switch) end,
+      { description = "change audio device", group = "function keys" }),
 
    awful.key({ modkey }, "F11",
       function()
@@ -223,8 +222,6 @@ globalkeys = my_table.join(
    awful.key({ "Control", altkey }, "o",
       function() awful.spawn.with_shell("$HOME/.config/awesome/scripts/picom-toggle.sh") end,
       { description = "Picom toggle", group = "alt+ctrl" }),
-   awful.key({ "Control", altkey }, "u", function() awful.util.spawn("pavucontrol") end,
-      { description = "pulseaudio control", group = "alt+ctrl" }),
    awful.key({ "Control", altkey }, "m", function() awful.util.spawn("xfce4-settings-manager") end,
       { description = "Xfce settings manager", group = "alt+ctrl" }),
    awful.key({ "Control", altkey }, "p", function() awful.util.spawn("pamac-manager") end,
