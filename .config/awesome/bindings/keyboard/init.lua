@@ -87,7 +87,7 @@ globalkeys = my_table.join(
    awful.key({ modkey }, "]", function() raise_or_spawn(chat) end,
       { description = chat, group = "hotkeys" }),
 
-   awful.key({ modkey }, ";", function() awful.util.spawn("rofi -show drun") end,
+   awful.key({ modkey }, "'", function() awful.util.spawn("rofi -show drun") end,
       { description = "rofi", group = "hotkeys" }),
 
    awful.key({ modkey, }, "s", hotkeys_popup.show_help,
@@ -270,11 +270,10 @@ globalkeys = my_table.join(
    -- ---------------
    awful.key({}, "Print",
       function() awful.util.spawn("scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'") end
-      ,
-      { description = "Scrot", group = "screenshots" }),
+      , { description = "Scrot", group = "screenshots" }),
    awful.key({ "Control" }, "Print", function() awful.util.spawn("xfce4-screenshooter") end,
       { description = "Xfce screenshot", group = "screenshots" }),
-   awful.key({ "Control", "Shift" }, "Print", function() awful.util.spawn("gnome-screenshot -i") end,
+   awful.key({ "Control", "Shift" }, "Print", function() awful.util.spawn("flameshot gui") end,
       { description = "Gnome screenshot", group = "screenshots" }),
 
 

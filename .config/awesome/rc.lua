@@ -15,9 +15,7 @@ lain : https://github.com/lcpz/lain
 --
 require("awful.autofocus")
 local awful     = require("awful") --Everything related to window managment
-local wibox     = require("wibox") -- Widget and layout library
 local beautiful = require("beautiful") -- Theme handling library
-local dpi       = require("beautiful.xresources").apply_dpi
 local naughty   = require("naughty") -- Notification library
 
 -- Enable hotkeys help widget for VIM and other apps

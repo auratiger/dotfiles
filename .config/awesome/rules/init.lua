@@ -57,9 +57,12 @@ awful.rules.rules = {
 
    { rule = { instance = chat },
       properties = { screen = 2, tag = cfg.screens[2].tags[1], switchtotag = true, maximized = true } },
+
    { rule = { instance = musicplayer },
       properties = { screen = 2, tag = cfg.screens[2].tags[2], switchtotag = true, maximized = true } },
 
+   { rule = { name = "Picture in picture" }, -- vivaldi floating video player
+      properties = { screen = 2, tag = cfg.screens[2].tags[3], switchtotag = true } },
 
    { rule = { class = "Xfce4-settings-manager" },
       properties = { floating = false } },

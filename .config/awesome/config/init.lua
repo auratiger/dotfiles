@@ -53,7 +53,7 @@ cfg = {
          shape = shape_utils.default_frr
       },
       { -- screen 2
-         tags = { "", "" },
+         tags = { "", "", "" },
          shape = shape_utils.default_frr
       },
       { -- screen 3

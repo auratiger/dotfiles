@@ -13,6 +13,7 @@ run xrandr --output DisplayPort-0 --primary --mode 2560x1440 --pos 1920x0 --rota
 #autorandr horizontal
 run nm-applet
 #run caffeine
+# run flameshot
 run pamac-tray
 run xfce4-power-manager
 run blueberry-tray
