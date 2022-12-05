@@ -6,6 +6,19 @@ local gears     = require("gears")
 local naughty   = require('naughty')
 
 local icons = require("common.icons")
+local delete_btn = require("panels.notifications_bar.delete_btn")
+
+local header = {
+   widget  = wibox.container.margin,
+   margins = dpi(10),
+   {
+      markup  = "<span foreground='" .. beautiful.fg_focus .. "'>Notifications</span>",
+      font    = beautiful.font_famaly .. '20',
+      align   = "center",
+      opacity = 1,
+      widget  = wibox.widget.textbox,
+   }
+}
 
 local notifications = wibox.widget({
    layout           = require("dependencies.overflow").vertical,
@@ -135,8 +148,7 @@ local is_relevant_to_add = function(n)
 end
 
 local add = function(n, notif_icon)
-   n:connect_signal(
-      'destroyed',
+   n:connect_signal('destroyed',
       function(self, reason, keep_visble)
          if is_relevant_to_add(n) then
             local notif = add_notif(n.app_name, n.message, notif_icon)
@@ -146,12 +158,24 @@ local add = function(n, notif_icon)
    )
 end
 
-naughty.connect_signal(
-   'added',
+naughty.connect_signal('added',
    function(n)
       local notif_icon = n.icon or n.app_icon
       add(n, notif_icon)
    end
 )
 
-return notifications
+return {
+   widget = wibox.container.background,
+   shape = shape_utils.default_frr,
+   {
+      layout = wibox.layout.fixed.vertical,
+      {
+         bg     = beautiful.palette_c7,
+         widget = wibox.container.background,
+         header,
+      },
+      delete_btn.create(notifications),
+      notifications
+   }
+}

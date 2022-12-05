@@ -3,12 +3,11 @@ local gears = require("gears")
 local icons = require("common.icons")
 
 return {
-   create = function(s)
+   create = function()
       local notif_icon = icons.wbic("", 14)
 
       notif_icon:buttons(gears.table.join(awful.button({}, 1, function()
-         s.notif.visible = not s.notif.visible
-         notif_icon.toggle()
+         awesome.emit_signal('notifcenter::toggle')
       end)))
 
       return notif_icon

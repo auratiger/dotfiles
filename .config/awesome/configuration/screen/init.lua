@@ -134,8 +134,6 @@ awful.screen.connect_for_each_screen(function(s)
       panels_switch.add_panel(s, s.docker)
    end
 
-   s.notif = notif.create(s)
-
    wibar.create(s)
 end)
 -- }}}

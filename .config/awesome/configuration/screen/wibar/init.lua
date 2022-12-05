@@ -7,13 +7,10 @@ local wbm = require("widgets.wibar_monitor")
 
 local tags          = require("configuration.screen.tags")
 local tasks         = require("configuration.screen.tasks")
-local notifi        = require("configuration.screen.notif_icon")
 local panels_switch = require("configuration.screen.panels_switch")
 
 return {
    create = function(s)
-
-      local notif_icon = notifi.create(s)
 
       local cpu_section, ram_section, wb_player
 
@@ -191,7 +188,7 @@ return {
                         mytextclock,
                         wibox.widget.systray(),
                         {
-                           notif_icon,
+                           s.notifcenter.icon,
                            margins = 10,
                            widget  = wibox.container.margin
                         },

@@ -170,6 +170,10 @@ globalkeys = my_table.join(
       focused_screen.docker.toggle()
    end, { description = "open docker wibar", group = "wibars" }),
 
+   awful.key({ modkey, "Shift" }, "n", function()
+      awesome.emit_signal('notifcenter::toggle')
+   end, { description = "open notification wibar", group = "wibars" }),
+
    -- ----------------------
    -- | CTRL + SHIFT + ... |
    -- ----------------------

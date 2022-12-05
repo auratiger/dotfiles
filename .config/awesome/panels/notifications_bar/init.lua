@@ -1,50 +1,44 @@
 local awful     = require("awful")
 local wibox     = require("wibox")
 local beautiful = require("beautiful")
-local dpi       = beautiful.xresources.apply_dpi
 
-local notif_center = require("widgets.notification_center")
-local delete_btn   = require("panels.notifications_bar.delete_btn")
+require("panels.notifications_bar.listeners")
 
-return {
-   create = function(s)
+awful.screen.connect_for_each_screen(function(s)
+   s.notifcenter = {}
 
-      local notif = awful.wibar {
-         position = "right",
-         screen   = s,
-         width    = dpi(400),
-         height   = dpi(1000),
-         visible  = false,
+   s.notifcenter.popup = wibox {
+      screen = s,
+      ontop = true,
+      visible = false,
+      bg = beautiful.bg_normal,
+      fg = beautiful.fg_normal,
+      width = 400,
+      height = s.geometry.height - 100,
+   }
 
-         margins = {
-            top   = dpi(20),
-            right = dpi(10)
-         },
-      }
+   s.notifcenter.icon = require("panels.notifications_bar.notif_icon").create()
 
-      local header = {
-         widget  = wibox.container.margin,
-         margins = dpi(10),
-         {
-            markup  = "<span foreground='" .. beautiful.fg_focus .. "'>Notifications</span>",
-            font    = beautiful.font_famaly .. '20',
-            align   = "center",
-            opacity = 1,
-            widget  = wibox.widget.textbox,
-         }
-      }
+   local content = require("panels.notifications_bar.content")
+   s.notifcenter.popup:setup(content)
 
-      notif:setup {
-         layout = wibox.layout.fixed.vertical,
-         {
-            bg     = beautiful.palette_c7,
-            widget = wibox.container.background,
-            header,
-         },
-         delete_btn,
-         notif_center
-      }
+   awful.placement.top_right(s.notifcenter.popup, { margins = { top = 60, right = 40 }, parent = s })
 
-      return notif
+   local self = s.notifcenter.popup
+
+   function s.notifcenter.open()
+      self.visible = true
    end
-}
+
+   function s.notifcenter.hide()
+      self.visible = false
+   end
+
+   function s.notifcenter.toggle()
+      if self.visible then
+         s.notifcenter.hide()
+      else
+         s.notifcenter.open()
+      end
+   end
+end)
