@@ -5,8 +5,7 @@ local dpi       = beautiful.xresources.apply_dpi
 local gears     = require("gears")
 local naughty   = require('naughty')
 
-
-local icons       = require("common.icons")
+local icons = require("common.icons")
 
 local notifications = wibox.widget({
    layout           = require("dependencies.overflow").vertical,
@@ -17,22 +16,20 @@ local notifications = wibox.widget({
    },
    scrollbar_width  = dpi(8),
    step             = 50,
-
 })
 
 local add_notif = function(title, text, notif_icon)
    local icon_widget = icons.wbic("", 25, beautiful.fg_focus)
 
-
    if notif_icon then
       icon_widget = {
          image         = notif_icon,
+         resize        = true,
          widget        = wibox.widget.imagebox,
-         forced_width  = dpi(beautiful.font_size * 2),
-         forced_height = dpi(beautiful.font_size * 2),
+         forced_width  = dpi(beautiful.font_size * 3),
+         forced_height = dpi(beautiful.font_size * 3),
       }
    end
-
 
    local close_icon = wibox.widget({
       id      = "icon",
@@ -43,13 +40,11 @@ local add_notif = function(title, text, notif_icon)
       widget  = wibox.widget.textbox,
    })
 
-
    local icon_section = {
       widget = wibox.container.margin,
       right  = dpi(15),
       icon_widget
    }
-
 
    local title_section = {
       markup  = "<span foreground='" .. beautiful.fg_focus .. "'><b>" .. title .. "</b></span>",
@@ -59,13 +54,11 @@ local add_notif = function(title, text, notif_icon)
       widget  = wibox.widget.textbox,
    }
 
-
    local close_btn_section = {
       widget  = wibox.container.margin,
       margins = dpi(5),
       close_icon
    }
-
 
    local message_section = {
       text    = text,
@@ -74,7 +67,6 @@ local add_notif = function(title, text, notif_icon)
       font    = beautiful.font,
       widget  = wibox.widget.textbox,
    }
-
 
    local notification = wibox.widget({
       widget = wibox.container.margin,
@@ -117,34 +109,30 @@ local add_notif = function(title, text, notif_icon)
       }
    })
 
-
    close_icon:buttons(gears.table.join(awful.button({}, 1, function()
       notifications:remove_widgets(notification, true)
    end)))
-
 
    notification:connect_signal('mouse::enter', function()
       close_icon.opacity = 1
    end)
 
-
    notification:connect_signal('mouse::leave', function()
       close_icon.opacity = 0
    end)
-
 
    return notification
 end
 
 local is_relevant_to_add = function(n)
+   return true
 
-   if n.app_name == "Player" then
-      return false
-   else
-      return true
-   end
+   -- if n.app_name == "Player" then
+   --    return false
+   -- else
+   --    return true
+   -- end
 end
-
 
 local add = function(n, notif_icon)
    n:connect_signal(
@@ -154,11 +142,9 @@ local add = function(n, notif_icon)
             local notif = add_notif(n.app_name, n.message, notif_icon)
             notifications:insert(1, notif)
          end
-
       end
    )
 end
-
 
 naughty.connect_signal(
    'added',
@@ -167,6 +153,5 @@ naughty.connect_signal(
       add(n, notif_icon)
    end
 )
-
 
 return notifications

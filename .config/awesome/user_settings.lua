@@ -1,8 +1,6 @@
 local gears = require("gears") --Utilities such as color parsing and objects
 local awful = require("awful") --Everything related to window managment
 
-local naughty = require("naughty")
-
 my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 -- NOTE: Awesomewm loads before zsh, and thus reads it's env variables from the /etc/profile config.
@@ -153,9 +151,3 @@ cfg = {
       }
    }
 }
-
-naughty.persistence_enabled = true
-naughty.config.defaults.ontop = true
-naughty.config.defaults.timeout = 5
-naughty.config.defaults.title = "Alert"
-naughty.config.defaults.position = "top_right"

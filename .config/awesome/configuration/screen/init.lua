@@ -7,9 +7,12 @@ require("configuration.screen.rclick_menu")
 local wibar = require("configuration.screen.wibar")
 
 local panels_switch = require("configuration.screen.panels_switch")
-local stat_bar      = require("panels.stat_bar")
-local user_bar      = require("panels.user_bar")
-local docker_bar    = require("panels.docker_bar")
+
+local stat_bar   = require("panels.stat_bar")
+local user_bar   = require("panels.user_bar")
+local docker_bar = require("panels.docker_bar")
+
+local notif = require("panels.notifications_bar")
 
 awful.util.terminal = terminal
 
@@ -130,6 +133,8 @@ awful.screen.connect_for_each_screen(function(s)
       s.docker = docker_bar.create(s)
       panels_switch.add_panel(s, s.docker)
    end
+
+   s.notif = notif.create(s)
 
    wibar.create(s)
 end)

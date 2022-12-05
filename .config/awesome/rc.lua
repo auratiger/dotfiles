@@ -59,7 +59,6 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 require("common.utils")
 require("user_settings")
 require("configuration")
-require("notifications")
 
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/scripts/autostart.sh")

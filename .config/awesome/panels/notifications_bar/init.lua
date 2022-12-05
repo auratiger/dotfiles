@@ -4,14 +4,12 @@ local wibox     = require("wibox")
 local dpi       = beautiful.xresources.apply_dpi
 
 local notif_center = require("widgets.notification_center")
-local delete_btn   = require("configuration.screen.notifications.delete_btn")
+local delete_btn   = require("panels.notifications_bar.delete_btn")
 
 return {
-
    create = function(s)
 
       local notif = awful.wibar {
-
          position = "right",
          screen   = s,
          width    = dpi(400),
@@ -23,7 +21,6 @@ return {
             right = dpi(10)
          },
       }
-
 
       local header = {
          widget  = wibox.container.margin,
@@ -37,7 +34,6 @@ return {
          }
       }
 
-
       notif:setup {
          layout = wibox.layout.fixed.vertical,
          {
@@ -50,7 +46,5 @@ return {
       }
 
       return notif
-
-
    end
 }
