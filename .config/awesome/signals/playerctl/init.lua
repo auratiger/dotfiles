@@ -1,6 +1,6 @@
 local awful = require("awful")
 
-playerctl = {}
+local playerctl = {}
 playerctl.command = {}
 playerctl.command.kill_metadata_check = [[
   ps x | grep playerctl | grep -v grep | awk '{print $1}' | xargs kill
@@ -9,7 +9,6 @@ playerctl.command.kill_metadata_check = [[
 playerctl.command.start_metadata_check = [[
  playerctl metadata --format '@artist{{artist}}artist@title{{title}}title@status{{status}}status@album{{album}}album@alink{{mpris:artUrl}}alink@position{{position}}position@length{{mpris:length}}length@' --follow
 ]]
-
 
 awful.spawn.easy_async_with_shell(playerctl.command.kill_metadata_check, function()
 

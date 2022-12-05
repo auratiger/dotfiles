@@ -106,7 +106,6 @@ return {
       table.insert(panels[s.index], panel)
    end,
 
-
    create = function(s)
       local body = wibox.layout.fixed.horizontal()
       body.spacing = dpi(5)

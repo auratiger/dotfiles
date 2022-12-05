@@ -5,6 +5,7 @@ local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
 
 local icons = require("common.icons")
+local weather_signal = require("signals.weather_signal")
 
 local weather_icons_map = {
    [1000] = '',
@@ -35,29 +36,15 @@ local weather_icons_map = {
    [1201] = '',
 }
 
-return {
+local module = {
    name = "weather",
-   watchdogs = {
-      {
-         command = 'curl https://api.weatherapi.com/v1/current.json?key='
-             .. os.getenv("WEATHER_API_COM_API_KEY")
-             .. '&q=' .. os.getenv("WEATHER_API_COM_CITY") .. '&aqi=no',
-         interval = 200,
-         callback = function(widget, stdout)
-            local status = stdout:match('code":([0-9]+)},"wind_mph')
-            local temperature = stdout:match('temp_c":(.+),"temp_f')
-            awesome.emit_signal("data:weather", status, temperature)
-         end
-      }
-   },
+   watchdogs = weather_signal,
    create = function()
-
       local icon = icons.wbic('', '30', beautiful.palette_c1)
       local temp_txt = wibox.widget({
          widget = wibox.widget.textbox,
          text = '0',
          font = beautiful.font_famaly .. '26'
-
       })
 
       local base_widget = wibox.widget({
@@ -69,7 +56,6 @@ return {
          temp_txt,
          layout = wibox.layout.fixed.horizontal
       })
-
 
       awesome.connect_signal("data:weather", function(status, t)
          local weather_icon = ''
@@ -86,5 +72,13 @@ return {
 
       return base_widget
 
+   end
+}
+
+return {
+   name = module.name,
+   watchdogs = module.watchdogs,
+   create = function(s)
+      return createWidget(module, s)
    end
 }

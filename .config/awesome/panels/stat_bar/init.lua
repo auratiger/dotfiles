@@ -2,12 +2,13 @@ local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful").xresources.apply_dpi
 
+local sysstat_signal = require("signals.sysstat_signal")
+
 local arcchart_stat = require("widgets.arcchart_stat")
 
 local module = {
    name = "stats",
-   watchdogs = watchdogs, -- defined in global events
-
+   watchdogs = sysstat_signal,
    create = function(s)
 
       local stat = awful.wibar({
@@ -61,12 +62,9 @@ local module = {
             d_home.mirr.bar.value = val
          end)
 
-
-
-
       stat:setup {
          {
-            createWidget(require("widgets.processes")),
+            require("widgets.processes").create(),
             widget = wibox.container.margin,
             top = dpi(5),
             right = dpi(10),

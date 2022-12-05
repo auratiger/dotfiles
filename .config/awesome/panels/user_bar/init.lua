@@ -2,8 +2,6 @@ local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful").xresources.apply_dpi
 
-
-
 local card     = require("widgets.card")
 local calendar = require("widgets.calendar").create()
 local todo     = require("widgets.todo").create()
@@ -29,7 +27,7 @@ return {
       local header = card.create({
          profile,
          nil,
-         createWidget(require("widgets.weather")),
+         require("widgets.weather").create(),
          layout = wibox.layout.align.horizontal
       })
 

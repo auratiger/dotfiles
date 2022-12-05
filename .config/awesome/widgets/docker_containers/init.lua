@@ -4,64 +4,18 @@ local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
 local gears     = require("gears")
 
-local icons       = require("common.icons")
+local icons = require("common.icons")
 
-local pagination  = require("common.pagination")
-local caching     = require("common.caching")
+local pagination = require("common.pagination")
+local docker_signal = require("signals.docker_signal")
 
 local droplist       = require("widgets.droplist")
 local paginator      = require("widgets.paginator")
 local container_card = require("widgets.docker_containers.docker_container_card")
 
-return {
+local module = {
    name = "docker",
-   watchdogs = {
-      {
-         command = [[
-          zsh -c "docker ps -a --format '{{.ID}}|||{{.Image}}|||{{.Names}}|||{{.Ports}}|||{{.Status}}|||{{.RunningFor}}'"
-        ]],
-         interval = 20,
-         callback = function(widget, stdout)
-
-            awful.spawn.with_shell(commands.create_text_file(cfg.panels.docker.cache_file))
-
-            stdout = stdout:gsub("||||||", "|||Noinfo|||")
-            stdout = stdout:gsub(", ", "@")
-
-            local lines = utils.split(stdout, '\n')
-
-            local containers = {}
-            for _, value in ipairs(lines) do
-               if #value > 0 then
-                  value = utils.trim(value)
-                  table.insert(containers, value)
-               end
-            end
-
-            caching.procedures.caching(cfg.panels.docker.cache_file, "sysstat::docker_container_add", containers,
-               function(value, callback)
-
-                  local line_data = utils.split(utils.trim(value), "|||")
-
-                  line_data[5] = line_data[5]:match("^%w+")
-
-                  local time = line_data[6]:match("^%d+%s+%w+")
-                  if time == nil then
-                     line_data[6] = line_data[6]:match("About%s+a%w*%s+(%w+)")
-                  else
-                     line_data[6] = time
-                  end
-
-                  if line_data[6] ~= nil then
-                     line_data[6] = line_data[6]:gsub("%s", "|||")
-                  end
-
-                  callback(line_data)
-               end)
-         end
-      }
-   },
-
+   watchdogs = docker_signal,
    create = function()
 
       local scroll = {
@@ -166,17 +120,13 @@ return {
          update()
       end
 
-
       pgntr = paginator.create(10, paginator_prev, paginator_next)
-
 
       local sortDirection = icons.wbi(direction == 'asc' and '' or '', 12)
       sortDirection:buttons(gears.table.join(awful.button({}, 1, function()
          sortDirection.text = toggleOrder()
          update()
       end)))
-
-
 
       droplist.create(sort_menu,
          shape_utils.partially_rounded_rect(true, true, true, false, beautiful.rounded),
@@ -221,7 +171,6 @@ return {
          }
       )
 
-
       local header_widget = wibox.widget({
          widget = wibox.container.margin,
          margins = dpi(3),
@@ -245,7 +194,6 @@ return {
          }
       })
 
-
       awesome.connect_signal("sysstat::docker_container_add", function()
          page = 1
          update()
@@ -259,5 +207,13 @@ return {
          base_widget
       })
 
+   end
+}
+
+return {
+   name = module.name,
+   watchdogs = module.watchdogs,
+   create = function(s)
+      return createWidget(module, s)
    end
 }
