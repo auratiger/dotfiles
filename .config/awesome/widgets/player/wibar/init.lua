@@ -5,6 +5,8 @@ local wibox     = require("wibox")
 local spotify  = require("common.spotify")
 local controls = require("widgets.player.controls")
 
+require("signals.playerctl_signal")
+
 player_works = true
 
 local make_ctr_margin = function(content)

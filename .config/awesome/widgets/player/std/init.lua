@@ -4,6 +4,8 @@ local dpi       = beautiful.xresources.apply_dpi
 local gears     = require("gears")
 local spotify   = require("common.spotify")
 
+require("signals.playerctl_signal")
+
 player_works = true
 
 local on_player_pause_cmd = "spotify"

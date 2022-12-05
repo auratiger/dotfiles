@@ -1,5 +1,4 @@
 local disk_callback = function(sig, widget, stdout)
-
    local used      = stdout:match('(.*) ')
    local available = stdout:match(' (.*)')
    local total     = used + available

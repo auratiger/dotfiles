@@ -58,7 +58,6 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 
 require("common.utils")
 require("user_settings")
-require("signals")
 require("configuration")
 require("notifications")
 
