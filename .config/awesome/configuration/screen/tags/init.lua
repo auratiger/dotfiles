@@ -42,7 +42,7 @@ return {
          widget = wibox.container.margin
       }
 
-      local widget_template = {
+      local tag_template = {
          id     = 'background_role',
          widget = wibox.container.background,
          {
@@ -52,7 +52,6 @@ return {
             name_section,
          },
       }
-
 
       -- return awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
       return awful.widget.taglist {
@@ -69,7 +68,7 @@ return {
             layout  = wibox.layout.fixed.horizontal
          },
 
-         widget_template = widget_template
+         widget_template = tag_template
       }
    end
 }

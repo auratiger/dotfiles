@@ -46,11 +46,13 @@ theme.fg_focus    = theme.palette_c4
 theme.fg_urgent   = "d61ff0"
 theme.fg_minimize = "#ffffff"
 
-theme.useless_gap   = dpi(5)
-theme.border_width  = dpi(2)
-theme.border_normal = theme.col_transparent
-theme.border_focus  = theme.palette_c2
-theme.border_marked = "#91231c"
+theme.normal_opacity = 1
+theme.focus_opacity  = 0.6
+theme.useless_gap    = dpi(5)
+theme.border_width   = dpi(2)
+theme.border_normal  = theme.col_transparent
+theme.border_focus   = theme.palette_c2
+theme.border_marked  = "#91231c"
 
 
 -- -- Progreess bar widget settings
@@ -76,7 +78,7 @@ theme.battery_size      = 60
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
---theme.taglist_bg_focus = "#ff0000"
+-- theme.taglist_fg_focus  = "#ff0000"
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(0)

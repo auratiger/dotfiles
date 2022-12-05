@@ -79,6 +79,15 @@ local create_menu_panel_button = function(glyph, mode, screen, panel)
       icon.toggle()
    end)))
 
+
+   btn:connect_signal('mouse::enter', function()
+      btn.opacity = beautiful.focus_opacity
+   end)
+
+   btn:connect_signal('mouse::leave', function()
+      btn.opacity = beautiful.normal_opacity
+   end)
+
    return btn
 end
 
