@@ -17,14 +17,34 @@ icons.wbi = function(glyph, size)
    return icon
 end
 
-icons.wbic = function(glyph, size, col)
+icons.wbic = function(glyph, size, fg_normal, fg_focus)
+
+   if fg_normal == nil then
+      fg_normal = beautiful.fg_normal
+   end
+
+   if fg_focus == nil then
+      fg_focus = beautiful.fg_focus
+   end
+
    local icon = wibox.widget {
-      markup  = "<span foreground='" .. col .. "'>" .. glyph .. "</span>",
+      active  = false,
+      markup  = "<span foreground='" .. fg_normal .. "'>" .. glyph .. "</span>",
       align   = "center",
       opacity = 1,
       font    = beautiful.icons_font .. size,
       widget  = wibox.widget.textbox,
    }
+
+   icon.toggle = function()
+      icon.active = not icon.active
+
+      if icon.active then
+         icon.markup = "<span foreground='" .. fg_focus .. "'>" .. glyph .. "</span>"
+      else
+         icon.markup = "<span foreground='" .. fg_normal .. "'>" .. glyph .. "</span>"
+      end
+   end
 
    return icon
 end

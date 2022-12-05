@@ -1,6 +1,6 @@
 local awful     = require("awful")
-local beautiful = require("beautiful")
 local wibox     = require("wibox")
+local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
 
 local notif_center = require("widgets.notification_center")

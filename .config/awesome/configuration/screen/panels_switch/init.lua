@@ -1,16 +1,13 @@
 local awful     = require("awful")
 local gears     = require("gears")
-local beautiful = require("beautiful")
 local wibox     = require("wibox")
+local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
 
 local icons = require("common.icons")
 
 local sub_panel_mode = sub_panel_mode
 local show_sub_panel = show_sub_panel
-
-local active_panel_switch_icon
-local active_panel_switch_icon_section
 
 local panels = {}
 
@@ -20,26 +17,19 @@ local close_all_sub_panels = function(s)
    for _, panel in ipairs(screen_panels) do
       panel.visible = false
    end
-
-   if active_panel_switch_icon and active_panel_switch_icon_section then
-      active_panel_switch_icon_section.markup = "<span foreground='" ..
-          beautiful.fg_normal .. "'>" .. active_panel_switch_icon .. "</span>"
-   end
 end
 
 local create_menu_panel_button = function(glyph, mode, screen, panel)
 
-   local toggle = function(icon)
+   local toggle_panel = function()
 
       local close = function()
          panel.visible  = false
          show_sub_panel = false
-         icon.markup    = "<span foreground='" .. beautiful.fg_normal .. "'>" .. glyph .. "</span>"
       end
 
       local close_active = function()
          show_sub_panel = false
-         icon.markup    = "<span foreground='" .. beautiful.fg_normal .. "'>" .. glyph .. "</span>"
          close_all_sub_panels(screen)
       end
 
@@ -53,17 +43,10 @@ local create_menu_panel_button = function(glyph, mode, screen, panel)
          sub_panel_mode = mode
          show_sub_panel = true
          panel.visible  = true
-         icon.markup    = "<span foreground='" .. beautiful.fg_focus .. "'>" .. glyph .. "</span>"
-
-         active_panel_switch_icon = glyph
-         active_panel_switch_icon_section = icon
-
       end
-
    end
 
-
-   local icon = icons.wbic(glyph, beautiful.font_size, beautiful.fg_normal)
+   local icon = icons.wbic(glyph, beautiful.font_size)
 
    local btn = wibox.widget {
       bg     = beautiful.palette_c7,
@@ -86,16 +69,18 @@ local create_menu_panel_button = function(glyph, mode, screen, panel)
    }
 
    -- asign the toggle function to each panel
-   panel.toggle = function() toggle(icon) end
+   panel.toggle = function()
+      toggle_panel()
+      icon.toggle()
+   end
 
    btn:buttons(gears.table.join(awful.button({}, 1, function()
-      toggle(icon)
+      toggle_panel()
+      icon.toggle()
    end)))
 
    return btn
 end
-
-
 
 return {
    add_panel = function(s, panel)
