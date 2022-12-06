@@ -1,6 +1,7 @@
 local awful     = require("awful")
 local wibox     = require("wibox")
 local beautiful = require("beautiful")
+local dpi       = beautiful.xresources.apply_dpi
 
 require("panels.notifications_bar.listeners")
 
@@ -8,19 +9,24 @@ awful.screen.connect_for_each_screen(function(s)
    s.notifcenter = {}
 
    s.notifcenter.popup = wibox {
-      screen = s,
-      ontop = true,
+      screen  = s,
+      ontop   = true,
       visible = false,
-      bg = beautiful.bg_normal,
-      fg = beautiful.fg_normal,
-      width = 400,
-      height = s.geometry.height - 100,
+      bg      = beautiful.bg_normal,
+      fg      = beautiful.fg_normal,
+      width   = 500,
+      shape   = shape_utils.default_frr,
+      -- height = s.geometry.height - 100,
+      height  = dpi(1020),
    }
 
    s.notifcenter.icon = require("panels.notifications_bar.notif_icon").create()
 
    local content = require("panels.notifications_bar.content")
-   s.notifcenter.popup:setup(content)
+   s.notifcenter.popup:setup({
+      content,
+      layout = wibox.layout.flex.vertical
+   })
 
    awful.placement.top_right(s.notifcenter.popup, { margins = { top = 60, right = 40 }, parent = s })
 

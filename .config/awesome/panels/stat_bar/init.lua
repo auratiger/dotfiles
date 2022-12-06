@@ -1,6 +1,7 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local dpi   = require("beautiful").xresources.apply_dpi
+local awful     = require("awful")
+local wibox     = require("wibox")
+local beautiful = require("beautiful")
+local dpi       = beautiful.xresources.apply_dpi
 
 local sysstat_signal = require("signals.sysstat_signal")
 
@@ -19,7 +20,8 @@ local module = {
          width    = dpi(380),
          height   = dpi(1020),
          margins  = {
-            left = dpi(15)
+            left = beautiful.useless_gap,
+            right = beautiful.useless_gap,
          }
       })
 

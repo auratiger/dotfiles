@@ -1,24 +1,10 @@
-local awful     = require("awful")
 local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
-local gears     = require("gears")
 local naughty   = require('naughty')
 
-local icons = require("common.icons")
 local delete_btn = require("panels.notifications_bar.delete_btn")
-
-local header = {
-   widget  = wibox.container.margin,
-   margins = dpi(10),
-   {
-      markup  = "<span foreground='" .. beautiful.fg_focus .. "'>Notifications</span>",
-      font    = beautiful.font_famaly .. '20',
-      align   = "center",
-      opacity = 1,
-      widget  = wibox.widget.textbox,
-   }
-}
+local notification_card = require("panels.notifications_bar.notif_card")
 
 local notifications = wibox.widget({
    layout           = require("dependencies.overflow").vertical,
@@ -30,112 +16,6 @@ local notifications = wibox.widget({
    scrollbar_width  = dpi(8),
    step             = 50,
 })
-
-local add_notif = function(title, text, notif_icon)
-   local icon_widget = icons.wbic("", 25, beautiful.fg_focus)
-
-   if notif_icon then
-      icon_widget = {
-         image         = notif_icon,
-         resize        = true,
-         widget        = wibox.widget.imagebox,
-         forced_width  = dpi(beautiful.font_size * 3),
-         forced_height = dpi(beautiful.font_size * 3),
-      }
-   end
-
-   local close_icon = wibox.widget({
-      id      = "icon",
-      markup  = "<span foreground='" .. beautiful.fg_focus .. "'>" .. "" .. "</span>",
-      align   = "center",
-      opacity = 0,
-      font    = beautiful.icons_font .. 20,
-      widget  = wibox.widget.textbox,
-   })
-
-   local icon_section = {
-      widget = wibox.container.margin,
-      right  = dpi(15),
-      icon_widget
-   }
-
-   local title_section = {
-      markup  = "<span foreground='" .. beautiful.fg_focus .. "'><b>" .. title .. "</b></span>",
-      align   = "left",
-      opacity = 1,
-      font    = beautiful.font,
-      widget  = wibox.widget.textbox,
-   }
-
-   local close_btn_section = {
-      widget  = wibox.container.margin,
-      margins = dpi(5),
-      close_icon
-   }
-
-   local message_section = {
-      text    = text,
-      align   = "left",
-      opacity = 1,
-      font    = beautiful.font,
-      widget  = wibox.widget.textbox,
-   }
-
-   local notification = wibox.widget({
-      widget = wibox.container.margin,
-      top    = dpi(10),
-      right  = dpi(10),
-      left   = dpi(10),
-      {
-         {
-            {
-               bg     = beautiful.palette_c7,
-               widget = wibox.container.background,
-               {
-                  widget = wibox.container.margin,
-                  top    = dpi(3),
-                  bottom = dpi(3),
-                  right  = dpi(5),
-                  left   = dpi(5),
-                  {
-                     icon_section,
-                     title_section,
-                     close_btn_section,
-                     layout = wibox.layout.align.horizontal
-                  }
-               }
-            },
-            {
-               widget = wibox.container.margin,
-               top    = dpi(3),
-               bottom = dpi(5),
-               right  = dpi(10),
-               left   = dpi(10),
-               message_section
-            },
-            layout = wibox.layout.align.vertical
-         },
-         bg     = beautiful.palette_c6,
-         shape  = shape_utils.default_frr,
-         widget = wibox.container.background,
-         height = dpi(30)
-      }
-   })
-
-   close_icon:buttons(gears.table.join(awful.button({}, 1, function()
-      notifications:remove_widgets(notification, true)
-   end)))
-
-   notification:connect_signal('mouse::enter', function()
-      close_icon.opacity = 1
-   end)
-
-   notification:connect_signal('mouse::leave', function()
-      close_icon.opacity = 0
-   end)
-
-   return notification
-end
 
 local is_relevant_to_add = function(n)
    return true
@@ -151,7 +31,7 @@ local add = function(n, notif_icon)
    n:connect_signal('destroyed',
       function(self, reason, keep_visble)
          if is_relevant_to_add(n) then
-            local notif = add_notif(n.app_name, n.message, notif_icon)
+            local notif = notification_card.create(n.app_name, n.message, notif_icon, notifications)
             notifications:insert(1, notif)
          end
       end
@@ -165,17 +45,11 @@ naughty.connect_signal('added',
    end
 )
 
-return {
-   widget = wibox.container.background,
-   shape = shape_utils.default_frr,
-   {
-      layout = wibox.layout.fixed.vertical,
-      {
-         bg     = beautiful.palette_c7,
-         widget = wibox.container.background,
-         header,
-      },
-      delete_btn.create(notifications),
-      notifications
-   }
-}
+local content = wibox.widget({
+   layout  = wibox.layout.fixed.vertical,
+   spacing = dpi(8),
+   delete_btn.create(notifications),
+   notifications
+})
+
+return require("widgets.card").create_with_header("Notifications", content)

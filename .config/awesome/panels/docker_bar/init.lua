@@ -1,6 +1,7 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local dpi   = require("beautiful").xresources.apply_dpi
+local awful     = require("awful")
+local wibox     = require("wibox")
+local beautiful = require("beautiful")
+local dpi       = beautiful.xresources.apply_dpi
 
 local card = require("widgets.card")
 local containers = card.create_with_header_placeholder(require("widgets.docker_containers").create())
@@ -17,7 +18,8 @@ return {
          height   = dpi(1020),
 
          margins = {
-            left = dpi(15)
+            left = beautiful.useless_gap,
+            right = beautiful.useless_gap,
          }
       })
 

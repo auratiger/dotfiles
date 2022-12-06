@@ -2,8 +2,7 @@ local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
 
-
-local icons       = require("common.icons")
+local icons = require("common.icons")
 
 return {
    create = function(id_text, image_text, name_text, ports_text, status_text, time_text)

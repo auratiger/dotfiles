@@ -5,8 +5,8 @@ local dpi       = beautiful.xresources.apply_dpi
 local gears     = require("gears")
 
 local icons = require("common.icons")
-
 local pagination = require("common.pagination")
+
 local docker_signal = require("signals.docker_signal")
 
 local droplist       = require("widgets.droplist")

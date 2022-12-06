@@ -1,6 +1,7 @@
-local awful = require("awful")
-local wibox = require("wibox")
-local dpi   = require("beautiful").xresources.apply_dpi
+local awful     = require("awful")
+local wibox     = require("wibox")
+local beautiful = require("beautiful")
+local dpi       = beautiful.xresources.apply_dpi
 
 local card     = require("widgets.card")
 local calendar = require("widgets.calendar").create()
@@ -20,7 +21,8 @@ return {
          width    = dpi(600),
          height   = dpi(1020),
          margins  = {
-            left = dpi(15)
+            left = beautiful.useless_gap,
+            right = beautiful.useless_gap,
          }
       })
 
