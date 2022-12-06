@@ -17,7 +17,7 @@ return {
          notification = n,
          type = "notification",
          cursor = "hand2",
-         shape = shape_utils.default_frr,
+         shape = shape_utils.default_frr_lg,
          maximum_width = 550,
          maximum_height = 120,
          bg = beautiful.bg_normal,
@@ -28,7 +28,7 @@ return {
             {
                image = n.icon,
                resize = true,
-               clip_shape = shape_utils.default_frr,
+               clip_shape = shape_utils.default_frr_lg,
                halign = "left",
                valign = "center",
                widget = wibox.widget.imagebox,

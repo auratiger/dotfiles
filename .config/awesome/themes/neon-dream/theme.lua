@@ -106,7 +106,10 @@ theme.menu_bg_focus     = "#050505dd"
 
 theme.icons_font = "Font Awesome 6 Free "
 
-theme.rounded = dpi(20)
+theme.rounded_xsm = dpi(5)
+theme.rounded_sm = dpi(10)
+theme.rounded_md = dpi(15)
+theme.rounded_lg = dpi(20)
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(

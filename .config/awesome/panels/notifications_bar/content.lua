@@ -11,7 +11,7 @@ local notifications = wibox.widget({
    spacing          = dpi(8),
    scrollbar_widget = {
       widget = wibox.widget.separator,
-      shape  = shape_utils.default_frr,
+      shape  = shape_utils.default_frr_lg,
    },
    scrollbar_width  = dpi(8),
    step             = 50,

@@ -62,7 +62,7 @@ local module = {
             }
          },
          bg     = beautiful.palette_c6,
-         shape  = shape_utils.rounded_rect(dpi(6)),
+         shape  = shape_utils.default_frr_xsm,
          widget = wibox.container.background,
          height = dpi(30),
       })

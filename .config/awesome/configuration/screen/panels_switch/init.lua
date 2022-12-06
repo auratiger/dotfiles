@@ -50,7 +50,7 @@ local create_menu_panel_button = function(glyph, mode, screen, panel)
 
    local btn = wibox.widget {
       bg     = beautiful.palette_c7,
-      shape  = cfg.screens[1].shape,
+      shape  = shape_utils.tags_shape,
       widget = wibox.container.background,
       {
          icon,

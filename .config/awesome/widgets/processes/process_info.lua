@@ -14,7 +14,7 @@ return {
          {
             id     = 'marg',
             widget = wibox.container.background,
-            shape  = shape_utils.default_frr,
+            shape  = shape_utils.default_frr_lg,
             bg     = beautiful.palette_c6,
             {
                id     = 'i_marg',

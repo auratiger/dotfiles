@@ -26,7 +26,7 @@ return {
          cpu_section = {
             widget = wibox.container.background,
             bg = beautiful.palette_c3,
-            shape = shape_utils.default_frr,
+            shape = shape_utils.default_frr_lg,
             wbm_cpu
          }
 
@@ -41,7 +41,7 @@ return {
          ram_section = {
             widget = wibox.container.background,
             bg = beautiful.palette_c3,
-            shape = shape_utils.default_frr,
+            shape = shape_utils.default_frr_lg,
             wbm_ram
          }
 
@@ -113,7 +113,7 @@ return {
                {
                   widget = wibox.container.background,
                   bg     = beautiful.palette_c3,
-                  shape  = shape_utils.default_frr,
+                  shape  = shape_utils.default_frr_lg,
                   {
                      widget = wibox.container.margin,
                      margins = dpi(4),
@@ -129,7 +129,7 @@ return {
                   {
                      widget = wibox.container.background,
                      bg     = beautiful.palette_c3,
-                     shape  = shape_utils.default_frr,
+                     shape  = shape_utils.default_frr_lg,
                      {
                         widget = wibox.container.margin,
                         margins = dpi(4),
@@ -147,7 +147,7 @@ return {
                      },
                      widget = wibox.container.background,
                      bg     = beautiful.palette_c3,
-                     shape  = shape_utils.default_frr,
+                     shape  = shape_utils.default_frr_lg,
                   }
                }
             },
@@ -160,7 +160,7 @@ return {
                   {
                      widget = wibox.container.background,
                      bg = beautiful.palette_c3,
-                     shape = shape_utils.default_frr,
+                     shape = shape_utils.default_frr_lg,
                      wb_player
                   }
                },
@@ -177,7 +177,7 @@ return {
                {
                   widget = wibox.container.background,
                   bg     = beautiful.palette_c3,
-                  shape  = shape_utils.default_frr,
+                  shape  = shape_utils.default_frr_lg,
                   {
                      widget = wibox.container.margin,
                      left = dpi(10),

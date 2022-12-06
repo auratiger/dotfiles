@@ -12,7 +12,7 @@ return {
 
          position = "left",
          screen   = s,
-         shape    = shape_utils.default_frr,
+         shape    = shape_utils.default_frr_lg,
          visible  = false,
          width    = dpi(380),
          height   = dpi(1020),

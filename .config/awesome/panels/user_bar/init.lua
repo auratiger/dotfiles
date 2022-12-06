@@ -16,7 +16,7 @@ return {
       local user = awful.wibar({
          position = "left",
          screen   = s,
-         shape    = shape_utils.default_frr,
+         shape    = shape_utils.default_frr_lg,
          visible  = false,
          width    = dpi(600),
          height   = dpi(1020),

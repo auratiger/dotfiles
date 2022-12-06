@@ -47,15 +47,12 @@ cfg = {
          -- tags = { "www", "edit", "gimp", "inkscape", "music" },
          -- Use this : https://fontawesome.com/cheatsheet
          tags = { "", "", "", "", "" },
-         shape = shape_utils.default_frr
       },
       { -- screen 2
          tags = { "", "", "" },
-         shape = shape_utils.default_frr
       },
       { -- screen 3
          tags = { "➊", "➋", "➌", "➍", "➎", "➏", "➐", "➑", "➒" },
-         shape = shape_utils.default_frr
       }
    },
    panels = {

@@ -47,7 +47,7 @@ return {
          widget = wibox.container.background,
          {
             bg     = beautiful.palette_c7,
-            shape  = cfg.screens[s.index].shape,
+            shape  = shape_utils.tags_shape,
             widget = wibox.container.background,
             name_section,
          },
@@ -60,7 +60,7 @@ return {
          buttons = taglist_buttons,
 
          style = {
-            shape = cfg.screens[s.index].shape,
+            shape = shape_utils.tags_shape,
          },
 
          layout = {

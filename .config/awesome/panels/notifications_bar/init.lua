@@ -15,7 +15,7 @@ awful.screen.connect_for_each_screen(function(s)
       bg      = beautiful.bg_normal,
       fg      = beautiful.fg_normal,
       width   = 500,
-      shape   = shape_utils.default_frr,
+      shape   = shape_utils.default_frr_lg,
       -- height = s.geometry.height - 100,
       height  = dpi(1020),
    }

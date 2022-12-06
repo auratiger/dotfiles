@@ -76,7 +76,7 @@ return {
 
       local widget_template = {
          name_section,
-         shape  = shape_utils.default_frr,
+         shape  = shape_utils.default_frr_lg,
          widget = wibox.container.background,
       }
 

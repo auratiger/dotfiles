@@ -20,7 +20,7 @@ local module = {
 
       local scroll = {
          widget = wibox.widget.separator,
-         shape  = shape_utils.default_frr,
+         shape  = shape_utils.default_frr_lg,
       }
 
 
@@ -129,7 +129,7 @@ local module = {
       end)))
 
       droplist.create(sort_menu,
-         shape_utils.partially_rounded_rect(true, true, true, false, beautiful.rounded),
+         shape_utils.partially_rounded_rect(true, true, true, false, beautiful.rounded_lg),
          'right', 'middle',
          {
             {

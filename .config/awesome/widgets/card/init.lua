@@ -1,37 +1,27 @@
 local wibox     = require("wibox")
 local beautiful = require("beautiful")
-local dpi       = beautiful.xresources.apply_dpi
-
--- TODO: Extract to utils
-local function make_margin(content, margin)
-   return {
-      content,
-      widget  = wibox.container.margin,
-      margins = margin or dpi(10),
-   }
-end
 
 return {
    create = function(content, margin)
-      return wibox.widget(make_margin({
-         make_margin(content, margin),
-         shape  = shape_utils.default_frr,
+      return wibox.widget(widget_utils.make_margin({
+         widget_utils.make_margin(content, margin),
+         shape  = shape_utils.default_frr_lg,
          widget = wibox.container.background,
          bg     = beautiful.palette_c6,
       }, margin))
    end,
 
    create_with_header_placeholder = function(content, margin)
-      return wibox.widget(make_margin({
+      return wibox.widget(widget_utils.make_margin({
          {
             forced_height = 10,
-            shape         = shape_utils.partially_rounded_rect(true, true, false, false),
+            shape         = shape_utils.rounded_rect_top,
             widget        = wibox.container.background,
             bg            = beautiful.palette_c6,
          },
          {
-            make_margin(content, margin),
-            shape  = shape_utils.partially_rounded_rect(false, false, true, true),
+            widget_utils.make_margin(content, margin),
+            shape  = shape_utils.rounded_rect_bottom,
             widget = wibox.container.background,
             bg     = beautiful.palette_c6,
          },
@@ -48,15 +38,15 @@ return {
          widget  = wibox.widget.textbox,
       }
 
-      return wibox.widget(make_margin({
+      return wibox.widget(widget_utils.make_margin({
          {
-            make_margin(header_name, margin),
-            shape  = shape_utils.partially_rounded_rect(true, true, false, false),
+            widget_utils.make_margin(header_name, margin),
+            shape  = shape_utils.rounded_rect_top,
             widget = wibox.container.background,
          },
          {
-            make_margin(content, 5),
-            shape  = shape_utils.partially_rounded_rect(false, false, true, true),
+            widget_utils.make_margin(content, 5),
+            shape  = shape_utils.rounded_rect_bottom,
             widget = wibox.container.background,
          },
          layout = wibox.layout.align.vertical
