@@ -73,6 +73,9 @@ globalkeys = my_table.join(
    --
    --awful.key({ modkey }, "h", function () awful.util.spawn( "urxvt -T 'htop task manager' -e htop" ) end,
    --{description = "htop", group = "super"}),
+   awful.key({ modkey, }, ".", function()
+      revelation({ rule = { class = "conky" }, is_excluded = true, curr_tag_only = true })
+   end),
 
    awful.key({ modkey }, "b", function() raise_or_spawn(browser1) end,
       { description = browser1, group = "hotkeys" }),

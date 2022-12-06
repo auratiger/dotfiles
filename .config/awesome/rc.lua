@@ -12,9 +12,10 @@ lain : https://github.com/lcpz/lain
 
 --https://awesomewm.org/doc/api/documentation/05-awesomerc.md.html
 -- Standard awesome library
-
-
+--
 pcall(require, "luarocks.loader")
+
+revelation = require("plugins.revelation")
 
 require("awful.autofocus")
 

@@ -1,4 +1,5 @@
 require("configuration.theme")
+revelation.init()
 require("configuration.layouts")
 require("configuration.bindings")
 require("configuration.screen")
