@@ -178,6 +178,6 @@ theme.titlebar_maximized_button_focus_inactive  = theme.confdir .. "/icons/title
 theme.titlebar_maximized_button_normal_active   = theme.confdir .. "/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
 
-theme.profile_pic = home_folder .. "/.config/awesome/profile.png"
+theme.profile_pic = cfg.panels.user.profile_pic
 
 return theme

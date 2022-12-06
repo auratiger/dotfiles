@@ -9,8 +9,6 @@ my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 home_folder = os.getenv("HOME")
 user        = os.getenv("USER")
 
--- {{{ Variable definitions
---
 -- modkey or mod4 = super key
 modkey = "Mod4"
 altkey = "Mod1"
@@ -134,6 +132,7 @@ cfg = {
 					3. Export Your city location into environment variable WEATHER_API_COM_CITY in .profile file
 			]]     --
          enabled = true,
+         profile_pic = home_folder .. "/.config/awesome/profile.png"
       }
    },
    widgets = {

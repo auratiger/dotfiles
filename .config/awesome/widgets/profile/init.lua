@@ -2,15 +2,16 @@ local wibox     = require("wibox")
 local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
 
-
-
 local profile = {
-   pic = function(shape)
+   pic = function()
       return wibox.widget(
          {
             image      = beautiful.profile_pic,
             widget     = wibox.widget.imagebox,
-            clip_shape = shape,
+            resize     = true,
+            clip_shape = shape_utils.default_frr_lg,
+            halign     = "center",
+            valign     = "center",
          }
       )
    end
@@ -31,7 +32,7 @@ local profile = {
 return wibox.widget(
    {
       {
-         profile.pic(shape_utils.circle(400)),
+         profile.pic(),
          {
             profile.name(12),
             widget = wibox.container.margin,

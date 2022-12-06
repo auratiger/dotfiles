@@ -28,7 +28,7 @@ awful.screen.connect_for_each_screen(function(s)
       layout = wibox.layout.flex.vertical
    })
 
-   awful.placement.top_right(s.notifcenter.popup, { margins = { top = 60, right = 40 }, parent = s })
+   awful.placement.right(s.notifcenter.popup, { margins = { right = 40 }, parent = s })
 
    local self = s.notifcenter.popup
 

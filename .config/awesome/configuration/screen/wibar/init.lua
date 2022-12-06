@@ -97,7 +97,11 @@ return {
          position = "top",
          screen   = s,
          bg       = beautiful.col_transparent,
-         height   = dpi(40)
+         height   = dpi(40),
+         margins = {
+            top = dpi(2),
+            bottom = dpi(2),
+         }
       })
 
       wibar:setup {
