@@ -1,0 +1,15 @@
+session: awesome
+
+root: ~/.config/awesome
+
+windows:
+  - name: dev
+
+  - name: dev-II
+    root: ~/deletethis/
+
+  - name: git
+    commands:
+      - dot su
+
+  - name: zsh

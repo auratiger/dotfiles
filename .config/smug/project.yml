@@ -1,0 +1,8 @@
+session: project
+
+root: ~/projects/
+
+windows:
+  - name: code
+    layout: main-horizontal
+  - name: ssh

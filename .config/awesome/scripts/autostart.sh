@@ -35,3 +35,6 @@ run nitrogen --restore # -- if you prefer nitrogen to feh/xwallpaper
 #run ckb-next -b
 #run discord
 #run telegram-desktop
+
+# https://github.com/ivaaaan/smug
+run alacritty -e "smug start project --detach && smug start awesome"

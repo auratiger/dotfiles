@@ -1,0 +1,18 @@
+tmux has-session -t awesome:
+exit status 1 no server running on /tmp/tmux-1000/default
+
+tmux new -Pd -s awesome -n smug_def -c /home/auratiger/.config/awesome
+tmux setenv -t awesome SMUG_SESSION_CONFIG_PATH /home/auratiger/.config/smug/awesome.yml
+tmux setenv -t awesome SMUG_SESSION awesome
+tmux neww -Pd -t awesome: -c /home/auratiger/.config/awesome -F #{window_id} -n dev
+tmux select-layout -t @1 even-horizontal
+tmux neww -Pd -t awesome: -c /home/auratiger/deletethis/ -F #{window_id} -n dev-II
+tmux select-layout -t @2 even-horizontal
+tmux neww -Pd -t awesome: -c /home/auratiger/.config/awesome -F #{window_id} -n git
+tmux send-keys -t @3 dot su Enter
+tmux select-layout -t @3 even-horizontal
+tmux neww -Pd -t awesome: -c /home/auratiger/.config/awesome -F #{window_id} -n zsh
+tmux select-layout -t @4 even-horizontal
+tmux kill-window -t awesome:smug_def
+tmux move-window -r -s awesome: -t awesome:
+tmux attach -d -t awesome:dev

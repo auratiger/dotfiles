@@ -322,9 +322,10 @@ Linux) # Maps only for Linux distros
       alias pacsyyu='sudo pacman -Syyu'                           # Refresh pkglist & update standard pkgs
       alias update='sudo pacman -Syyu && sudo pamac update -a'    # Refresh pkglist & update standard pkgs
 
-      alias pc=pamac
-      alias psearch=pamac search
-      alias pinfo=pamac info
+      alias pm=pamac
+      alias pms='pamac search'
+      alias pmi='pamac install'
+      alias pmn='pamac info'
 
       alias yaysua='yay -Sua --noconfirm'                         # update only AUR pkgs (yay)
       alias yaysyu='yay -Syu --noconfirm'                         # update standard pkgs and AUR pkgs (yay)
