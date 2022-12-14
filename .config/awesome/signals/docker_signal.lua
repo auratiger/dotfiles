@@ -1,4 +1,5 @@
 local caching = require("common.caching")
+local awful   = require("awful") --Everything related to window managment
 
 return {
    {

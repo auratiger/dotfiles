@@ -29,7 +29,7 @@ return {
       local header = card.create({
          profile,
          nil,
-         require("widgets.weather").create(),
+         -- require("widgets.weather").create(),
          layout = wibox.layout.align.horizontal
       })
 

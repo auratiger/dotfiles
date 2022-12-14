@@ -19,7 +19,7 @@ M.setup = function()
    keymap("n", "<F12>", ":set relativenumber!<CR>", opts) -- F12 toggles relativenumber
 
    -- Hitting escape also clears spelling and search highlights
-   keymap("n", "<ESC>", ":nohls |:set norelativenumber | :setlocal nospell<ESC>", opts)
+   -- keymap("n", "<ESC>", ":nohls |:set norelativenumber | :setlocal nospell<ESC>", opts)
 
    keymap("n", "<C-d>", "<C-d>zz", opts) -- When you search, center the result and open any folds
    keymap("n", "<C-u>", "<C-u>zz", opts) -- When you search, center the result and open any folds

@@ -28,12 +28,22 @@ globalkeys = my_table.join(
 -- | SUPER + ... function keys |
 -- -----------------------------
 --
--- awful.key({ modkey }, "F1", function() awful.util.spawn(musicplayer) end,
---    { description = musicplayer, group = "function keys" }),
--- awful.key({ modkey }, "F2", function() awful.util.spawn(editorgui) end,
---    { description = editorgui, group = "function keys" }),
--- awful.key({ modkey }, "F3", function() awful.util.spawn("inkscape") end,
---    { description = "inkscape", group = "function keys" }),
+   awful.key({ modkey }, "F1", function()
+      awful.spawn(cava, {
+         floating    = true,
+         tag         = cfg.screens[2].tags[2],
+         screen      = 2,
+         switchtotag = false,
+         placement   = awful.placement.top_right,
+         width       = 500,
+         height      = 300,
+      })
+   end,
+      { description = musicplayer, group = "function keys" }),
+   -- awful.key({ modkey }, "F2", function() awful.util.spawn(editorgui) end,
+   --    { description = editorgui, group = "function keys" }),
+   -- awful.key({ modkey }, "F3", function() awful.util.spawn("inkscape") end,
+   --    { description = "inkscape", group = "function keys" }),
    awful.key({ modkey }, "F4", function() awful.util.spawn("gimp") end,
       { description = "gimp", group = "function keys" }),
    awful.key({ modkey }, "F5", function() awful.util.spawn("discord") end,

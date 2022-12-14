@@ -55,6 +55,9 @@ awful.rules.rules = {
    { rule = { instance = mediaplayer },
       properties = { screen = 1, tag = cfg.screens[1].tags[3], switchtotag = true, maximized = true } },
 
+   { rule = { instance = videorecorder },
+      properties = { screen = 2, switchtotag = true, floating = true, ontop = true } },
+
    { rule = { instance = chat },
       properties = { screen = 2, tag = cfg.screens[2].tags[1], switchtotag = true, maximized = true } },
 

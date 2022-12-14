@@ -1,6 +1,5 @@
 local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
-local gears     = require("gears")
 local wibox     = require("wibox")
 
 local last_player_notification = nil

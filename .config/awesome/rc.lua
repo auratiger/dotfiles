@@ -64,3 +64,17 @@ require("configuration")
 -- Autostart applications
 awful.spawn.with_shell("~/.config/awesome/scripts/autostart.sh")
 awful.spawn.with_shell("picom -b --config  $HOME/.config/awesome/picom.conf")
+
+
+
+-- https://github.com/ivaaaan/smug
+local tmux_sessions = { "lvim", "zshdot", "project", "awesome", "sliddo" }
+local initiate_tmux_session = ""
+
+for _, v in ipairs(tmux_sessions) do
+   initiate_tmux_session = initiate_tmux_session .. string.format("smug start %s --detach; ", v)
+end
+
+awful.spawn.easy_async_with_shell(initiate_tmux_session, function()
+   awful.spawn.spawn(tmux)
+end)

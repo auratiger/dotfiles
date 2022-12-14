@@ -103,6 +103,8 @@ alias lang-options="localectl list-x11-keymap-options | grep grp:"
 
 alias set-lang="setxkbmap -option grp:switch,grp_led:scroll,grp:ctrl_alt_toggle -layout us,bg -variant ,phonetic"
 
+alias getinstance="xprop"
+
 # ---------------------
 
 relative_dir() { # returns the current dirrectory relative from where it is called. Used for scripts.
