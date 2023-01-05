@@ -35,3 +35,4 @@ run nitrogen --restore # -- if you prefer nitrogen to feh/xwallpaper
 #run ckb-next -b
 #run discord
 #run telegram-desktop
+run emote

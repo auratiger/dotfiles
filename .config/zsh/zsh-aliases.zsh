@@ -191,6 +191,20 @@ alias gdev="gatsby develop"
 alias gser="gatsby serve"
 alias gres="gatsby clean && gatsby develop"
 
+# This function searches all subdirectories of the passed/default path and deletes all node_modules
+delete_node_modules() {
+  # Set the default search path to ~/projects
+  local search_path=~/projects
+  
+  # If a search path is passed as an argument, use it instead
+  if [ $# -gt 0 ]; then
+    search_path=$1
+  fi
+
+  # Find all directories named "node_modules" and delete them and their contents
+  find "$search_path" -type d -name "node_modules" -exec rm -rf {} \;
+}
+
 helpweb() {
    cat "$ZDOTDIR/alias-help/web.txt"
 }
@@ -337,7 +351,13 @@ Linux) # Maps only for Linux distros
       alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'            # remove orphaned packages
 
    elif [[ -f "/etc/debian_version" ]]; then # Checks if using Debian distro
-      echo "Hello Debian (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
+      # echo "Hello Debian (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
+
+      # This is in case of using a WSL
+      alias gowin="cd /mnt/c"
+      alias gouser="cd /mnt/c/Users/ggeorgi"
+
+      alias update="sudo apt update && sudo apt upgrade -y"
 
    elif [[ -f "/etc/alpine-release" ]]; then # Checks if using Alpine distro
       echo "Hello Alpine (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"

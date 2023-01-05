@@ -104,6 +104,8 @@ return {
          }
       })
 
+      s.mywibar = wibar
+
       wibar:setup {
          widget = wibox.container.margin,
          top    = dpi(2),

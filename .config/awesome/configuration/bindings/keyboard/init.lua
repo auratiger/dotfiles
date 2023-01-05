@@ -123,7 +123,7 @@ globalkeys = my_table.join(
    -- Show/Hide Wibox
    awful.key({ modkey }, "w", function()
       for s in screen do
-         s.mywibox.visible = not s.mywibox.visible
+         s.mywibar.visible = not s.mywibar.visible
          if s.mybottomwibox then
             s.mybottomwibox.visible = not s.mybottomwibox.visible
          end
@@ -213,8 +213,8 @@ globalkeys = my_table.join(
 
    awful.key({ "Control", altkey }, "w", function() awful.util.spawn("arcolinux-welcome-app") end,
       { description = "ArcoLinux Welcome App", group = "alt+ctrl" }),
-   awful.key({ "Control", altkey }, "e", function() awful.util.spawn("archlinux-tweak-tool") end,
-      { description = "ArcoLinux Tweak Tool", group = "alt+ctrl" }),
+   -- awful.key({ "Control", altkey }, "e", function() awful.util.spawn("archlinux-tweak-tool") end,
+   --    { description = "ArcoLinux Tweak Tool", group = "alt+ctrl" }),
    awful.key({ "Control", altkey }, "Next", function() awful.util.spawn("conky-rotate -n") end,
       { description = "Next conky rotation", group = "alt+ctrl" }),
    awful.key({ "Control", altkey }, "Prior", function() awful.util.spawn("conky-rotate -p") end,
