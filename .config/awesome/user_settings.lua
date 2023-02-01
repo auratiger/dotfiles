@@ -30,8 +30,10 @@ videorecorder  = "obs"
 musicplayer    = "spotify"
 cava           = terminal .. " -e " .. "cava"
 virtualmachine = "virtualbox"
-chat           = "discord"
+discord        = "discord"
 bitwarden      = "bitwarden"
+postman        = "postman"
+mongocompass   = "mongodb compass"
 
 cfg = {
    theme = {

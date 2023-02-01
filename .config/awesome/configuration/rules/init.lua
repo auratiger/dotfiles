@@ -1,6 +1,8 @@
 local awful = require("awful") --Everything related to window managment
 local beautiful = require("beautiful") -- Theme handling library
 
+-- NOTE: find class or role via ===== xprop ===== command
+--
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
@@ -47,10 +49,10 @@ awful.rules.rules = {
       properties = { maximized = true } },
 
    { rule = { instance = bitwarden },
-      properties = { floating = true, ontop = true } },
+      properties = { screen = 2, floating = true, ontop = true } },
 
    { rule = { instance = browser1 },
-      properties = { screen = 1, tag = cfg.screens[1].tags[1], switchtotag = true, maximized = true } },
+      properties = { maximized = true } },
 
    { rule = { instance = mediaplayer },
       properties = { screen = 1, tag = cfg.screens[1].tags[3], switchtotag = true, maximized = true } },
@@ -58,7 +60,7 @@ awful.rules.rules = {
    { rule = { instance = videorecorder },
       properties = { screen = 2, switchtotag = true, floating = true, ontop = true } },
 
-   { rule = { instance = chat },
+   { rule = { instance = discord },
       properties = { screen = 2, tag = cfg.screens[2].tags[1], switchtotag = true, maximized = true } },
 
    { rule = { instance = musicplayer },
@@ -66,6 +68,12 @@ awful.rules.rules = {
 
    { rule = { name = "Picture in picture" }, -- vivaldi floating video player
       properties = { screen = 2, tag = cfg.screens[2].tags[3], switchtotag = true } },
+
+   { rule = { instance = postman },
+      properties = { screen = 1, tag = cfg.screens[1].tags[2], switchtotag = true } },
+
+   { rule = { instance = mongocompass },
+      properties = { screen = 1, tag = cfg.screens[1].tags[3], switchtotag = true } },
 
    { rule = { class = "Xfce4-settings-manager" },
       properties = { floating = false } },

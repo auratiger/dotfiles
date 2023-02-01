@@ -3,8 +3,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local beautiful     = require("beautiful")
 local spotify       = require("common.spotify")
 
-local modkey, altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, musicplayer, mailclient = modkey
-    , altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, musicplayer, mailclient
+local modkey, altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, musicplayer, mailclient, discord = modkey
+    , altkey, filemanager, terminal, browser, browser1, browser2, browser3, virtualmachine, musicplayer, mailclient,
+    discord
 
 local my_table, client, screen, awesome = my_table, client, screen, awesome
 
@@ -90,11 +91,17 @@ globalkeys = my_table.join(
    awful.key({ modkey }, "b", function() raise_or_spawn(browser1) end,
       { description = browser1, group = "hotkeys" }),
 
+   awful.key({ modkey }, "p", function() raise_or_spawn(postman) end,
+      { description = postman, group = "hotkeys" }),
+
+   awful.key({ modkey }, "i", function() raise_or_spawn("mongodb-compass") end,
+      { description = mongocompass, group = "hotkeys" }),
+
    awful.key({ modkey }, "[", function() raise_or_spawn(musicplayer) end,
       { description = musicplayer, group = "hotkeys" }),
 
-   awful.key({ modkey }, "]", function() raise_or_spawn(chat) end,
-      { description = chat, group = "hotkeys" }),
+   awful.key({ modkey }, "]", function() raise_or_spawn(discord) end,
+      { description = discord, group = "hotkeys" }),
 
    awful.key({ modkey }, "'", function() awful.util.spawn("rofi -show drun") end,
       { description = "rofi", group = "hotkeys" }),
@@ -145,7 +152,7 @@ globalkeys = my_table.join(
       { description = "select next grid layout", group = "layout" }),
 
    -- Widgets popups
-   awful.key({ modkey, }, "p", function() require("widgets.float_calendar").toggle() end,
+   awful.key({ modkey, }, "e", function() require("widgets.float_calendar").toggle() end,
       { description = "show calendar", group = "widgets" }),
 
    -- awful.key({ modkey, }, "p", function() if beautiful.fs then beautiful.fs.show(7) end end,
