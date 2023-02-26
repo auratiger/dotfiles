@@ -5,18 +5,7 @@ local lvim = lvim
 M.setup = function()
    -- local configs = require("user.plugins.plugin-configs")
 
-   lvim.builtin.alpha.active = true
-   lvim.builtin.alpha.mode = "dashboard"
-   -- lvim.builtin.notify.active = true
-   lvim.builtin.terminal.active = true
-   lvim.builtin.nvimtree.setup.view.side = "left"
-   -- lvim.builtin.nvimtree.show_icons.git = 0
-   -- if you don't want all the parsers change this to a table of the ones you want
-   lvim.builtin.treesitter.ensure_installed = { "bash", "c", "javascript", "json", "lua", "python", "typescript", "tsx",
-      "css", "rust", "java", "yaml", }
-   lvim.builtin.treesitter.ignore_install = { "haskell" }
-   lvim.builtin.treesitter.highlight.enabled = true
-   lvim.builtin.treesitter.rainbow.enable = true
+   require "user.plugins.builtin"
 
    -- Additional Plugins --
    lvim.plugins = {
@@ -44,12 +33,10 @@ M.setup = function()
       {
          "p00f/nvim-ts-rainbow",
       },
-      -- {
-      --    "nvim-treesitter/nvim-treesitter-textobjects",
-      --    config = function()
-      --       configs.text_objects()
-      --    end
-      -- },
+      {
+         "nvim-treesitter/nvim-treesitter-textobjects",
+         after = "nvim-treesitter",
+      },
       {
          "NvChad/nvim-colorizer.lua",
          config = function()
@@ -87,6 +74,26 @@ M.setup = function()
       --   end,
       -- },
       {
+         'antosha417/nvim-lsp-file-operations',
+         requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "kyazdani42/nvim-tree.lua" },
+         },
+         config = function()
+            require("lsp-file-operations").setup()
+         end,
+      },
+      {
+         "ThePrimeagen/harpoon",
+         requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-lua/popup.nvim" },
+         },
+         config = function()
+            require("harpoon").setup()
+         end,
+      },
+      {
          "windwp/nvim-ts-autotag",
          config = function()
             require("nvim-ts-autotag").setup()
@@ -100,6 +107,13 @@ M.setup = function()
          "folke/todo-comments.nvim",
          event = "BufRead",
          config = function()
+            -- TODO:
+            -- FIX:
+            -- HACK:
+            -- PERF:
+            -- WARN:
+            -- NOTE:
+            -- TEST:
             require("todo-comments").setup()
          end,
       },
@@ -120,8 +134,6 @@ M.setup = function()
          event = "BufRead",
          config = function()
             require("hop").setup()
-            vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-            vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
          end,
       },
       {
@@ -180,6 +192,11 @@ M.setup = function()
                      cmd = "<cmd>lua require('spectre.actions').run_replace()<CR>",
                      desc = "replace all"
                   },
+                  ['show_option_menu'] = {
+                     map = "<leader>o",
+                     cmd = "<cmd>lua require('spectre').show_options()<CR>",
+                     desc = "show option"
+                  },
                }
             })
          end,
@@ -199,7 +216,6 @@ M.setup = function()
    --     require("nvim-treesitter.highlight").attach(0, "bash")
    --   end,
    -- })
-
 end
 
 return M
