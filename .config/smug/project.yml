@@ -1,8 +1,29 @@
 session: project
 
-root: ~/projects/
+root: ~/projects/docker/nodejs_microservice/
 
 windows:
-  - name: code
+  - name: free
     layout: main-horizontal
-  - name: ssh
+    root: ~/projects
+
+  - name: ide
+    layout: main-vertical
+
+  - name: customer
+    root: customer
+
+  - name: products
+    root: products
+
+  - name: shopping
+    root: shopping
+
+  - name: web
+    root: shopping_app_frontend
+
+  - name: docker
+
+  - name: git
+    commands:
+      - g s

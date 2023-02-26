@@ -1,0 +1,16 @@
+session: lvim
+
+root: ~/.config/lvim
+
+windows:
+  - name: lvim
+
+  - name: lunarvim
+    root: ~/.local/share/lunarvim
+
+  - name: git
+    commands:
+      - dot su
+
+  - name: test
+    root: ~/projects/next

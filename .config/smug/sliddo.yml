@@ -1,0 +1,15 @@
+session: sliddoo
+
+root: ~/projects/next/12/Sliddo/
+
+windows:
+  - name: npm
+
+  - name: dev
+
+  - name: git
+    commands:
+      - g s
+
+  - name: zsh
+  - name: test

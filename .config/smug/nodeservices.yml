@@ -1,0 +1,36 @@
+session: node-services
+
+root: ~/projects/node/microservices-playground/
+
+windows:
+  - name: env
+    layout: main-vertical
+
+    panes:
+      - type: horizontal
+        root: products
+        commands:
+          - yarn dev
+
+      - type: vertical
+        root: shopping
+        commands:
+          - yarn dev
+
+      - type: vertical
+        root: customer
+        commands:
+          - yarn dev
+
+  - name: products
+    root: products
+
+  - name: shopping
+    root: shopping
+
+  - name: customer
+    root: customer
+
+  - name: git
+    commands:
+      - g s

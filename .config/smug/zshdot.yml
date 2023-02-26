@@ -1,0 +1,12 @@
+session: zshdot
+
+root: ~/.config/zsh
+
+windows:
+  - name: dev
+
+  - name: test
+
+  - name: git
+    commands:
+      - dot su

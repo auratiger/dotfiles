@@ -1,0 +1,21 @@
+session: work
+
+root: ~/projects/work/pmddashboard/
+
+windows:
+  - name: env
+    layout: main-vertical
+    commands:
+      - nvm use 14.15.3
+
+  - name: git
+    commands:
+      - nvm use 14.15.3
+
+  - name: test
+    commands:
+      - nvm use 14.15.3
+
+  - name: another
+    commands:
+      - nvm use 14.15.3

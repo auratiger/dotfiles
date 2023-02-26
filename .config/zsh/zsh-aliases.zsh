@@ -247,20 +247,47 @@ dins() { # inspect container with less command
 # where you are and without knowing any container names
 alias dsa="docker ps -q | awk '{print $1}' | xargs -o docker stop"
 
+alias cm="docker compose"
 
-alias dm="docker compose"
-alias dmu="docker compose up -d" # Start the docker-compose stack in the current directory
-alias dmb="docker compose up -d --build" # Start the docker-compose stack in the current directory and rebuild the images
+cmu() {
+  local build=''
+  local detached=''
+  local profile='prod' # Default value for profile
+
+  # Check if the first parameter is 'prod' or 'dev'
+  if [[ "$1" == "prod" || "$1" == "dev" ]]; then
+    profile="$1"
+    shift # Remove the first parameter
+  fi
+
+  while getopts ":bd" opt; do
+    case $opt in
+      b) build='--build';;
+      d) detached='-d';;
+      \?)
+        echo "Invalid option: -$OPTARG" >&2
+        return 1
+        ;;
+    esac
+  done
+
+  eval "docker compose --profile=${profile} up ${detached} ${build}"
+}
+
+cmd() {
+  profile=${1:-prod}
+  eval "docker compose --profile="$profile" down"
+}
 
 # Stop, delete (down) or restart the docker-compose stack in the current directory
-alias dmc="docker compose stop"
-alias dmd="docker compose down"
-alias dmr="docker compose restart"
+alias cms="docker compose stop"
+alias cmr="docker compose restart"
+
 
 # Show the logs for the docker-compose stack in the current directory
 # May be extended with the service name to get service-specific logs, like
 # 'dcl php' to get the logs of the php container
-alias dml="docker compose logs"
+alias cml="docker compose logs"
 
 # >>>> ============ VERSIONS SCRIPT ==================================================== <<<< #
 
@@ -337,6 +364,7 @@ Linux) # Maps only for Linux distros
       alias pacsyu='sudo pacman -Syu'                             # update only standard pkgs
       alias pacsyyu='sudo pacman -Syyu'                           # Refresh pkglist & update standard pkgs
       alias update='sudo pacman -Syyu && sudo pamac update -a'    # Refresh pkglist & update standard pkgs
+      alias упдате='sudo pacman -Syyu && sudo pamac update -a'    # Refresh pkglist & update standard pkgs
 
       alias pm=pamac
       alias pms='pamac search'

@@ -194,6 +194,8 @@
    # Commit all changes
    ca = !git add -A && git commit -av
 
+   cam = !"git commit --amend"
+
    amend = !"git commit --amend --no-edit && git status"
 
    # Command for overriding commit attributes
@@ -245,9 +247,10 @@
 
 # ======================================== RESET ======================================== #
 
-   rh = reset --hard
+   rsh = reset --hard
    rss = reset --soft
    rsl = reset --soft HEAD~1
+   rso = !"git reset --hard origin/$(git branch --show-current)"
 
 # ======================================== REVERT ======================================== #
 
@@ -273,4 +276,7 @@
    # show all branches
    ba = branch -a
 
+   # renames current branch
    rename = branch -m
+[credential]
+	helper = store
