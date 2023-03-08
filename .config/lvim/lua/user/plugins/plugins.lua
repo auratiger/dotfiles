@@ -3,10 +3,6 @@ local M = {}
 local lvim = lvim
 
 M.setup = function()
-   -- local configs = require("user.plugins.plugin-configs")
-
-   require "user.plugins.builtin"
-
    -- Additional Plugins --
    lvim.plugins = {
       { "milisims/nvim-luaref" },
@@ -34,8 +30,11 @@ M.setup = function()
          "p00f/nvim-ts-rainbow",
       },
       {
-         "nvim-treesitter/nvim-treesitter-textobjects",
-         after = "nvim-treesitter",
+         "nvim-treesitter/nvim-treesitter-textobjects"
+      },
+      {
+         "hrsh7th/cmp-cmdline",
+         disable = not lvim.builtin.fancy_wild_menu.active,
       },
       {
          "NvChad/nvim-colorizer.lua",
