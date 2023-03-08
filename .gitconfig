@@ -38,6 +38,8 @@
 ; [mergetool "vimdiff3"]
 ;   cmd = vim -u ~/.vimrc -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
+[init]
+   defaultBranch = master
 
 [alias]
 
@@ -65,6 +67,17 @@
 
    # number of commits in the repo
    commits-count = rev-list --all --count
+
+   list-origin = remote -v
+   remove-origin = remote remove origin
+
+   find-branch = "!f() { git branch | grep ${1} | head -1; }; f"
+
+# ======================================== CONFIG ======================================== #
+
+    conf = config --global -l           # show global git config
+    aliases = !sh -c 'git config --global -l | grep alias' # show global aliases
+    user = !sh -c 'git config --global -l | grep user' # show git user settings
 
 # ======================================== LOGS ======================================== #
    # View abbreviated SHA, description, and history graph of all commits
@@ -187,6 +200,52 @@
 
    cln = "!f() { git clone $1; git remote add upstream $1; }; f"
 
+# ======================================== TAGS ======================================== #
+
+   t = tag --list --sort=-v:refname --format '%(color:blue)%(creatordate:relative)%09%(color:green)%(objectname:short)%09|%09%(color:bold yellow)%(refname:short)%09%(color:white)-> %(color:bold cyan)%(contents:subject)%(color:reset)'
+   tags = tag -l                       # show all tags
+   td = tag -d
+   tp = tag --format='%(color:green)%(objectname:short)%(color:reset)%09%(color:yellow)%(refname:strip=2)%(color:reset)%09%(color:red)%(creatordate:iso)%(color:reset)%09%(color:blue)%(creatordate:relative)%(color:reset)'
+
+   tag-release = ! sh -c 'date=$(date +%Y%m%d) && \
+      tag=${date}-$(expr $(git tag | grep $date | wc -l) + 1) && \
+      git tag -a "$tag" -m \"Release $tag\" && \
+      echo \"$tag\\nTo push this tag, use\n\n    git push origin $tag\n\"'
+
+   # Find tags by name
+   find-tag = "!f() { git tag | grep ${1} | head -1; }; f"
+   find-tags = "!f() { git tag | grep ${1}; }; f"
+
+   # NOTE: '[[ ${1+abc} && ${2+abc} ]]' this checks if the required parameters for the function are
+   # passed, and only then it continues execution
+	tag-new = "! \
+		[[ ${1+abc} && ${2+abc} ]] && \
+		\
+		git tag -a $1 -m \"$2\" && \
+      git push origin $1 \
+      \
+      2>/dev/null \
+	#"
+
+	tag-delete = "! \
+		[[ ${1+abc} ]] && \
+		\
+		git tag -d $1 && \
+		git push -d origin $1 \
+      \
+      2>/dev/null \
+	#"
+
+	tag-update = "! \
+		[[ ${1+abc} ]] && \
+		\
+		message=`git tag -l --format='%(contents)' $1` && \
+		git tag-delete $1 && \
+		git tag-new $1 \"$message\" \
+      \
+      2>/dev/null \
+	#"
+
 # ======================================== COMMIT ======================================== #
 
    c = commit
@@ -203,6 +262,7 @@
    # git change-commits GIT_AUTHOR_EMAIL "gegeorgiev@vmware.com" "auratiger00@gmail.com" b0ea1d9..HEAD
    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
    change-commits-force = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+   change-commits-force-all = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" -- --all; }; f "
 
    # Find commits by commit message
    fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
@@ -251,6 +311,7 @@
    rss = reset --soft
    rsl = reset --soft HEAD~1
    ; rso = !"git reset --hard origin/$(git branch --show-current)"
+
    rso = "!f() { read -p 'Are you sure you want to reset to the origin branch? (y/n): ' choice; case \"$choice\" in y|Y ) git reset --hard origin/$(git branch --show-current);; * ) echo Aborting.;; esac }; f"
 
 # ======================================== REVERT ======================================== #
@@ -262,6 +323,10 @@
 # ======================================== CHECKOUT / BRANCH ======================================== #
 
    co = checkout
+
+   resolve-ours = checkout --ours      # merge conflict scenario: checkout our version
+
+   resolve-theirs = checkout --theirs  # merge conflict scenario: checkout their version
 
    copy = !"git co -b $(git branch --show-current)-COPY"
 
@@ -279,5 +344,6 @@
 
    # renames current branch
    rename = branch -m
+
 [credential]
 	helper = store

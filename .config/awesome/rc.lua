@@ -68,7 +68,7 @@ awful.spawn.with_shell("picom -b --config  $HOME/.config/awesome/picom.conf")
 
 
 -- https://github.com/ivaaaan/smug
-local tmux_sessions = { "lvim", "zshdot", "awesome", "work", "sliddo", "project" }
+local tmux_sessions = { "lvim", "zshdot", "awesome", "work", "sliddo", "project", "coffee" }
 local initiate_tmux_session = ""
 
 for _, v in ipairs(tmux_sessions) do
