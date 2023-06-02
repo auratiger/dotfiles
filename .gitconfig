@@ -135,6 +135,8 @@
    # add just the files that are updated.
    au = add --update
 
+   af = "!f() { find . -not -path './node_modules/*' -type f -name \"*$1\" -exec git add {} \\; ; }; f"
+
    add-untracked = !git add `git untracked`
    aun = add-untracked
 
@@ -271,7 +273,7 @@
 
    # restore all staged files
    rsa = !"git restore --staged . && git status"
-
+   rsf = "!f() { find . -not -path './node_modules/*' -type f -name \"*.$1\" -exec git restore {} \\; ; }; f"
    rs = !"git restore . && git status"
 
 # ======================================== REBASE ======================================== #

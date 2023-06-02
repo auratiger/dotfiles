@@ -42,6 +42,7 @@ PATHS=(
 	"/usr/local/opt/openjdk/bin"
 	"/usr/local/opt/openssl/bin"
 	"/usr/local/opt/openvpn/sbin"
+   "/usr/local/go/bin"
 	"$HOME/.local/bin"
 	"$HOME/.cargo/bin"
 )
@@ -65,10 +66,6 @@ export LESS_TERMCAP_so=$'\E[01;47;31m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-R
-
-# >>>> ============ WEATHER API ==================================================== <<<< #
-
-source "$HOME/.weatherapi.zsh"
 
 # >>>> ============ USER CONFIGURATION ==================================================== <<<< #
 

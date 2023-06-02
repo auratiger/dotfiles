@@ -191,6 +191,11 @@ alias gdev="gatsby develop"
 alias gser="gatsby serve"
 alias gres="gatsby clean && gatsby develop"
 
+alias rp1="nx run sub-app-experience-api:start"
+alias rp2="nx run @sub-apps/collections:start"
+alias rpg="nx run @sub-apps/collections:codegen"
+alias rpm="nx run-many --target=start --projects=@sub-apps/collections,sub-app-experience-api"
+
 # This function searches all subdirectories of the passed/default path and deletes all node_modules
 delete_node_modules() {
   # Set the default search path to ~/projects
@@ -358,7 +363,17 @@ Darwin) # Maps only for Mac distros
 
 Linux) # Maps only for Linux distros 
 
-   if [[ -f "/etc/lsb-release" ]];then # Checks if using Arch distro
+
+   if [[ -f "/etc/debian_version" ]]; then # Checks if using Debian distro
+      # echo "Hello Debian (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
+
+      # This is in case of using a WSL
+      alias gowin="cd /mnt/c"
+      alias gouser="cd /mnt/c/Users/ggeorgi"
+
+      alias update="sudo apt update && sudo apt upgrade -y"
+
+   elif [[ -f "/etc/lsb-release" ]];then # Checks if using Arch distro
       # pacman and yay
       alias pac=pacman
       alias pacsyu='sudo pacman -Syu'                             # update only standard pkgs
@@ -377,15 +392,6 @@ Linux) # Maps only for Linux distros
       alias parsyu='paru -Syu --noconfirm'                        # update standard pkgs and AUR pkgs (paru)
       alias unlock='sudo rm /var/lib/pacman/db.lck'               # remove pacman lock
       alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'            # remove orphaned packages
-
-   elif [[ -f "/etc/debian_version" ]]; then # Checks if using Debian distro
-      # echo "Hello Debian (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
-
-      # This is in case of using a WSL
-      alias gowin="cd /mnt/c"
-      alias gouser="cd /mnt/c/Users/ggeorgi"
-
-      alias update="sudo apt update && sudo apt upgrade -y"
 
    elif [[ -f "/etc/alpine-release" ]]; then # Checks if using Alpine distro
       echo "Hello Alpine (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"

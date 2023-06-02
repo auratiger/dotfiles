@@ -11,3 +11,8 @@ export ZDOTDIR=$HOME/.config/zsh
 #   Order of Operations: [ .zshenv -> .zprofile -> .zshrc -> .zlogin -> .zlogout ]              #
 #                                                                                               #
 #################################################################################################
+
+
+# Added by Toolbox App
+export PATH="$PATH:/home/ggeorgi/.local/share/JetBrains/Toolbox/scripts"
+
