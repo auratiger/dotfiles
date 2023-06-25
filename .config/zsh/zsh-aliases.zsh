@@ -194,6 +194,7 @@ alias gres="gatsby clean && gatsby develop"
 alias rp1="nx run sub-app-experience-api:start"
 alias rp2="nx run @sub-apps/collections:start"
 alias rpg="nx run @sub-apps/collections:codegen"
+alias rpt="nx run @sub-apps/collections:test"
 alias rpm="nx run-many --target=start --projects=@sub-apps/collections,sub-app-experience-api"
 
 # This function searches all subdirectories of the passed/default path and deletes all node_modules
