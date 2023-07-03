@@ -11,7 +11,7 @@ wk.setup.plugins.presets.windows = true
 wk.setup.plugins.presets.nav = true
 wk.setup.plugins.marks = true
 wk.setup.plugins.registers = true
-wk.setup.ignore_missing = true
+wk.setup.ignore_missing = false
 
 wk.mappings["S"] = {
   name = " persistence.nvim",

@@ -39,7 +39,7 @@ lvimmap.normal_mode["gf"] = {
   kind.cmp_kind.Reference .. " Telescope Frecency"
 }
 
-keymap("n", "gr", function() vim.lsp.buf.references() end, opts)
+keymap("n", "gr",  "<cmd>lua vim.lsp.buf.references()<cr>" , opts) -- opens references of word under cursor
 
 local ok, _ = pcall(require, "vim.diagnostic")
 if ok then
@@ -84,7 +84,7 @@ keymap('n', "zk", "zc", opts)
 keymap('n', "zJ", "zM", opts)
 keymap('n', "zK", "zR", opts)
 
-keymap('', "<C-Z>", "ZZ", opts) -- Force Exit
+keymap('', "<C-Z>", ":xa<cr>", opts) -- save and quit all
 keymap('n', "<C-s>", ":w<cr>", opts) -- Save
 
 -- Resize with arrows
