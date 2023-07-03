@@ -1,4 +1,5 @@
 local kind = require('user.kind')
+local ui = require('user.utils.ui')
 
 local wk = lvim.builtin.which_key
 
@@ -32,6 +33,29 @@ wk.mappings["D"] = {
    W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
    t = { "<cmd>TodoQuickFix<cr>", "Find Todo" },
    T = { "<cmd>TodoTelescope<cr>", "Find Todo Telescope" },
+}
+
+wk.mappings["u"] = {
+   desc = "UI",
+   d = { ui.toggle_diagnostics, "Toggle diagnostics" },
+   g = { ui.toggle_signcolumn, "Toggle signcolumn" },
+   a = { ui.toggle_autopairs, "Toggle autopairs" },
+   b = { ui.toggle_background, "Toggle background" },
+   c = { ui.toggle_cmp, "Toggle autocompletion" },
+   C = { "<cmd>ColorizerToggle<cr>", "Toggle color highlight" },
+   i = { ui.set_indent, "Change indent setting" },
+   l = { ui.toggle_statusline, "Toggle statusline" },
+   L = { ui.toggle_codelens, "Toggle CodeLens" },
+   n = { ui.change_number, "Change line numbering" },
+   N = { ui.toggle_ui_notifications, "Toggle UI notifications" },
+   p = { ui.toggle_paste, "Toggle paste mode" },
+   s = { ui.toggle_spell, "Toggle spellcheck" },
+   S = { ui.toggle_conceal, "Toggle conceal" },
+   t = { ui.toggle_tabline, "Toggle tabline" },
+   u = { ui.toggle_url_match, "Toggle URL highlight" },
+   w = { ui.toggle_wrap, "Toggle wrap" },
+   y = { ui.toggle_syntax, "Toggle syntax highlight" },
+   h = { ui.toggle_foldcolumn, "Toggle foldcolumn" },
 }
 
 wk.mappings["l"]["t"] = { ":LvimToggleFormatOnSave<cr>", kind.symbols_outline.File .. " Toggle format-on-save" }
