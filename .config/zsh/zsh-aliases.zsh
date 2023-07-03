@@ -154,7 +154,7 @@ iconv() {
 }
 
 # >> ------------ TMUX ------------ << #
-alias mx="tmux"
+alias mx="tmux -u"
 alias mxl="tmux list-sessions"
 
 alias mxkill="tmux kill-session -t"
@@ -295,47 +295,6 @@ alias cmr="docker compose restart"
 # 'dcl php' to get the logs of the php container
 alias cml="docker compose logs"
 
-# >>>> ============ VERSIONS SCRIPT ==================================================== <<<< #
-
-function __print_versions {
-    local RED_BOLD=$fg_bold[red]
-    local YELLOW=$fg[yellow]
-
-    function __print_colored_function_output() {
-        echo $1 "$( bash <<EOF
-            eval $2
-EOF
-        )" $reset_color
-    }
-
-    function __print_title() {
-        echo  "[ ====================== $RED_BOLD $1 $reset_color ====================== ] \n"
-    }
-
-   typeset -A application_version_map=(
-       [NPM]="npm --version"
-       [YARN]="yarn -v"
-       [NODE]="node --version"
-       [MAVEN]="mvn --version"
-       [GRADLE]="gradle -v"
-       [PYTHON]="python3 --version"
-       [TMUX]="tmux -V"
-       [ZSH]="zsh --version"
-       [BASH]="bash --version"
-       [RUBY]="ruby --version"
-       [LUA]="lua -v"
-   )
-
-    for key val in "${(@kv)application_version_map}"; do
-        __print_title $key
-        __print_colored_function_output $YELLOW $val
-        echo
-    done
-}
-
-alias versions=__print_versions
-
-
 # >>>> ============ SCRIPTS ==================================================== <<<< #
 
 # Functions which expects two input parameters one for the file extention to change and the second for the new extention.
@@ -356,25 +315,37 @@ function __change_file_extensions() {
 alias extChange=__change_file_extensions
 
 
-# >>>> ============ This is a switch case for handling aliases between different OS's ==================================================== <<<< #
-case "$(uname -s)" in
 
-Darwin) # Maps only for Mac distros 
-	;;
+# If this script is run on macOS, there will be no /etc/os-release file, but the sw_vers command will work.
+if [[ "$OSTYPE" == "darwin"* ]]; then
+   BASE='macOS'
+else
+   # Assuming a Linux environment
+   . /etc/os-release
+   BASE=$ID_LIKE
+fi
 
-Linux) # Maps only for Linux distros 
+case $BASE in
+   *debian*)
+      # echo "This distro is based on Debian"
 
-
-   if [[ -f "/etc/debian_version" ]]; then # Checks if using Debian distro
       # echo "Hello Debian (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
 
       # This is in case of using a WSL
       alias gowin="cd /mnt/c"
       alias gouser="cd /mnt/c/Users/ggeorgi"
 
-      alias update="sudo apt update && sudo apt upgrade -y"
+      alias update="sudo apt-get update && sudo apt-get upgrade -y"
+    ;;
+   *fedora*)
+      echo "Hello Fedora (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
+   ;;
+   *rhel*)
+      echo "This distro is based on RHEL"
+   ;;
+   *arch*)
+      # echo "This distro is based on Arch"
 
-   elif [[ -f "/etc/lsb-release" ]];then # Checks if using Arch distro
       # pacman and yay
       alias pac=pacman
       alias pacsyu='sudo pacman -Syu'                             # update only standard pkgs
@@ -393,25 +364,13 @@ Linux) # Maps only for Linux distros
       alias parsyu='paru -Syu --noconfirm'                        # update standard pkgs and AUR pkgs (paru)
       alias unlock='sudo rm /var/lib/pacman/db.lck'               # remove pacman lock
       alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'            # remove orphaned packages
+   ;;
 
-   elif [[ -f "/etc/alpine-release" ]]; then # Checks if using Alpine distro
-      echo "Hello Alpine (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
+   'macOS')
+      echo "This is macOS"
+   ;;
 
-   elif [[ -f "/etc/centos-release" ]]; then # Checks if using Centos distro
-      echo "Hello Centos (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
-
-   elif [[ -f "/etc/fedora-release" ]]; then # Checks if using Fedora distro
-      echo "Hello Fedora (This message is comming from $ZDOTDIR/zsh-aliases.zsh)"
-
-   fi
-
-	;;
-
-CYGWIN* | MINGW32* | MSYS* | MINGW*) # Maps only for Windows distros... Don't ask why I added it.
-	;;
-
-*) # Other
-	;;
-
+   *)
+      echo "Unknown base distro: $BASE"
+   ;;
 esac
-

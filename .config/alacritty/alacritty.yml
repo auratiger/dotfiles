@@ -2,7 +2,7 @@ window:
   # Number of lines/columns (not pixels) in the terminal. The number of columns
   # must be at least `2`, while using a value of `0` for columns and lines will
   # fall back to the window manager's recommended size.
-  opacity: 0.9
+  opacity: 0.8
 
   dimensions:
     columns: 220

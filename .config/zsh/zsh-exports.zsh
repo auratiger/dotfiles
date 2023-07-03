@@ -32,6 +32,8 @@ SAVEHIST=100000
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# XDG_CONFIG_HOME="$HOME/.config"
+
 # https://github.com/nvm-sh/nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -45,6 +47,7 @@ PATHS=(
    "/usr/local/go/bin"
 	"$HOME/.local/bin"
 	"$HOME/.cargo/bin"
+   "$HOME/.local/opt/firefox/firefox"
 )
 
 for new_path in "${PATHS[@]}"; do
