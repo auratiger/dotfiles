@@ -18,3 +18,9 @@ export PATH="$PATH:/home/ggeorgi/.local/share/JetBrains/Toolbox/scripts"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Ubuntu make installation of Ubuntu Make binary symlink
+PATH=/home/georgi/.local/share/umake/bin:$PATH
+
+# Ubuntu make installation of Android Studio
+export ANDROID_HOME=/home/georgi/.local/share/umake/android/android-studio
+

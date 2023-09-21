@@ -118,6 +118,9 @@ alias dirTotal="du -sh ."                                      # Prints the tota
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 
+alias restart="shutdown -r now"
+alias off="shutdown now"
+
 # ps
 alias psa="ps auxf"
 alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
