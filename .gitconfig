@@ -119,9 +119,12 @@
    sha = stash apply
 
    # Stashes local changes with specified name
-   sp = "!f() { git stash push -m $1; }; f"
+   ; sp = "!f() { git stash push -m $1; }; f"
+   ; sp = "!f() { git stash push -m \"$1\" -- ${@:2}; }; f"
+   sp = "!bash -c 'git stash push -m \"$1\" -- \"${@:2}\"' -"
 
    so = "!f() { git stash pop stash@{$1}; }; f"
+   ss = "!f() { git status; echo $SHELL; }; f"
 
 # ======================================== SHOW ======================================== #
 

@@ -84,7 +84,8 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
 
 	if [[ -e ~/.local/bin/lvim ]]; then
-		export EDITOR='lvim'
+		# export EDITOR='lvim'
+		export EDITOR='nvim'
 	elif [[ -e /usr/bin/nvim ]]; then
 		export EDITOR='nvim'
 	else
