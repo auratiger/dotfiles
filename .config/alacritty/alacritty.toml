@@ -1,62 +1,71 @@
+working_directory = "/home/georgi/projects/vikings/"
 live_config_reload = true
-save_to_clipboard = true
+
+[selection]
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
-"window.dynamic_title" = true
+save_to_clipboard = true
 
-[colors]
-author = "Folke"
-draw_bold_text_with_bright_colors = true
-name = "TokyoNight Night"
+[scrolling]
+history = 10000
+multiplier = 10
 
-[[colors.indexed_colors]]
-color = "0xff9e64"
-index = 16
+[mouse]
+hide_when_typing = true
 
-[[colors.indexed_colors]]
-color = "0xdb4b4b"
-index = 17
+[window]
+opacity = 0.94
+dynamic_title = true
 
-[colors.bright]
-black = "0x414868"
-blue = "0x7aa2f7"
-cyan = "0x7dcfff"
-green = "0x9ece6a"
-magenta = "0xbb9af7"
-red = "0xf7768e"
-white = "0xc0caf5"
-yellow = "0xe0af68"
+decorations = "transparent"
+startup_mode = "Maximized"
+decorations_theme_variant = "dark"
 
-[colors.normal]
-black = "0x15161E"
-blue = "0x7aa2f7"
-cyan = "0x7dcfff"
-green = "0x9ece6a"
-magenta = "0xbb9af7"
-red = "0xf7768e"
-white = "0xa9b1d6"
-yellow = "0xe0af68"
+# [window.dimensions]
+# columns = 220
+# lines = 65
+
+[window.padding]
+x = 25
+y = 25
 
 [colors.primary]
-background = "0x1a1b26"
-foreground = "0xc0caf5"
+background = "#15141b"
+foreground = "#edecee"
+
+[colors.cursor]
+cursor = "#a277ff"
+
+[colors.selection]
+text = "CellForeground"
+background = "#29263c"
+
+[colors.normal]
+black = "#110f18"
+red = "#ff6767"
+green = "#61ffca"
+yellow = "#ffca85"
+blue = "#a277ff"
+magenta = "#a277ff"
+cyan = "#61ffca"
+white = "#edecee"
+
+[colors.bright]
+black = "#4d4d4d"
+red = "#ff6767"
+green = "#61ffca"
+yellow = "#ffca85"
+blue = "#a277ff"
+magenta = "#a277ff"
+cyan = "#61ffca"
+white = "#edecee"
+
 
 [cursor]
-style = "Block"
+style = { shape = "Block", blinking = "On" }
 unfocused_hollow = true
 
 [font]
 size = 13.0
-
-[font.bold]
-family = "Hack"
-style = "Bold"
-
-[font.debug]
-persistent_logging = false
-
-[font.glyph_offset]
-x = 0
-y = 0
 
 [font.italic]
 family = "Hack"
@@ -66,9 +75,21 @@ style = "SemiBold"
 family = "Hack"
 style = "Regular"
 
+[font.bold]
+family = "Hack"
+style = "Bold"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
 [font.offset]
 x = 0
 y = 0
+
+[debug]
+render_timer = true
+persistent_logging = false
 
 [[keyboard.bindings]]
 action = "Paste"
@@ -101,21 +122,6 @@ key = "N"
 mods = "Control"
 
 [[keyboard.bindings]]
-action = "ToggleFullscreen"
-key = "F"
+action = "Minimize"
+key = "M"
 mods = "Control"
-
-[scrolling]
-history = 10000
-multiplier = 10
-
-[window]
-opacity = 0.94
-
-[window.dimensions]
-columns = 220
-lines = 65
-
-[window.padding]
-x = 25
-y = 25
