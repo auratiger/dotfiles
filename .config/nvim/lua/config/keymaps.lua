@@ -11,6 +11,8 @@ map("i", "jk", "<esc>")
 map("i", "jj", "<esc>")
 
 map("", "<C-Z>", ":xa<cr>", "Save and Quit")
+-- map() -- When you search, center the result and open any folds
+-- map("n", "<C-u>", "<C-u>zz") -- When you search, center the result and open any folds
 
 map("n", "<leader>h", "<cmd>nohlsearch<CR>", "No Highlight")
 
@@ -120,6 +122,10 @@ map("n", "zj", "zo", "Open fold")
 map("n", "zk", "zc", "Close fold")
 map("n", "zJ", "zR", "Open all folds")
 map("n", "zK", "zM", "Close all folds")
+
+map("n", "<F3>", ":Lab code stop<CR>")
+map("n", "<F4>", ":Lab code run<CR>")
+map("n", "<F5>", ":Lab code panel<CR>")
 
 -- Clear search with <esc>
 -- map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })

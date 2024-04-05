@@ -272,6 +272,17 @@
    # Find commits by commit message
    fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
+
+# ======================================== WORKTREE ======================================== #
+
+  # Examples:
+  # g wt add -b new-branch ../worktree/feat main
+  # ^^^
+  # create a new worktree in the directory "../worktree/featb"
+  # in a new branch based on 'main'
+  wt = worktree
+
+
 # ======================================== RESTORE ======================================== #
 
    # restore all staged files

@@ -147,14 +147,27 @@ alias neofetch="neofetch --source ~/.config/neofetch/neofetch_ascii/merlin.txt"
 # >> ------------ IMAGES ------------ << #
 
 ico() {
-   convert $1 x:
+   magick convert $1 x:
 }
 
 alias ide="identify"
 
 iconv() {
-   convert $1 -resize $2\! -quality 75 -define webp:lossless=true $3
+   magick convert $1 -resize $2\! -quality 75 -define webp:lossless=true $3
 }
+
+convert_to_avif() {
+  for file in *; do
+    if [ -f "$file" ]; then
+      magick convert "$file" "${file%.*}.avif"
+    fi
+  done
+}
+
+remove_images() {
+  find . -type f \( -iname "*.jpg" -o -iname "*.png" \) -exec rm -f {} +
+}
+
 
 # >> ------------ TMUX ------------ << #
 alias mx="tmux -u"
