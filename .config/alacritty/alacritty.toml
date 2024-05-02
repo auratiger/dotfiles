@@ -88,7 +88,7 @@ x = 0
 y = 0
 
 [debug]
-render_timer = true
+render_timer = false
 persistent_logging = false
 
 [[keyboard.bindings]]

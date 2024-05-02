@@ -164,6 +164,29 @@ convert_to_avif() {
   done
 }
 
+convert-avif-to-webp() {
+    local file output err
+
+    # Loop through all avif files in the current directory
+    for file in *.avif; do
+        # Check if file exists to avoid errors in empty directories
+        if [[ -e "$file" ]]; then
+            # Define the output filename with .webp extension
+            output="${file%.avif}.webp"
+
+            # Convert AVIF to WebP and capture stderr separately
+            if ! err=$(ffmpeg -i "$file" -vf scale=1920:1080 "$output" 2>&1); then
+                echo "Error converting $file: $err"
+            fi
+        else
+            echo "No AVIF files found in the current directory."
+            return 1
+        fi
+    done
+
+    echo "Conversion completed."
+}
+
 remove_images() {
   find . -type f \( -iname "*.jpg" -o -iname "*.png" \) -exec rm -f {} +
 }
