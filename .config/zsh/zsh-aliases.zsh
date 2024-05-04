@@ -45,14 +45,14 @@ alias gs="git status"
 # inspired from this blog post: https://www.atlassian.com/git/tutorials/dotfiles
 alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-alias ls='exa'                                   # ls
-alias l='exa -lbF'                         # list, size, type, git
-alias ll='exa -lbFa'                       # long list
-alias lf='exa -lbFa --group-directories-first'
-alias llm='exa -lbGb --sort=modified'      # long list, modified date sort
-alias la='exa -lbhHigUmuSa --color-scale'  # all list
-alias lx='exa -lbhHigUmuSa@ --color-scale' # all + extended list
-alias lt='exa -lbFa --tree --level=2'
+alias ls='eza'                                   # ls
+alias l='eza -lb'                         # list, size, type, git
+alias ll='eza -lba'                       # long list
+alias lf='eza -lba --group-directories-first'
+alias llm='eza -lbGb --sort=modified'      # long list, modified date sort
+alias la='eza -lbhHigUmuSa --color-scale'  # all list
+alias lx='eza -lbhHigUmuSa@ --color-scale' # all + extended list
+alias lt='eza -lba --tree --level=2'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -60,7 +60,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Better directory navigation
-alias cd='change_dir(){ cd $1 && exa }; change_dir'
+alias cd='change_dir(){ cd $1 && eza }; change_dir'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
