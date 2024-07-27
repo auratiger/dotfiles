@@ -361,5 +361,7 @@
    # renames current branch
    rename = branch -m
 
+   nikola = !"git commit --amend --author='Nikola Kanev <nikolastkanev@gmail.com>' --no-edit"
+
 [credential]
 	helper = store
