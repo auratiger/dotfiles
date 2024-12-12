@@ -104,16 +104,13 @@ else
   print("[MAPPINGS]: vim.diagnostics not loaded")
 end
 
--- Harpoon
-map("n", "<leader>a", "<cmd>lua require('harpoon.mark').add_file()<CR>", " Add Mark")
-map("n", "<leader>0", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Harpoon")
-
-map("n", "<leader>1", "<CMD>lua require('harpoon.ui').nav_file(1)<CR>", "goto1")
-map("n", "<leader>2", "<CMD>lua require('harpoon.ui').nav_file(2)<CR>", "goto2")
-map("n", "<leader>3", "<CMD>lua require('harpoon.ui').nav_file(3)<CR>", "goto3")
-map("n", "<leader>4", "<CMD>lua require('harpoon.ui').nav_file(4)<CR>", "goto4")
-map("n", "<leader>5", "<CMD>lua require('harpoon.ui').nav_file(5)<CR>", "goto5")
-map("n", "<leader>6", "<CMD>lua require('harpoon.ui').nav_file(6)<CR>", "goto6")
+map("n", "<leader>gw", "<CMD>lua require('telescope').extensions.git_worktree.git_worktree()<CR>", "worktree list")
+map(
+  "n",
+  "<leader>gt",
+  "<CMD>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
+  "worktree create"
+)
 
 -- folds
 map("n", "zn", "zj", "Go to next fold")

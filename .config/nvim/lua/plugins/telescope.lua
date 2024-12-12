@@ -1,5 +1,4 @@
 local actions = require("telescope.actions")
-local Util = require("lazyvim.util")
 
 return {
   {
@@ -8,7 +7,7 @@ return {
       { "<leader>/", false },
       { "zs", ":lua require'telescope.builtin'.spell_suggest()<cr>", desc = "Spell Suggest" },
       { "<leader><leader>", "<Cmd>Telescope frecency workspace=CWD<CR>", desc = "Frecency" },
-      { "<leader>st", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>st", LazyVim.pick("live_grep"), desc = "Grep (root dir)" },
     },
     opts = {
       defaults = {
