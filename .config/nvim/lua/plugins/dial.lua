@@ -17,10 +17,8 @@ return {
   desc = "Increment and decrement numbers, dates, and more",
   -- stylua: ignore
   keys = {
-    { "<C-]>", function() return M.dial(true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
-    { "<C-[>", function() return M.dial(false) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
-    { "g<C-]>", function() return M.dial(true, true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
-    { "g<C-[>", function() return M.dial(false, true) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
+    { "<M-l>", function() return M.dial(true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
+    { "<M-h>", function() return M.dial(false) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
   },
   opts = function()
     local augend = require("dial.augend")
