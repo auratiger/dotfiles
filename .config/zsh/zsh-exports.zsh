@@ -38,16 +38,19 @@ SAVEHIST=100000
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+export BUN_INSTALL="$HOME/.bun"
+
 PATHS=(
 	"/usr/local/opt/openjdk/bin"
 	"/usr/local/bin"
 	"/usr/local/opt/openjdk/bin"
 	"/usr/local/opt/openssl/bin"
 	"/usr/local/opt/openvpn/sbin"
-   "/usr/local/go/bin"
+  "/usr/local/go/bin"
 	"$HOME/.local/bin"
 	"$HOME/.cargo/bin"
-   "$HOME/.local/opt/firefox/firefox"
+  "$HOME/.local/opt/firefox/firefox",
+  "$BUN_INSTALL/bin"
 )
 
 for new_path in "${PATHS[@]}"; do
@@ -93,5 +96,6 @@ else
 	fi
 
 fi
+
 
 export GIT_EDITOR=$EDITOR
